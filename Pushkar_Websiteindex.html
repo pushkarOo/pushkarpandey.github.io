@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Pushkar Pandey — UX Research & Design Ops</title>
+<meta name="description" content="Dr. Pushkar Pandey — UX Research & Design Ops Lead at Jio Platforms. PhD & M.Des from IIT Kanpur. Building experience standards across large-scale digital ecosystems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0e0e0e;
+    --bg2: #161616;
+    --bg3: #1e1e1e;
+    --text: #f0ede6;
+    --text-muted: #8a8880;
+    --text-dim: #5a5855;
+    --accent: #c8a96e;
+    --accent2: #7eb8a4;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --nav-h: 72px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+    mix-blend-mode: normal;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200, 169, 110, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease;
+  }
+  .cursor.hover { width: 18px; height: 18px; }
+  .cursor-ring.hover { width: 56px; height: 56px; border-color: rgba(200, 169, 110, 0.2); }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    z-index: 100;
+    background: rgba(14,14,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-links .contact-link {
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.3);
+    padding: 8px 20px;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links .contact-link:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  /* Mobile nav toggle */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--text);
+    transition: all 0.3s;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: calc(var(--nav-h) + 40px) 48px 80px;
+    position: relative;
+    overflow: hidden;
+    gap: 40px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(200,169,110,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(126,184,164,0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-grid-line {
+    position: absolute;
+    top: var(--nav-h);
+    right: 48px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .hero-content { max-width: 600px; position: relative; z-index: 1; }
+
+  /* Hero portrait */
+  .hero-portrait {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portrait-wrap {
+    position: relative;
+    width: min(420px, 90%);
+    aspect-ratio: 4/5;
+    cursor: none;
+  }
+
+  .portrait-circle {
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+    background: rgba(200,169,110,0.07);
+    border: 1px solid rgba(200,169,110,0.12);
+    transition: border-color 0.4s, background 0.4s;
+  }
+  .portrait-wrap:hover .portrait-circle {
+    border-color: rgba(200,169,110,0.35);
+    background: rgba(200,169,110,0.11);
+  }
+
+  .portrait-photo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+    overflow: hidden;
+  }
+  .portrait-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: contrast(1.08) saturate(1.1) brightness(1.02);
+    transform: scale(1);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+  .portrait-wrap:hover .portrait-photo img {
+    transform: scale(1.04);
+  }
+
+  /* Floating tags that appear on hover */
+  .portrait-tag {
+    position: absolute;
+    padding: 7px 14px;
+    background: rgba(14,14,14,0.92);
+    border: 1px solid rgba(200,169,110,0.35);
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .portrait-wrap:hover .portrait-tag { opacity: 1; }
+
+  .portrait-tag-1 {
+    top: 12%;
+    left: -10%;
+    transform: translateX(-8px);
+    transition-delay: 0s;
+  }
+  .portrait-wrap:hover .portrait-tag-1 { transform: translateX(0); }
+
+  .portrait-tag-2 {
+    top: 38%;
+    right: -12%;
+    transform: translateX(8px);
+    transition-delay: 0.08s;
+  }
+  .portrait-wrap:hover .portrait-tag-2 { transform: translateX(0); }
+
+  .portrait-tag-3 {
+    bottom: 22%;
+    left: -8%;
+    transform: translateX(-8px);
+    transition-delay: 0.16s;
+  }
+  .portrait-wrap:hover .portrait-tag-3 { transform: translateX(0); }
+
+  .portrait-tag-4 {
+    bottom: 8%;
+    right: -10%;
+    transform: translateX(8px);
+    transition-delay: 0.1s;
+  }
+  .portrait-wrap:hover .portrait-tag-4 { transform: translateX(0); }
+
+  /* Dot connector lines for tags */
+  .portrait-tag::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 1px;
+    background: rgba(200,169,110,0.4);
+  }
+  .portrait-tag-1::before, .portrait-tag-3::before { right: -20px; }
+  .portrait-tag-2::before, .portrait-tag-4::before { left: -20px; }
+
+  /* Accent ring that pulses on hover */
+  .portrait-ring {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+    border: 1px solid rgba(200,169,110,0);
+    transition: border-color 0.4s, inset 0.4s;
+    pointer-events: none;
+  }
+  .portrait-wrap:hover .portrait-ring {
+    border-color: rgba(200,169,110,0.15);
+    inset: -20px;
+  }
+
+  /* Name overlay on hover */
+  .portrait-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 30%;
+    border-radius: 0 0 50% 50% / 0 0 55% 55%;
+    background: linear-gradient(to top, rgba(14,14,14,0.7) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 24px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .portrait-wrap:hover .portrait-overlay { opacity: 1; }
+  .portrait-overlay span {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(240,237,230,0.9);
+    letter-spacing: 0.04em;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(42px, 6vw, 78px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: #0e0e0e;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #d4b87d; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text); }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--text-dim);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; width: 40px; }
+    50% { opacity: 1; width: 60px; }
+  }
+
+  /* Section scaffolding */
+  section { padding: 120px 48px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Work section */
+  #work { padding-top: 80px; padding-bottom: 80px; border-top: 1px solid var(--border); }
+
+  .work-list { list-style: none; }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: border-color 0.2s;
+    cursor: none;
+  }
+  .work-item:first-child { border-top: 1px solid var(--border); }
+  .work-item:hover { border-bottom-color: var(--border-hover); }
+
+  .work-num {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .work-info { }
+
+  .work-tag {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text);
+    transition: color 0.2s;
+    margin-bottom: 8px;
+  }
+  .work-item:hover .work-title { color: var(--accent); }
+
+  .work-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 480px;
+  }
+
+  .work-arrow {
+    font-size: 24px;
+    color: var(--text-dim);
+    transition: color 0.2s, transform 0.2s;
+    line-height: 1;
+  }
+  .work-item:hover .work-arrow { color: var(--accent); transform: translate(4px, -4px); }
+
+  /* Image tooltip on hover */
+  .work-preview {
+    position: fixed;
+    width: 280px;
+    height: 175px;
+    border-radius: 6px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0;
+    transform: scale(0.92) rotate(-2deg);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .work-preview.visible { opacity: 1; transform: scale(1) rotate(0deg); }
+  .wp-card {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  .wp-card.active { opacity: 1; }
+  .wp-card svg { display: block; }
+
+  /* Capabilities */
+  #capabilities { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .caps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .cap-card {
+    padding: 40px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .cap-card:hover { border-color: var(--border-hover); background: var(--bg3); }
+
+  .cap-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 24px;
+    color: var(--accent);
+    opacity: 0.8;
+  }
+
+  .cap-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .cap-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cap-items li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-left: 12px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .cap-items li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  /* About */
+  #about { border-top: 1px solid var(--border); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-headline {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+  .about-headline em { font-style: italic; color: var(--accent); }
+
+  .about-body p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .about-right { padding-top: 8px; }
+
+  .current-role {
+    padding: 32px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+  .role-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .role-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .role-org {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .skill-chip {
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* CTA / Footer */
+  #contact {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 140px 48px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+
+  .cta-headline {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .cta-headline em { font-style: italic; color: var(--accent); }
+
+  .cta-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text); }
+
+  /* Work preview colors per project */
+  .preview-jio { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+  .preview-jiogate { background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #162032 100%); }
+  .preview-jds { background: linear-gradient(135deg, #1a0a2e 0%, #2d1654 50%, #1a0a2e 100%); }
+  .preview-cx { background: linear-gradient(135deg, #0a1e1a 0%, #0d3028 50%, #0a1e1a 100%); }
+  .preview-brand { background: linear-gradient(135deg, #1e0a0a 0%, #3d1515 50%, #1e0a0a 100%); }
+
+  .preview-label {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+
+  /* Animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      padding: calc(var(--nav-h) + 40px) 32px 40px;
+      gap: 24px;
+      z-index: 99;
+    }
+    .nav-links.open a { font-size: 20px; }
+    .nav-toggle { display: flex; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: calc(var(--nav-h) + 32px) 24px 80px;
+    }
+    .hero-portrait { order: -1; }
+    .portrait-wrap { width: min(280px, 80%); margin: 0 auto; }
+    section { padding: 80px 24px; }
+    .work-item { grid-template-columns: 48px 1fr auto; gap: 16px; padding: 28px 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .hero-grid-line { display: none; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    #contact { padding: 100px 24px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div class="work-preview" id="work-preview">
+  <!-- P1: Design Operations & Research -->
+  <div class="wp-card" id="wp-p1">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#0a1628"/>
+      <!-- grid lines -->
+      <line x1="0" y1="35" x2="280" y2="35" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="0" y1="70" x2="280" y2="70" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="0" y1="105" x2="280" y2="105" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="0" y1="140" x2="280" y2="140" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="56" y1="0" x2="56" y2="175" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="112" y1="0" x2="112" y2="175" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="168" y1="0" x2="168" y2="175" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="224" y1="0" x2="224" y2="175" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <!-- Jio dot motif top right -->
+      <circle cx="248" cy="20" r="3" fill="#c8a96e" opacity="0.7"/>
+      <circle cx="260" cy="20" r="3" fill="#c8a96e" opacity="0.5"/>
+      <circle cx="272" cy="20" r="3" fill="#c8a96e" opacity="0.3"/>
+      <circle cx="248" cy="32" r="3" fill="#c8a96e" opacity="0.4"/>
+      <circle cx="260" cy="32" r="3" fill="#c8a96e" opacity="0.2"/>
+      <!-- bar chart -->
+      <rect x="20" y="90" width="18" height="50" rx="2" fill="#c8a96e" opacity="0.7"/>
+      <rect x="44" y="75" width="18" height="65" rx="2" fill="#c8a96e" opacity="0.5"/>
+      <rect x="68" y="60" width="18" height="80" rx="2" fill="#c8a96e" opacity="0.8"/>
+      <rect x="92" y="80" width="18" height="60" rx="2" fill="#7eb8a4" opacity="0.6"/>
+      <rect x="116" y="55" width="18" height="85" rx="2" fill="#c8a96e" opacity="0.4"/>
+      <!-- keywords -->
+      <text x="20" y="24" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="1.5" text-transform="uppercase">DESIGN OPS</text>
+      <text x="20" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="#c8a96e" opacity="0.9" letter-spacing="1">CX AUDITS</text>
+      <text x="80" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.4)" letter-spacing="1">JDS ADOPTION</text>
+      <text x="168" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)" letter-spacing="1">30+ PRODUCTS</text>
+      <text x="140" y="50" font-family="DM Sans, sans-serif" font-size="20" font-weight="300" fill="rgba(255,255,255,0.08)" letter-spacing="-1">Research</text>
+    </svg>
+  </div>
+
+  <!-- P2: JioTranslate UX Research -->
+  <div class="wp-card" id="wp-p2">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#1a0d2e"/>
+      <!-- speech bubble shapes -->
+      <rect x="18" y="30" width="100" height="52" rx="8" fill="rgba(200,169,110,0.12)" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+      <polygon points="28,82 18,96 42,82" fill="rgba(200,169,110,0.12)"/>
+      <rect x="162" y="55" width="100" height="52" rx="8" fill="rgba(126,184,164,0.12)" stroke="rgba(126,184,164,0.3)" stroke-width="1"/>
+      <polygon points="252,107 272,107 262,121" fill="rgba(126,184,164,0.12)"/>
+      <!-- text lines inside bubbles -->
+      <rect x="28" y="44" width="60" height="3" rx="1" fill="rgba(200,169,110,0.4)"/>
+      <rect x="28" y="53" width="80" height="3" rx="1" fill="rgba(200,169,110,0.25)"/>
+      <rect x="28" y="62" width="50" height="3" rx="1" fill="rgba(200,169,110,0.2)"/>
+      <rect x="172" y="69" width="60" height="3" rx="1" fill="rgba(126,184,164,0.4)"/>
+      <rect x="172" y="78" width="80" height="3" rx="1" fill="rgba(126,184,164,0.25)"/>
+      <rect x="172" y="87" width="45" height="3" rx="1" fill="rgba(126,184,164,0.2)"/>
+      <!-- translate arrow -->
+      <text x="126" y="68" font-family="DM Sans, sans-serif" font-size="16" fill="rgba(255,255,255,0.2)">⇄</text>
+      <!-- keywords -->
+      <text x="18" y="22" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">JIOTRANSLATE</text>
+      <text x="18" y="155" font-family="DM Sans, sans-serif" font-size="8" fill="#c8a96e" opacity="0.9" letter-spacing="1">USABILITY TESTING</text>
+      <text x="128" y="155" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="1">HEURISTICS</text>
+      <text x="200" y="155" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.25)" letter-spacing="1">BETA→V2</text>
+      <!-- language tags -->
+      <rect x="18" y="110" width="38" height="14" rx="3" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.3)" stroke-width="0.5"/>
+      <text x="24" y="121" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(200,169,110,0.8)" letter-spacing="0.5">Hindi</text>
+      <rect x="62" y="110" width="42" height="14" rx="3" fill="rgba(200,169,110,0.1)" stroke="rgba(200,169,110,0.2)" stroke-width="0.5"/>
+      <text x="68" y="121" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(200,169,110,0.6)" letter-spacing="0.5">English</text>
+      <rect x="110" y="110" width="40" height="14" rx="3" fill="rgba(126,184,164,0.1)" stroke="rgba(126,184,164,0.2)" stroke-width="0.5"/>
+      <text x="116" y="121" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(126,184,164,0.6)" letter-spacing="0.5">Kannada</text>
+    </svg>
+  </div>
+
+  <!-- P3: Jio Design System Research -->
+  <div class="wp-card" id="wp-p3">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#0d1a0d"/>
+      <!-- component grid -->
+      <rect x="18" y="28" width="54" height="36" rx="4" fill="rgba(126,184,164,0.12)" stroke="rgba(126,184,164,0.3)" stroke-width="1"/>
+      <rect x="80" y="28" width="54" height="36" rx="4" fill="rgba(126,184,164,0.08)" stroke="rgba(126,184,164,0.2)" stroke-width="1"/>
+      <rect x="142" y="28" width="54" height="36" rx="4" fill="rgba(200,169,110,0.1)" stroke="rgba(200,169,110,0.25)" stroke-width="1"/>
+      <rect x="204" y="28" width="54" height="36" rx="4" fill="rgba(126,184,164,0.06)" stroke="rgba(126,184,164,0.15)" stroke-width="1"/>
+      <!-- component labels -->
+      <rect x="26" y="38" width="38" height="3" rx="1" fill="rgba(126,184,164,0.5)"/>
+      <rect x="26" y="46" width="28" height="3" rx="1" fill="rgba(126,184,164,0.25)"/>
+      <rect x="88" y="38" width="38" height="3" rx="1" fill="rgba(126,184,164,0.3)"/>
+      <rect x="88" y="46" width="22" height="3" rx="1" fill="rgba(126,184,164,0.15)"/>
+      <rect x="150" y="38" width="38" height="3" rx="1" fill="rgba(200,169,110,0.4)"/>
+      <rect x="150" y="46" width="30" height="3" rx="1" fill="rgba(200,169,110,0.2)"/>
+      <rect x="212" y="38" width="38" height="3" rx="1" fill="rgba(126,184,164,0.2)"/>
+      <rect x="212" y="46" width="18" height="3" rx="1" fill="rgba(126,184,164,0.1)"/>
+      <!-- progress bars -->
+      <rect x="18" y="80" width="240" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+      <rect x="18" y="80" width="192" height="4" rx="2" fill="rgba(126,184,164,0.5)"/>
+      <text x="216" y="87" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(126,184,164,0.7)">+35–50%</text>
+      <rect x="18" y="92" width="240" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+      <rect x="18" y="92" width="144" height="4" rx="2" fill="rgba(200,169,110,0.4)"/>
+      <text x="168" y="99" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(200,169,110,0.7)">200+ validated</text>
+      <rect x="18" y="104" width="240" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+      <rect x="18" y="104" width="216" height="4" rx="2" fill="rgba(126,184,164,0.3)"/>
+      <text x="222" y="111" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(126,184,164,0.6)">32+ teams</text>
+      <!-- keywords -->
+      <text x="18" y="22" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">JIO DESIGN SYSTEM</text>
+      <text x="18" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="#7eb8a4" opacity="0.9" letter-spacing="1">33+ STUDIES</text>
+      <text x="90" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="1">MOTION AUDIT</text>
+      <text x="182" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.25)" letter-spacing="1">DS ADOPTION</text>
+    </svg>
+  </div>
+
+  <!-- P4: JioFinance -->
+  <div class="wp-card" id="wp-p4">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#0e1a10"/>
+      <!-- phone mockup outline -->
+      <rect x="100" y="18" width="80" height="130" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+      <rect x="108" y="30" width="64" height="90" rx="4" fill="rgba(200,169,110,0.06)"/>
+      <!-- screen content lines -->
+      <rect x="116" y="38" width="48" height="4" rx="1" fill="rgba(200,169,110,0.4)"/>
+      <rect x="116" y="48" width="36" height="3" rx="1" fill="rgba(255,255,255,0.15)"/>
+      <rect x="116" y="58" width="48" height="12" rx="2" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.2)" stroke-width="0.5"/>
+      <rect x="116" y="76" width="22" height="8" rx="2" fill="rgba(126,184,164,0.2)"/>
+      <rect x="144" y="76" width="20" height="8" rx="2" fill="rgba(255,255,255,0.06)"/>
+      <rect x="116" y="90" width="48" height="3" rx="1" fill="rgba(255,255,255,0.1)"/>
+      <rect x="116" y="98" width="36" height="3" rx="1" fill="rgba(255,255,255,0.07)"/>
+      <!-- home button -->
+      <rect x="128" y="136" width="24" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+      <!-- severity badge -->
+      <rect x="18" y="28" width="62" height="18" rx="3" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.4)" stroke-width="0.5"/>
+      <text x="24" y="40" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(200,169,110,0.9)" letter-spacing="0.5">HIGH SEVERITY</text>
+      <rect x="18" y="54" width="56" height="18" rx="3" fill="rgba(126,184,164,0.1)" stroke="rgba(126,184,164,0.3)" stroke-width="0.5"/>
+      <text x="24" y="66" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(126,184,164,0.8)" letter-spacing="0.5">UX RESEARCH</text>
+      <!-- keywords -->
+      <text x="18" y="22" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">JIOFINANCE</text>
+      <text x="18" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="#c8a96e" opacity="0.9" letter-spacing="1">TRUST & FEAR</text>
+      <text x="100" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="1">JOURNEY AUDIT</text>
+      <text x="198" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.25)" letter-spacing="1">FINTECH</text>
+    </svg>
+  </div>
+
+  <!-- P5: JioTranslate UI & Brand -->
+  <div class="wp-card" id="wp-p5">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#1a0a08"/>
+      <!-- colour swatches -->
+      <rect x="18" y="28" width="32" height="32" rx="3" fill="#8F005D" opacity="0.85"/>
+      <rect x="56" y="28" width="32" height="32" rx="3" fill="#FA7D19" opacity="0.75"/>
+      <rect x="94" y="28" width="32" height="32" rx="3" fill="#67C3EF" opacity="0.7"/>
+      <rect x="132" y="28" width="32" height="32" rx="3" fill="#000000" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <rect x="170" y="28" width="32" height="32" rx="3" fill="#FFFFFF" opacity="0.9"/>
+      <!-- swatch labels -->
+      <text x="20" y="72" font-family="DM Sans, sans-serif" font-size="6" fill="rgba(255,255,255,0.4)">Primary</text>
+      <text x="58" y="72" font-family="DM Sans, sans-serif" font-size="6" fill="rgba(255,255,255,0.4)">Secondary</text>
+      <text x="96" y="72" font-family="DM Sans, sans-serif" font-size="6" fill="rgba(255,255,255,0.4)">Sparkle</text>
+      <text x="132" y="72" font-family="DM Sans, sans-serif" font-size="6" fill="rgba(255,255,255,0.4)">BG Dark</text>
+      <text x="170" y="72" font-family="DM Sans, sans-serif" font-size="6" fill="rgba(255,255,255,0.4)">BG Light</text>
+      <!-- type sample -->
+      <text x="18" y="100" font-family="DM Sans, sans-serif" font-size="14" font-weight="600" fill="rgba(255,255,255,0.7)" letter-spacing="-0.5">JioType</text>
+      <text x="18" y="114" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.3)" letter-spacing="1">Corporate Typeface</text>
+      <!-- ribbon strip -->
+      <rect x="18" y="122" width="130" height="8" rx="1" fill="url(#ribbon)"/>
+      <defs>
+        <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8F005D" stop-opacity="0.8"/>
+          <stop offset="40%" stop-color="#FA7D19" stop-opacity="0.7"/>
+          <stop offset="70%" stop-color="#67C3EF" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#000000" stop-opacity="0.5"/>
+        </linearGradient>
+      </defs>
+      <!-- keywords -->
+      <text x="18" y="22" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">UI · BRAND IDENTITY</text>
+      <text x="18" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="#c8a96e" opacity="0.9" letter-spacing="1">COLOUR SYSTEM</text>
+      <text x="108" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="1">JIOTYPE</text>
+      <text x="164" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.25)" letter-spacing="1">ACCESSIBILITY</text>
+    </svg>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Dr. Pushkar <span>Pandey</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:pushkar@pushkarpandey.com" class="contact-link">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-line"></div>
+
+  <!-- LEFT: Text -->
+  <div class="hero-content">
+    <p class="hero-eyebrow fade-up">UX Research · Design Ops · IIT Kanpur PhD</p>
+    <h1 class="hero-headline fade-up">I build experience<br>systems that make<br><em>products better.</em></h1>
+    <p class="hero-sub fade-up">UX Research & Design Ops Lead at Jio Platforms — driving organisation-wide experience standards, research frameworks, and design quality across India's largest digital ecosystem.</p>
+    <div class="hero-actions fade-up">
+      <a href="#work" class="btn-primary">View Work ↓</a>
+      <a href="#about" class="btn-ghost">About Me</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: Portrait with hover interaction -->
+  <div class="hero-portrait">
+    <div class="portrait-wrap" id="portrait-wrap">
+      <div class="portrait-ring"></div>
+      <div class="portrait-circle"></div>
+
+      <div class="portrait-photo">
+        <img src="pushkar.png" alt="Dr. Pushkar Pandey">
+      </div>
+
+      <!-- Floating keyword tags on hover -->
+      <div class="portrait-tag portrait-tag-1">PhD · IIT Kanpur</div>
+      <div class="portrait-tag portrait-tag-2">UX Research Lead</div>
+      <div class="portrait-tag portrait-tag-3">Design Ops · Jio</div>
+      <div class="portrait-tag portrait-tag-4">33+ Studies</div>
+
+      <!-- Subtle name overlay -->
+      <div class="portrait-overlay">
+        <span>Dr. Pushkar Pandey</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span class="scroll-line"></span>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label">Selected Work</p>
+
+  <ul class="work-list">
+    <li>
+      <a class="work-item" href="Design_Ops___Research.pdf" target="_blank" data-preview="p1">
+        <span class="work-num">01</span>
+        <div class="work-info">
+          <p class="work-tag">Design Ops · Jio Platforms</p>
+          <h2 class="work-title">Design Operations & Research</h2>
+          <p class="work-desc">Driving JDS integration, CX audits, brand evaluations and a Research Centre of Excellence — aligning design operations across 30+ Jio products and services.</p>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+    <li>
+      <a class="work-item" href="JioTranslate.pdf" target="_blank" data-preview="p2">
+        <span class="work-num">02</span>
+        <div class="work-info">
+          <p class="work-tag">UX Research · Product</p>
+          <h2 class="work-title">JioTranslate — UX Research</h2>
+          <p class="work-desc">Beta-to-launch UX research for JioTranslate — usability testing, heuristic evaluation, competitor analysis, and iterative research across multiple product versions driving key interaction improvements.</p>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+    <li>
+      <a class="work-item" href="JioDesign_System_Research.pdf" target="_blank" data-preview="p3">
+        <span class="work-num">03</span>
+        <div class="work-info">
+          <p class="work-tag">UX Research · Design Systems</p>
+          <h2 class="work-title">Jio Design System Research</h2>
+          <p class="work-desc">33+ end-to-end research studies shaping the Jio Design System — from component usability and motion audits to documentation, improving DS adoption by 35–50% across product teams.</p>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+    <li>
+      <a class="work-item" href="JioFinance.pdf" target="_blank" data-preview="p4">
+        <span class="work-num">04</span>
+        <div class="work-info">
+          <p class="work-tag">UX Research · FinTech</p>
+          <h2 class="work-title">JioFinance</h2>
+          <p class="work-desc">End-to-end UX research for Jio's smart financial platform — foundation research on destructive action psychology, feature evaluation, journey audits, and UI compliance against JDS standards.</p>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+    <li>
+      <a class="work-item" href="JioTranslate_UI.pdf" target="_blank" data-preview="p5">
+        <span class="work-num">05</span>
+        <div class="work-info">
+          <p class="work-tag">Brand Identity · UI Design</p>
+          <h2 class="work-title">JioTranslate — UI & Brand</h2>
+          <p class="work-desc">Brand identity definition and UI audit for JioTranslate — covering colour system, JioType typography, navigation patterns, accessibility standards, and design system compliance.</p>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <p class="section-label">Capabilities</p>
+  <div class="caps-grid">
+    <div class="cap-card fade-up">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="18" cy="14" r="6"/>
+        <path d="M22 20l6 6"/>
+        <path d="M6 30c0-4.418 4.477-8 10-8"/>
+        <circle cx="26" cy="26" r="3"/>
+      </svg>
+      <h3 class="cap-title">UX Research</h3>
+      <ul class="cap-items">
+        <li>Usability Testing</li>
+        <li>Empirical UX Studies</li>
+        <li>UX Questionnaires</li>
+        <li>Qualitative Research</li>
+        <li>Design Pattern Derivation</li>
+      </ul>
+    </div>
+    <div class="cap-card fade-up">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="18" cy="12" r="5"/>
+        <path d="M6 28c0-5.523 5.373-10 12-10s12 4.477 12 10"/>
+        <circle cx="8" cy="20" r="3"/>
+        <circle cx="28" cy="20" r="3"/>
+      </svg>
+      <h3 class="cap-title">CX Strategy</h3>
+      <ul class="cap-items">
+        <li>Experience Principles Verification</li>
+        <li>CX Standards Auditing</li>
+        <li>Journey Mapping</li>
+        <li>User Research Synthesis</li>
+        <li>Measurement Frameworks</li>
+      </ul>
+    </div>
+    <div class="cap-card fade-up">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="4" y="4" width="12" height="12" rx="2"/>
+        <rect x="20" y="4" width="12" height="12" rx="2"/>
+        <rect x="4" y="20" width="12" height="12" rx="2"/>
+        <rect x="20" y="20" width="12" height="12" rx="2"/>
+      </svg>
+      <h3 class="cap-title">Design Systems</h3>
+      <ul class="cap-items">
+        <li>Token Architecture</li>
+        <li>Component Governance</li>
+        <li>Adoption & Migration</li>
+        <li>Design–Dev Handoff</li>
+        <li>Figma & MCP Workflows</li>
+      </ul>
+    </div>
+    <div class="cap-card fade-up">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M18 4L32 12v12L18 32 4 24V12z"/>
+        <path d="M18 4v28M4 12l14 8 14-8"/>
+      </svg>
+      <h3 class="cap-title">Brand Integration</h3>
+      <ul class="cap-items">
+        <li>Brand–Experience Alignment</li>
+        <li>Rebranding Implementation</li>
+        <li>Visual Identity Governance</li>
+        <li>Cross-team Coordination</li>
+      </ul>
+    </div>
+    <div class="cap-card fade-up">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="4" y="8" width="28" height="20" rx="2"/>
+        <path d="M12 8V6M24 8V6M4 16h28"/>
+        <circle cx="12" cy="22" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="18" cy="22" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="24" cy="22" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+      <h3 class="cap-title">AI-Powered Tools</h3>
+      <ul class="cap-items">
+        <li>Audit Automation (Claude)</li>
+        <li>Self-Serve Adoption Tools</li>
+        <li>Figma MCP Integration</li>
+        <li>Cursor & Dovetail Workflows</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div class="about-left fade-up">
+      <h2 class="about-headline">Research-led.<br>Systems-<em>minded.</em><br>Impact-driven.</h2>
+      <div class="about-stats">
+        <div>
+          <p class="stat-num">6+</p>
+          <p class="stat-label">Years in UX & Design Ops</p>
+        </div>
+        <div>
+          <p class="stat-num">10+</p>
+          <p class="stat-label">Jio Products Audited</p>
+        </div>
+        <div>
+          <p class="stat-num">15</p>
+          <p class="stat-label">Experience Standards Defined</p>
+        </div>
+        <div>
+          <p class="stat-num">3</p>
+          <p class="stat-label">International Publications</p>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div style="margin-top: 48px;">
+        <p style="font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px;">Education</p>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="padding: 20px 24px; border: 1px solid var(--border); border-left: 2px solid var(--accent); background: var(--bg2);">
+            <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">2019 – 2023</p>
+            <p style="font-family: var(--serif); font-size: 17px; color: var(--text); margin-bottom: 4px;">Doctor of Philosophy (PhD)</p>
+            <p style="font-size: 13px; color: var(--text-muted);">Indian Institute of Technology Kanpur</p>
+            <p style="font-size: 12px; color: var(--text-dim); margin-top: 4px; font-style: italic;">Handheld AR Games · UX Design Patterns</p>
+          </div>
+          <div style="padding: 20px 24px; border: 1px solid var(--border); border-left: 2px solid var(--accent2); background: var(--bg2);">
+            <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 6px;">2019 – 2021</p>
+            <p style="font-family: var(--serif); font-size: 17px; color: var(--text); margin-bottom: 4px;">Master of Design (M.Des)</p>
+            <p style="font-size: 13px; color: var(--text-muted);">Indian Institute of Technology Kanpur</p>
+          </div>
+          <div style="padding: 20px 24px; border: 1px solid var(--border); background: var(--bg2);">
+            <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px;">2014 – 2018</p>
+            <p style="font-family: var(--serif); font-size: 17px; color: var(--text); margin-bottom: 4px;">B.Tech, Mechanical Engineering</p>
+            <p style="font-size: 13px; color: var(--text-muted);">Nagpur University</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right fade-up">
+      <div class="current-role">
+        <p class="role-eyebrow">Currently</p>
+        <p class="role-title">UX Research & Design Ops Lead</p>
+        <p class="role-org">Jio Platforms Limited — India</p>
+      </div>
+      <div class="about-body">
+        <p>I'm a UX researcher and design operations lead with 6+ years of experience driving organisation-wide experience standards, research frameworks, and design quality across large-scale digital ecosystems.</p>
+        <p>At Jio Platforms, I lead UX audits across 10+ products, defined the One Jio Experience Framework (15 actionable standards), and partner with Product, Design, Engineering, and Leadership to embed research into roadmaps and releases.</p>
+        <p>Before Jio, I was a Project Associate at DRDO and a doctoral researcher at IIT Kanpur — where I published in international journals and derived validated design patterns for AR game experiences.</p>
+      </div>
+      <div class="skills-list" style="margin-top: 28px;">
+        <span class="skill-chip">UX Research</span>
+        <span class="skill-chip">Design Ops</span>
+        <span class="skill-chip">Usability Testing</span>
+        <span class="skill-chip">Figma</span>
+        <span class="skill-chip">Design Systems</span>
+        <span class="skill-chip">Journey Mapping</span>
+        <span class="skill-chip">CX Auditing</span>
+        <span class="skill-chip">AR/VR</span>
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">Notion</span>
+        <span class="skill-chip">Miro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section id="contact">
+  <p class="cta-eyebrow">Let's connect</p>
+  <h2 class="cta-headline fade-up">Let's make something<br><em>meaningful.</em></h2>
+  <p class="cta-sub">Open to conversations about UX research, design ops, experience strategy, or bold ideas.</p>
+  <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+    <a href="mailto:pushkarpandey1007@gmail.com" class="btn-primary">Email me ↗</a>
+    <a href="Pushkar_2026-2.pdf" target="_blank" class="btn-ghost">View Portfolio PDF ↓</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">India &nbsp;·&nbsp; © 2026 Dr. Pushkar Pandey</p>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pushkarpandey1007" target="_blank">LinkedIn</a></li>
+    <li><a href="mailto:pushkarpandey1007@gmail.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .work-item, .skill-chip').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+
+  // Work preview card tooltip
+  const preview = document.getElementById('work-preview');
+  let activeCard = null;
+
+  document.querySelectorAll('.work-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const key = item.dataset.preview;
+      // hide previous
+      if (activeCard) activeCard.classList.remove('active');
+      activeCard = document.getElementById('wp-' + key);
+      if (activeCard) activeCard.classList.add('active');
+      preview.classList.add('visible');
+    });
+    item.addEventListener('mouseleave', () => {
+      preview.classList.remove('visible');
+      if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
+    });
+    item.addEventListener('mousemove', e => {
+      const x = e.clientX + 28;
+      const y = e.clientY - 90;
+      const maxX = window.innerWidth - 300;
+      const maxY = window.innerHeight - 190;
+      preview.style.left = Math.min(x, maxX) + 'px';
+      preview.style.top = Math.max(10, Math.min(y, maxY)) + 'px';
+    });
+  });
+
+  // Mobile nav
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Stagger hero fade-ups immediately
+  document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+  });
+</script>
+</body>
+</html>
