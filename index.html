@@ -648,6 +648,57 @@
 
   .about-right { padding-top: 8px; }
 
+  /* Publications */
+  .pub-card {
+    background: var(--bg);
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .pub-card:hover { background: var(--bg3); border-color: rgba(255,255,255,0.12); }
+
+  /* International chips */
+  .intl-chip {
+    padding: 8px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .intl-chip:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  /* Open to chips */
+  .open-chip {
+    padding: 8px 16px;
+    background: rgba(200,169,110,0.06);
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 2px;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    transition: background 0.2s;
+  }
+  .open-chip:hover { background: rgba(200,169,110,0.12); }
+  .work-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .metric {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: rgba(200,169,110,0.05);
+  }
+
   .current-role {
     padding: 32px;
     background: var(--bg2);
@@ -865,16 +916,21 @@
 
   .edu-iit-seal {
     position: absolute;
-    top: 28px;
-    right: 28px;
-    opacity: 0.5;
-    transform: scale(0.9);
-    transition: opacity 0.3s, transform 0.3s;
+    top: 24px;
+    right: 24px;
+    opacity: 0.45;
+    transform: scale(1);
+    transition: opacity 0.35s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .edu-highlight:hover .edu-iit-seal,
+  .edu-highlight:hover .edu-iit-seal {
+    opacity: 1;
+    transform: scale(1.15) rotate(12deg);
+    filter: drop-shadow(0 0 8px rgba(200,169,110,0.4));
+  }
   .edu-mdes:hover .edu-iit-seal {
     opacity: 1;
-    transform: scale(1) rotate(10deg);
+    transform: scale(1.15) rotate(12deg);
+    filter: drop-shadow(0 0 8px rgba(126,184,164,0.4));
   }
 
   /* Shimmer sweep on IIT cards */
@@ -1110,6 +1166,83 @@
       <text x="164" y="158" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.25)" letter-spacing="1">ACCESSIBILITY</text>
     </svg>
   </div>
+
+  <!-- P6: DRDO -->
+  <div class="wp-card" id="wp-p6">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#0a0f1a"/>
+      <!-- subtle grid -->
+      <line x1="0" y1="58" x2="280" y2="58" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="0" y1="116" x2="280" y2="116" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="93" y1="0" x2="93" y2="175" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      <line x1="186" y1="0" x2="186" y2="175" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      <!-- drone body -->
+      <rect x="118" y="72" width="44" height="28" rx="4" fill="rgba(200,169,110,0.12)" stroke="rgba(200,169,110,0.4)" stroke-width="1"/>
+      <circle cx="140" cy="86" r="6" fill="none" stroke="rgba(200,169,110,0.6)" stroke-width="1"/>
+      <circle cx="140" cy="86" r="2" fill="rgba(200,169,110,0.5)"/>
+      <!-- drone arms -->
+      <line x1="118" y1="74" x2="96" y2="56" stroke="rgba(200,169,110,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="162" y1="74" x2="184" y2="56" stroke="rgba(200,169,110,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="118" y1="98" x2="96" y2="116" stroke="rgba(200,169,110,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="162" y1="98" x2="184" y2="116" stroke="rgba(200,169,110,0.35)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- propellers -->
+      <ellipse cx="96" cy="56" rx="12" ry="4" fill="none" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+      <ellipse cx="184" cy="56" rx="12" ry="4" fill="none" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+      <ellipse cx="96" cy="116" rx="12" ry="4" fill="none" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+      <ellipse cx="184" cy="116" rx="12" ry="4" fill="none" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+      <!-- DRDO badge -->
+      <rect x="18" y="18" width="46" height="18" rx="2" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.4)" stroke-width="0.5"/>
+      <text x="24" y="31" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(200,169,110,0.9)" letter-spacing="1">DRDO</text>
+      <!-- Behance badge -->
+      <rect x="70" y="18" width="58" height="18" rx="2" fill="rgba(0,107,255,0.2)" stroke="rgba(0,107,255,0.4)" stroke-width="0.5"/>
+      <text x="76" y="31" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(100,160,255,0.9)" letter-spacing="0.5">Behance ↗</text>
+      <!-- keywords -->
+      <text x="18" y="158" font-family="DM Sans,sans-serif" font-size="8" fill="#c8a96e" opacity="0.9" letter-spacing="1">MISSION-CRITICAL UX</text>
+      <text x="168" y="158" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,0.3)" letter-spacing="1">DRONE</text>
+    </svg>
+  </div>
+
+  <!-- P7: IIT AR Research -->
+  <div class="wp-card" id="wp-p7">
+    <svg viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg" width="280" height="175">
+      <rect width="280" height="175" fill="#0d0a1e"/>
+      <!-- phone outline -->
+      <rect x="104" y="28" width="72" height="118" rx="8" fill="rgba(126,184,164,0.05)" stroke="rgba(126,184,164,0.3)" stroke-width="1"/>
+      <rect x="112" y="38" width="56" height="76" rx="3" fill="rgba(126,184,164,0.04)"/>
+      <!-- AR overlay elements on screen -->
+      <rect x="116" y="42" width="48" height="32" rx="2" fill="rgba(200,169,110,0.08)" stroke="rgba(200,169,110,0.25)" stroke-width="0.5" stroke-dasharray="3 2"/>
+      <circle cx="140" cy="58" r="8" fill="none" stroke="rgba(200,169,110,0.4)" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="116" y1="42" x2="124" y2="50" stroke="rgba(200,169,110,0.3)" stroke-width="0.5"/>
+      <line x1="164" y1="42" x2="156" y2="50" stroke="rgba(200,169,110,0.3)" stroke-width="0.5"/>
+      <line x1="116" y1="74" x2="124" y2="66" stroke="rgba(200,169,110,0.3)" stroke-width="0.5"/>
+      <line x1="164" y1="74" x2="156" y2="66" stroke="rgba(200,169,110,0.3)" stroke-width="0.5"/>
+      <!-- screen content lines -->
+      <rect x="116" y="80" width="48" height="3" rx="1" fill="rgba(126,184,164,0.3)"/>
+      <rect x="116" y="88" width="36" height="3" rx="1" fill="rgba(126,184,164,0.2)"/>
+      <rect x="116" y="96" width="42" height="3" rx="1" fill="rgba(126,184,164,0.15)"/>
+      <!-- home bar -->
+      <rect x="130" y="132" width="20" height="3" rx="1" fill="rgba(255,255,255,0.15)"/>
+      <!-- IIT badge -->
+      <rect x="18" y="18" width="60" height="18" rx="2" fill="rgba(200,169,110,0.15)" stroke="rgba(200,169,110,0.4)" stroke-width="0.5"/>
+      <text x="24" y="31" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(200,169,110,0.9)" letter-spacing="0.5">IIT KANPUR</text>
+      <!-- Behance badge -->
+      <rect x="84" y="18" width="58" height="18" rx="2" fill="rgba(0,107,255,0.2)" stroke="rgba(0,107,255,0.4)" stroke-width="0.5"/>
+      <text x="90" y="31" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(100,160,255,0.9)" letter-spacing="0.5">Behance ↗</text>
+      <!-- pattern nodes -->
+      <circle cx="28" cy="70" r="4" fill="rgba(200,169,110,0.4)"/>
+      <circle cx="28" cy="90" r="4" fill="rgba(126,184,164,0.4)"/>
+      <circle cx="28" cy="110" r="4" fill="rgba(200,169,110,0.25)"/>
+      <line x1="28" y1="74" x2="28" y2="86" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <line x1="28" y1="94" x2="28" y2="106" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <text x="40" y="74" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(200,169,110,0.6)" letter-spacing="0.3">Pattern 01</text>
+      <text x="40" y="94" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(126,184,164,0.6)" letter-spacing="0.3">Pattern 02</text>
+      <text x="40" y="114" font-family="DM Sans,sans-serif" font-size="7" fill="rgba(200,169,110,0.4)" letter-spacing="0.3">10 total</text>
+      <!-- keywords -->
+      <text x="18" y="158" font-family="DM Sans,sans-serif" font-size="8" fill="#7eb8a4" opacity="0.9" letter-spacing="1">AR GAMES · PhD</text>
+      <text x="118" y="158" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="1">10 PATTERNS</text>
+      <text x="206" y="158" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(255,255,255,0.25)" letter-spacing="1">SPRINGER</text>
+    </svg>
+  </div>
 </div>
 
 <!-- NAV -->
@@ -1122,7 +1255,7 @@
     <li><a href="#work">Work</a></li>
     <li><a href="#capabilities">Capabilities</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="mailto:pushkar@pushkarpandey.com" class="contact-link">Contact</a></li>
+    <li><a href="mailto:pushkarpandey1007@gmail.com" class="contact-link">Contact</a></li>
   </ul>
 </nav>
 
@@ -1133,9 +1266,9 @@
 
   <!-- LEFT: Text -->
   <div class="hero-content">
-    <p class="hero-eyebrow fade-up">UX Research · Design Ops · IIT Kanpur PhD</p>
-    <h1 class="hero-headline fade-up">I build experience<br>systems that make<br><em>products better.</em></h1>
-    <p class="hero-sub fade-up">UX Research & Design Ops Lead at Jio Platforms — driving organisation-wide experience standards, research frameworks, and design quality across India's largest digital ecosystem.</p>
+    <p class="hero-eyebrow fade-up">IIT Kanpur PhD · UX Research · Design Ops</p>
+    <h1 class="hero-headline fade-up">From IIT labs<br>to 400M+ users —<br><em>research-led.</em></h1>
+    <p class="hero-sub fade-up">UX Research & Design Ops Lead at Jio Platforms. PhD & M.Des from IIT Kanpur. Defining experience standards, driving design system research, and embedding user insights across India's largest digital ecosystem.</p>
     <div class="hero-actions fade-up">
       <a href="#work" class="btn-primary">View Work ↓</a>
       <a href="#about" class="btn-ghost">About Me</a>
@@ -1182,7 +1315,12 @@
         <div class="work-info">
           <p class="work-tag">Design Ops · Jio Platforms</p>
           <h2 class="work-title">Design Operations & Research</h2>
-          <p class="work-desc">Driving JDS integration, CX audits, brand evaluations and a Research Centre of Excellence — aligning design operations across 30+ Jio products and services.</p>
+          <p class="work-desc">Driving JDS integration, CX audits, brand evaluations and a Research Centre of Excellence — aligning design operations across 30+ Jio products.</p>
+          <div class="work-metrics">
+            <span class="metric">30+ products aligned</span>
+            <span class="metric">15 experience standards</span>
+            <span class="metric">Org-wide adoption</span>
+          </div>
         </div>
         <span class="work-arrow">↗</span>
       </a>
@@ -1193,7 +1331,12 @@
         <div class="work-info">
           <p class="work-tag">UX Research · Product</p>
           <h2 class="work-title">JioTranslate — UX Research</h2>
-          <p class="work-desc">Beta-to-launch UX research for JioTranslate — usability testing, heuristic evaluation, competitor analysis, and iterative research across multiple product versions driving key interaction improvements.</p>
+          <p class="work-desc">Beta-to-launch UX research — usability testing, heuristic evaluation, competitor analysis across multiple product versions.</p>
+          <div class="work-metrics">
+            <span class="metric">Beta → V2 research</span>
+            <span class="metric">Jakob Nielsen heuristics</span>
+            <span class="metric">Multi-language testing</span>
+          </div>
         </div>
         <span class="work-arrow">↗</span>
       </a>
@@ -1204,7 +1347,12 @@
         <div class="work-info">
           <p class="work-tag">UX Research · Design Systems</p>
           <h2 class="work-title">Jio Design System Research</h2>
-          <p class="work-desc">33+ end-to-end research studies shaping the Jio Design System — from component usability and motion audits to documentation, improving DS adoption by 35–50% across product teams.</p>
+          <p class="work-desc">33+ research studies shaping the Jio Design System — improving DS adoption and reducing designer onboarding time.</p>
+          <div class="work-metrics">
+            <span class="metric">+35–50% DS adoption</span>
+            <span class="metric">2.5hrs → 1hr onboarding</span>
+            <span class="metric">200+ components validated</span>
+          </div>
         </div>
         <span class="work-arrow">↗</span>
       </a>
@@ -1215,7 +1363,12 @@
         <div class="work-info">
           <p class="work-tag">UX Research · FinTech</p>
           <h2 class="work-title">JioFinance</h2>
-          <p class="work-desc">End-to-end UX research for Jio's smart financial platform — foundation research on destructive action psychology, feature evaluation, journey audits, and UI compliance against JDS standards.</p>
+          <p class="work-desc">End-to-end UX research for Jio's financial platform — destructive action psychology, feature evaluation, and journey audits.</p>
+          <div class="work-metrics">
+            <span class="metric">Fear & trust research</span>
+            <span class="metric">High-stakes UX flows</span>
+            <span class="metric">DS compliance audit</span>
+          </div>
         </div>
         <span class="work-arrow">↗</span>
       </a>
@@ -1226,7 +1379,46 @@
         <div class="work-info">
           <p class="work-tag">Brand Identity · UI Design</p>
           <h2 class="work-title">JioTranslate — UI & Brand</h2>
-          <p class="work-desc">Brand identity definition and UI audit for JioTranslate — covering colour system, JioType typography, navigation patterns, accessibility standards, and design system compliance.</p>
+          <p class="work-desc">Brand identity and UI audit — colour system, JioType typography, navigation patterns, and accessibility standards.</p>
+          <div class="work-metrics">
+            <span class="metric">4-colour system</span>
+            <span class="metric">JioType integration</span>
+            <span class="metric">Accessibility audit</span>
+          </div>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+    <li>
+      <a class="work-item" href="https://www.behance.net/gallery/155597149/DRDO-Drone-Design" target="_blank" data-preview="p6">
+        <span class="work-num">06</span>
+        <div class="work-info">
+          <p class="work-tag">UX Research · Defence · DRDO &nbsp;↗ Behance</p>
+          <h2 class="work-title">Mission-Critical UX — DRDO</h2>
+          <p class="work-desc">UX research and interface design for mission-critical defence software at India's premier defence R&D organisation. Designed and evaluated UI screens based on operator workflows, task analysis, and usability principles. Also contributed to a palm-sized drone for object identification through prototyping and testing.</p>
+          <div class="work-metrics">
+            <span class="metric">Defence-grade UX</span>
+            <span class="metric">Task analysis & workflows</span>
+            <span class="metric">Palm drone prototyping</span>
+            <span class="metric">MATLAB & Python</span>
+          </div>
+        </div>
+        <span class="work-arrow">↗</span>
+      </a>
+    </li>
+    <li>
+      <a class="work-item" href="https://www.behance.net/gallery/155012161/Handheld-Augmented-Reality-Games" target="_blank" data-preview="p7">
+        <span class="work-num">07</span>
+        <div class="work-info">
+          <p class="work-tag">PhD Research · IIT Kanpur &nbsp;↗ Behance</p>
+          <h2 class="work-title">UX Design Patterns for AR Games</h2>
+          <p class="work-desc">Doctoral research at IIT Kanpur on handheld augmented reality game experiences — deriving 10 validated UX design patterns through empirical usability studies, UX questionnaires, and qualitative methods. Prototyped and validated patterns through a functional AR game concept. Published findings in Springer journals.</p>
+          <div class="work-metrics">
+            <span class="metric">10 validated UX patterns</span>
+            <span class="metric">2 Springer publications</span>
+            <span class="metric">IIT Kanpur PhD</span>
+            <span class="metric">AR prototyping</span>
+          </div>
         </div>
         <span class="work-arrow">↗</span>
       </a>
@@ -1354,11 +1546,12 @@
         <p class="edu-inst-name">IIT Kanpur</p>
         <p class="edu-field">Handheld AR Games · UX Design Patterns</p>
         <div class="edu-iit-seal">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
-            <circle cx="20" cy="20" r="13" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
-            <text x="20" y="17" text-anchor="middle" font-size="6" fill="rgba(200,169,110,0.6)" font-family="DM Sans,sans-serif" letter-spacing="1">IIT</text>
-            <text x="20" y="25" text-anchor="middle" font-size="5" fill="rgba(200,169,110,0.4)" font-family="DM Sans,sans-serif" letter-spacing="0.5">KANPUR</text>
+          <svg width="64" height="64" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" stroke="rgba(200,169,110,0.4)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="14" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
+            <circle cx="20" cy="20" r="10" stroke="rgba(200,169,110,0.12)" stroke-width="0.6"/>
+            <text x="20" y="17" text-anchor="middle" font-size="6" fill="rgba(200,169,110,0.8)" font-family="DM Sans,sans-serif" letter-spacing="1">IIT</text>
+            <text x="20" y="25" text-anchor="middle" font-size="4.5" fill="rgba(200,169,110,0.55)" font-family="DM Sans,sans-serif" letter-spacing="0.5">KANPUR</text>
           </svg>
         </div>
       </div>
@@ -1373,11 +1566,12 @@
         <p class="edu-inst-name">IIT Kanpur</p>
         <p class="edu-field">Design · Human-Computer Interaction</p>
         <div class="edu-iit-seal">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" stroke="rgba(126,184,164,0.25)" stroke-width="1"/>
-            <circle cx="20" cy="20" r="13" stroke="rgba(126,184,164,0.12)" stroke-width="1"/>
-            <text x="20" y="17" text-anchor="middle" font-size="6" fill="rgba(126,184,164,0.5)" font-family="DM Sans,sans-serif" letter-spacing="1">IIT</text>
-            <text x="20" y="25" text-anchor="middle" font-size="5" fill="rgba(126,184,164,0.35)" font-family="DM Sans,sans-serif" letter-spacing="0.5">KANPUR</text>
+          <svg width="64" height="64" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" stroke="rgba(126,184,164,0.35)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="14" stroke="rgba(126,184,164,0.18)" stroke-width="0.8"/>
+            <circle cx="20" cy="20" r="10" stroke="rgba(126,184,164,0.1)" stroke-width="0.6"/>
+            <text x="20" y="17" text-anchor="middle" font-size="6" fill="rgba(126,184,164,0.7)" font-family="DM Sans,sans-serif" letter-spacing="1">IIT</text>
+            <text x="20" y="25" text-anchor="middle" font-size="4.5" fill="rgba(126,184,164,0.45)" font-family="DM Sans,sans-serif" letter-spacing="0.5">KANPUR</text>
           </svg>
         </div>
       </div>
@@ -1426,25 +1620,96 @@
         <p class="role-title">UX Research & Design Ops Lead</p>
         <p class="role-org">Jio Platforms Limited — India</p>
       </div>
-      <div style="margin-top: 32px; padding: 28px; background: var(--bg2); border: 1px solid var(--border);">
-        <p style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px;">Publications</p>
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <div style="padding-left: 16px; border-left: 2px solid rgba(200,169,110,0.3);">
-            <p style="font-size: 13px; color: var(--text); margin-bottom: 4px; line-height: 1.5;">UI Guidelines for Cultural Sensitivity in Indian Handicraft User Interfaces</p>
-            <p style="font-size: 11px; color: var(--text-dim);">Springer · Design in the Era of Industry 4.0, Vol. 1</p>
-          </div>
-          <div style="padding-left: 16px; border-left: 2px solid rgba(200,169,110,0.2);">
-            <p style="font-size: 13px; color: var(--text); margin-bottom: 4px; line-height: 1.5;">Deriving Design Patterns for Handheld Augmented Reality Games</p>
-            <p style="font-size: 11px; color: var(--text-dim);">Springer · Design in the Era of Industry 4.0, Vol. 2</p>
-          </div>
-          <div style="padding-left: 16px; border-left: 2px solid rgba(200,169,110,0.1);">
-            <p style="font-size: 13px; color: var(--text); margin-bottom: 4px; line-height: 1.5;">An Empirical Study on Human-Centric UX Design Principles and Design Thinking</p>
-            <p style="font-size: 11px; color: var(--text-dim);">European Academic Research · Vol. X</p>
-          </div>
+
+      <!-- Academic Excellence Award -->
+      <div style="margin-top: 24px; padding: 24px 28px; background: var(--bg2); border: 1px solid rgba(200,169,110,0.25); border-left: 2px solid var(--accent); position: relative; overflow: hidden;">
+        <div style="position:absolute;top:16px;right:20px;opacity:0.12;">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <polygon points="24,4 29,18 44,18 32,27 37,42 24,33 11,42 16,27 4,18 19,18" stroke="#c8a96e" stroke-width="1.2" fill="none"/>
+          </svg>
         </div>
+        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;">🏆 Academic Award</p>
+        <p style="font-family:var(--serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:6px;">Academic Excellence Award</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">Indian Institute of Technology Kanpur</p>
+        <p style="font-size:12px;color:var(--text-dim);font-style:italic;">Awarded for outstanding research contributions during Master of Design (2019–21)</p>
+      </div>
+
+      <!-- Co-author -->
+      <div style="margin-top: 16px; padding: 20px 28px; background: var(--bg2); border: 1px solid var(--border); border-left: 2px solid rgba(200,169,110,0.3);">
+        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Co-Author</p>
+        <p style="font-family:var(--serif);font-size:16px;font-weight:400;color:var(--text);margin-bottom:4px;">A Textbook of Mathematics</p>
+        <p style="font-size:12px;color:var(--text-dim);font-style:italic;">Published academic textbook</p>
       </div>
     </div>
   </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" style="border-top: 1px solid var(--border); padding: 80px 48px;">
+  <p class="section-label">Published Research</p>
+  <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border);">
+
+    <div class="pub-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+        <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,169,110,0.3);padding:3px 10px;border-radius:2px;">Springer</span>
+        <span style="font-size:11px;color:var(--text-dim);">Vol. 1</span>
+      </div>
+      <p style="font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);line-height:1.4;margin-bottom:10px;">UI Guidelines for Cultural Sensitivity in Indian Handicraft Interfaces</p>
+      <p style="font-size:12px;color:var(--text-dim);">Design in the Era of Industry 4.0 · Springer</p>
+    </div>
+
+    <div class="pub-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+        <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,169,110,0.3);padding:3px 10px;border-radius:2px;">Springer</span>
+        <span style="font-size:11px;color:var(--text-dim);">Vol. 2</span>
+      </div>
+      <p style="font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);line-height:1.4;margin-bottom:10px;">Deriving Design Patterns for Handheld Augmented Reality Games</p>
+      <p style="font-size:12px;color:var(--text-dim);">Design in the Era of Industry 4.0 · Springer</p>
+    </div>
+
+    <div class="pub-card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+        <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);border:1px solid rgba(126,184,164,0.3);padding:3px 10px;border-radius:2px;">Journal</span>
+        <span style="font-size:11px;color:var(--text-dim);">Vol. X</span>
+      </div>
+      <p style="font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);line-height:1.4;margin-bottom:10px;">An Empirical Study on Human-Centric UX Design Principles and Design Thinking</p>
+      <p style="font-size:12px;color:var(--text-dim);">European Academic Research</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- INTERNATIONAL EXPOSURE -->
+<section style="border-top: 1px solid var(--border); padding: 64px 48px; background: var(--bg2);">
+  <p class="section-label">International Exposure</p>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+    <span class="intl-chip">🇺🇸 New York & Manhattan, USA</span>
+    <span class="intl-chip">🇯🇵 Tokyo, Japan</span>
+    <span class="intl-chip">🇧🇷 Rio de Janeiro, Brazil</span>
+    <span class="intl-chip">🇹🇷 Ankara, Mardin, Erzurum, Cappadocia — Turkey</span>
+    <span class="intl-chip">🇲🇽 Mexico</span>
+    <span class="intl-chip">🇧🇬 Bulgaria</span>
+    <span class="intl-chip">🇷🇴 Bucharest, Romania</span>
+    <span class="intl-chip">🇲🇻 Malé, Maldives</span>
+    <span class="intl-chip">🇹🇭 Pattaya, Thailand</span>
+    <span class="intl-chip">🇮🇳 India</span>
+  </div>
+  <p style="font-size:13px;color:var(--text-dim);margin-top:20px;max-width:600px;line-height:1.7;">Presented research at 21+ international scientific conferences and congresses across Europe, Asia, and the Americas — covering innovation technology, social sciences, applied research, and design.</p>
+</section>
+
+<!-- OPEN TO -->
+<section style="border-top: 1px solid var(--border); padding: 48px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+  <div>
+    <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">Currently open to</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <span class="open-chip">UX Research Consulting</span>
+      <span class="open-chip">Design Strategy</span>
+      <span class="open-chip">Speaking Engagements</span>
+      <span class="open-chip">Research Collaborations</span>
+      <span class="open-chip">Design System Advisory</span>
+    </div>
+  </div>
+  <a href="mailto:pushkarpandey1007@gmail.com" class="btn-primary">Let's talk ↗</a>
 </section>
 
 <!-- CONTACT / CTA -->
