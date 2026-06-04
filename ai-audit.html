@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Powered Design Audit Automation — Pushkar Pandey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0e0e0e;--bg2:#161616;--bg3:#1e1e1e;
+  --text:#f0ede6;--muted:#8a8880;--dim:#5a5855;
+  --accent:#c8a96e;--accent2:#7eb8a4;--purple:#9d8fdd;
+  --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
+  --serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(14,14,14,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;}
+.nav-logo{font-family:var(--serif);font-size:15px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-back{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+
+/* HERO */
+.hero{min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 48px 80px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 50%,rgba(157,143,221,0.06) 0%,transparent 60%);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);border:1px solid rgba(157,143,221,0.3);padding:5px 14px;border-radius:2px;margin-bottom:28px;width:fit-content;}
+.hero-title{font-family:var(--serif);font-size:clamp(36px,6vw,72px);font-weight:400;line-height:1.05;margin-bottom:24px;}
+.hero-title span{font-style:italic;color:var(--purple);}
+.hero-sub{font-size:16px;color:var(--muted);max-width:600px;line-height:1.75;margin-bottom:40px;}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:700px;}
+.metric-cell{background:var(--bg);padding:20px 24px;}
+.metric-num{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--purple);line-height:1;margin-bottom:4px;}
+.metric-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.built-with{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+.tech-chip{padding:5px 14px;background:transparent;border:1px solid var(--border);border-radius:2px;font-size:11px;letter-spacing:.08em;color:var(--muted);}
+
+/* SECTIONS */
+section{padding:80px 48px;border-top:1px solid var(--border);}
+.sec-num{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.sec-title{font-family:var(--serif);font-size:clamp(24px,3.5vw,38px);font-weight:400;line-height:1.2;margin-bottom:36px;}
+.sec-title span{font-style:italic;color:var(--purple);}
+.body{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px;max-width:680px;}
+
+/* PROBLEM */
+.problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);margin-bottom:32px;}
+.problem-card{background:var(--bg2);padding:28px;transition:background .2s;}
+.problem-card:hover{background:var(--bg3);}
+.problem-icon{font-size:22px;margin-bottom:14px;}
+.problem-title{font-size:13px;font-weight:500;letter-spacing:.08em;color:var(--text);margin-bottom:8px;}
+.problem-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+.old-process{background:var(--bg2);border:1px solid var(--border);padding:28px;}
+.old-title{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.old-step{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted);}
+.old-step:last-child{border-bottom:none;}
+.step-num{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--text);flex-shrink:0;}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);margin-bottom:28px;}
+.tool-card{background:var(--bg2);padding:32px;position:relative;overflow:hidden;transition:background .2s;}
+.tool-card:hover{background:var(--bg3);}
+.tool-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
+.tool-cx::before{background:var(--accent);}
+.tool-xp::before{background:var(--accent2);}
+.tool-badge{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:16px;}
+.tool-cx .tool-badge{background:rgba(200,169,110,0.12);color:var(--accent);border:1px solid rgba(200,169,110,0.3);}
+.tool-xp .tool-badge{background:rgba(126,184,164,0.1);color:var(--accent2);border:1px solid rgba(126,184,164,0.25);}
+.tool-title{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:10px;}
+.tool-body{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.tool-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{font-size:10px;letter-spacing:.08em;padding:3px 10px;border-radius:2px;background:transparent;border:1px solid var(--border);color:var(--muted);}
+
+.outcome-strip{background:var(--bg2);border-left:2px solid var(--purple);padding:20px 28px;border-radius:0 2px 2px 0;}
+.outcome-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;}
+.outcome-text{font-size:15px;color:var(--text);font-weight:400;}
+
+/* PROCESS */
+.process-list{display:flex;flex-direction:column;gap:0;}
+.process-step{display:grid;grid-template-columns:48px 1fr;gap:20px;position:relative;}
+.process-step:not(:last-child)::after{content:'';position:absolute;left:23px;top:48px;bottom:0;width:1px;background:var(--border);}
+.ps-dot{width:48px;height:48px;border-radius:50%;background:var(--bg2);border:1px solid rgba(157,143,221,0.4);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--purple);flex-shrink:0;}
+.ps-content{padding-bottom:28px;}
+.ps-title{font-size:15px;font-weight:400;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.ps-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* BEFORE AFTER */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);}
+.ba-card{background:var(--bg2);padding:28px;}
+.ba-header{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.ba-before .ba-header{color:#b85c3a;}
+.ba-after .ba-header{color:var(--accent2);}
+.ba-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:13px;color:var(--muted);line-height:1.5;}
+.ba-item .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.ba-before .dot{background:#b85c3a;}
+.ba-after .dot{background:var(--accent2);}
+
+/* LEARNINGS */
+.learnings-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);margin-bottom:24px;}
+.learning-card{background:var(--bg2);padding:28px;transition:background .2s;}
+.learning-card:hover{background:var(--bg3);}
+.learning-card.full{grid-column:1/-1;}
+.learning-num{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+.learning-title{font-size:16px;font-weight:400;color:var(--text);margin-bottom:8px;font-family:var(--serif);}
+.learning-body{font-size:13px;color:var(--muted);line-height:1.7;}
+
+.honest-note{display:flex;gap:16px;align-items:flex-start;background:var(--bg2);border:1px solid var(--border);padding:24px 28px;}
+.honest-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+.honest-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px;}
+.honest-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* CTA */
+.cta{border-top:1px solid var(--border);padding:80px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(157,143,221,0.05),transparent 65%);}
+.cta-title{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;color:var(--text);line-height:1.1;margin-bottom:12px;}
+.cta-title em{font-style:italic;color:var(--purple);}
+.cta-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-p{padding:12px 28px;background:var(--purple);color:#0e0e0e;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:2px;text-decoration:none;cursor:pointer;transition:opacity .2s;}
+.btn-p:hover{opacity:.85;}
+.btn-g{padding:12px 28px;background:transparent;color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);border-radius:2px;text-decoration:none;transition:border-color .2s,color .2s;}
+.btn-g:hover{border-color:var(--border-h);color:var(--text);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-links{display:flex;gap:20px;list-style:none;}
+.footer-links a{font-size:12px;color:var(--dim);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--text);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav,section,.hero,.cta,footer{padding-left:24px;padding-right:24px;}
+  .hero-metrics,.problem-grid,.tools-grid,.ba-grid,.learnings-grid{grid-template-columns:1fr;}
+  .process-step{grid-template-columns:36px 1fr;}
+  .process-step:not(:last-child)::after{left:17px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dr. Pushkar <span>Pandey</span></a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">AI · Design Ops · Case Study</div>
+  <h1 class="hero-title">AI-Powered<br><span>Design Audit</span><br>Automation</h1>
+  <p class="hero-sub">How I replaced a fully manual compliance review process with an AI-powered audit pipeline using Claude + Figma MCP — cutting audit time from days to minutes.</p>
+  <div class="built-with">
+    <span class="tech-chip">Claude AI</span>
+    <span class="tech-chip">Figma MCP</span>
+    <span class="tech-chip">Interactive HTML</span>
+    <span class="tech-chip">Figma Plugin API</span>
+  </div>
+  <div class="hero-metrics">
+    <div class="metric-cell"><p class="metric-num">44</p><p class="metric-lbl">CX criteria automated</p></div>
+    <div class="metric-cell"><p class="metric-num">27</p><p class="metric-lbl">XP criteria automated</p></div>
+    <div class="metric-cell"><p class="metric-num">~10m</p><p class="metric-lbl">Per audit turnaround</p></div>
+    <div class="metric-cell"><p class="metric-num">32+</p><p class="metric-lbl">Product teams enabled</p></div>
+  </div>
+</div>
+
+<!-- 01 PROBLEM -->
+<section>
+  <p class="sec-num">01 / The Problem</p>
+  <h2 class="sec-title">Manual audits were <span>slow, inconsistent,</span> and didn't scale.</h2>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">⏱</div>
+      <p class="problem-title">Time Cost</p>
+      <p class="problem-body">2–3 days per audit manually cross-checking 27 experience criteria and 44 CX standards across Figma files one by one.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⚖</div>
+      <p class="problem-title">No Consistency</p>
+      <p class="problem-body">Results varied by reviewer. Two people auditing the same product could reach different conclusions on identical criteria.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔒</div>
+      <p class="problem-title">No Self-Serve</p>
+      <p class="problem-body">Product teams queued for central DesignOps to schedule every audit. No way to check compliance before shipping.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📉</div>
+      <p class="problem-title">Not Scalable</p>
+      <p class="problem-body">Manual process couldn't scale past a handful of audits per month across 30+ product teams.</p>
+    </div>
+  </div>
+  <div class="old-process">
+    <p class="old-title">The Old Process</p>
+    <div class="old-step"><span class="step-num">1</span>Figma Design File</div>
+    <div class="old-step"><span class="step-num">2</span>DesignOps schedules review</div>
+    <div class="old-step"><span class="step-num">3</span>Manual Figma inspection / CX check</div>
+    <div class="old-step"><span class="step-num">4</span>Generate and share report to teams</div>
+  </div>
+</section>
+
+<!-- 02 WHAT I BUILT -->
+<section>
+  <p class="sec-num">02 / What I Built</p>
+  <h2 class="sec-title">Two automated tools — <span>one pipeline.</span></h2>
+  <div class="tools-grid">
+    <div class="tool-card tool-cx">
+      <span class="tool-badge">Tool 01</span>
+      <p class="tool-title">CX Assessment Tool</p>
+      <p class="tool-body">Evaluates against 44 criteria across 15 CX standards. Generates an interactive HTML report with in-report approval workflows — reviewers approve or flag inside the report itself.</p>
+      <div class="tool-chips">
+        <span class="chip">15 standards</span>
+        <span class="chip">44 criteria</span>
+        <span class="chip">In-report approvals</span>
+      </div>
+    </div>
+    <div class="tool-card tool-xp">
+      <span class="tool-badge">Tool 02</span>
+      <p class="tool-title">Experience Principles Verifier</p>
+      <p class="tool-body">Evaluates any Jio product against 27 criteria across 10 experience principles using live Figma design data extracted via Figma MCP. No screenshots — real structured data.</p>
+      <div class="tool-chips">
+        <span class="chip">10 principles</span>
+        <span class="chip">27 criteria</span>
+        <span class="chip">~10 min per audit</span>
+      </div>
+    </div>
+  </div>
+  <div class="outcome-strip">
+    <p class="outcome-label">Outcome</p>
+    <p class="outcome-text">Product teams run compliance checks without waiting on central DesignOps — anytime, before any release.</p>
+  </div>
+</section>
+
+<!-- 03 PROCESS -->
+<section>
+  <p class="sec-num">03 / Process</p>
+  <h2 class="sec-title">From Figma file to audit report <span>in minutes.</span></h2>
+  <div class="process-list">
+    <div class="process-step"><div class="ps-dot">1</div><div class="ps-content"><p class="ps-title">Figma file URL provided</p><p class="ps-desc">Component data, tokens, and layout pulled live via Figma MCP</p></div></div>
+    <div class="process-step"><div class="ps-dot">2</div><div class="ps-content"><p class="ps-title">Figma MCP extracts design context</p><p class="ps-desc">Real structured data — no screenshots needed</p></div></div>
+    <div class="process-step"><div class="ps-dot">3</div><div class="ps-content"><p class="ps-title">Claude AI evaluates against criteria</p><p class="ps-desc">27 XP or 44 CX criteria — every one checked with a rubric</p></div></div>
+    <div class="process-step"><div class="ps-dot">4</div><div class="ps-content"><p class="ps-title">Pass / Partial / Fail scored per criterion</p><p class="ps-desc">Each criterion gets a verdict with clear reasoning</p></div></div>
+    <div class="process-step"><div class="ps-dot">5</div><div class="ps-content"><p class="ps-title">Interactive HTML report generated</p><p class="ps-desc">Downloadable, shareable — no special tool to open</p></div></div>
+    <div class="process-step"><div class="ps-dot">6</div><div class="ps-content"><p class="ps-title">In-report approval workflow</p><p class="ps-desc">Reviewers approve, flag, or mark criteria inside the report</p></div></div>
+  </div>
+</section>
+
+<!-- 04 BEFORE VS AFTER -->
+<section>
+  <p class="sec-num">04 / Before vs After</p>
+  <h2 class="sec-title">What <span>changed.</span></h2>
+  <div class="ba-grid">
+    <div class="ba-card ba-before">
+      <p class="ba-header">Before — Manual Process</p>
+      <div class="ba-item"><span class="dot"></span>2–3 days per audit</div>
+      <div class="ba-item"><span class="dot"></span>71 total criteria checked manually</div>
+      <div class="ba-item"><span class="dot"></span>Inconsistent — varied by reviewer</div>
+      <div class="ba-item"><span class="dot"></span>Teams queued for DesignOps</div>
+      <div class="ba-item"><span class="dot"></span>Findings in Notion — hard to act on</div>
+      <div class="ba-item"><span class="dot"></span>Not scalable past a few audits per month</div>
+    </div>
+    <div class="ba-card ba-after">
+      <p class="ba-header">After — Automated Pipeline</p>
+      <div class="ba-item"><span class="dot"></span>Minutes per audit</div>
+      <div class="ba-item"><span class="dot"></span>71 criteria fully automated</div>
+      <div class="ba-item"><span class="dot"></span>Same rubric — consistent every time</div>
+      <div class="ba-item"><span class="dot"></span>Teams self-serve anytime</div>
+      <div class="ba-item"><span class="dot"></span>Interactive HTML report with approvals</div>
+      <div class="ba-item"><span class="dot"></span>Scalable across 30+ product teams</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 LEARNINGS -->
+<section>
+  <p class="sec-num">05 / Learnings</p>
+  <h2 class="sec-title">What I <span>learned</span> building this.</h2>
+  <div class="learnings-grid">
+    <div class="learning-card">
+      <p class="learning-num">01</p>
+      <p class="learning-title">AI works best with structure</p>
+      <p class="learning-body">Claude's evaluation quality improved significantly when criteria were written as specific, testable questions — not broad principles. Prompt engineering took as long as building the tool.</p>
+    </div>
+    <div class="learning-card">
+      <p class="learning-num">02</p>
+      <p class="learning-title">Figma MCP is powerful but selective</p>
+      <p class="learning-body">Live design context extraction works well for components, tokens, and layout. Nuanced experience calls still need a human reviewer — the tool doesn't replace judgement.</p>
+    </div>
+    <div class="learning-card full">
+      <p class="learning-num">03</p>
+      <p class="learning-title">Adoption is a design problem</p>
+      <p class="learning-body">Getting product teams to trust an automated verdict required as much change management as engineering. The technical part was the easier half.</p>
+    </div>
+  </div>
+  <div class="honest-note">
+    <div class="honest-icon">💡</div>
+    <div>
+      <p class="honest-title">Honest note</p>
+      <p class="honest-body">This tool handles ~70% of what a manual audit covers. The remaining 30% — nuanced emotional and contextual judgement — still requires a human reviewer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2 class="cta-title">Let's talk about how I can<br>bring this to <em>your team.</em></h2>
+  <p class="cta-sub">Open to consulting, advisory, or collaboration on AI-powered design ops.</p>
+  <div class="cta-btns">
+    <a href="mailto:pushkarpandey1007@gmail.com" class="btn-p">Get in touch ↗</a>
+    <a href="index.html" class="btn-g">← Back to Portfolio</a>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">India · © 2026 Dr. Pushkar Pandey</p>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pushkarpandey1007" target="_blank">LinkedIn</a></li>
+    <li><a href="mailto:pushkarpandey1007@gmail.com">Email</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
