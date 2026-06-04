@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Operations & Research — Pushkar Pandey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#120a0e;--bg2:#1c1018;--bg3:#261520;
+  --text:#f0ede6;--muted:#a89098;--dim:#6a5060;
+  --rose:#d4648a;--rose2:#e890aa;--rose-dim:rgba(212,100,138,0.12);
+  --teal:#7eb8a4;--gold:#c8a96e;
+  --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
+  --serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(18,10,14,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;}
+.nav-logo{font-family:var(--serif);font-size:15px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--rose);}
+.nav-back{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+
+/* HERO */
+.hero{min-height:92vh;padding:100px 48px 0;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 50% 55% at 80% 35%,rgba(212,100,138,0.09) 0%,transparent 55%),radial-gradient(ellipse 35% 40% at 15% 75%,rgba(126,184,164,0.05) 0%,transparent 50%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:900px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);border:1px solid rgba(212,100,138,0.35);padding:5px 14px;border-radius:2px;margin-bottom:28px;}
+.hero-title{font-family:var(--serif);font-size:clamp(40px,6.5vw,80px);font-weight:400;line-height:1.0;margin-bottom:24px;}
+.hero-title em{font-style:italic;color:var(--rose);}
+.hero-sub{font-size:16px;color:var(--muted);line-height:1.8;max-width:580px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px;}
+.btn-rose{padding:12px 28px;background:var(--rose);color:#fff;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:2px;text-decoration:none;transition:background .2s;cursor:pointer;}
+.btn-rose:hover{background:#c05070;}
+.btn-out{padding:12px 28px;background:transparent;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);border-radius:2px;text-decoration:none;transition:border-color .2s,color .2s;}
+.btn-out:hover{border-color:var(--rose);color:var(--rose);}
+
+/* TWO PILLARS TOGGLE */
+.pillars-toggle{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:0;}
+.pillar-tab{background:var(--bg2);padding:28px 32px;cursor:pointer;transition:background .25s;position:relative;border-bottom:2px solid transparent;}
+.pillar-tab:hover{background:var(--bg3);}
+.pillar-tab.active{background:var(--bg3);border-bottom-color:var(--rose);}
+.pillar-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:8px;opacity:.6;transition:opacity .2s;}
+.pillar-tab.active .pillar-label{opacity:1;}
+.pillar-title{font-family:var(--serif);font-size:clamp(18px,2.5vw,26px);font-weight:400;color:var(--text);margin-bottom:6px;}
+.pillar-desc{font-size:13px;color:var(--muted);line-height:1.5;max-width:400px;}
+
+/* PILLAR CONTENT PANELS */
+.panel{display:none;padding:56px 48px;border-top:1px solid var(--border);}
+.panel.active{display:block;}
+
+/* SECTIONS */
+.sec-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.sec-heading{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:400;line-height:1.15;margin-bottom:12px;}
+.sec-heading em{font-style:italic;color:var(--rose);}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:680px;margin-bottom:40px;}
+
+/* WHAT I DO GRID */
+.what-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);margin-bottom:40px;}
+.what-card{background:var(--bg2);padding:30px;transition:background .2s;position:relative;overflow:hidden;cursor:default;}
+.what-card:hover{background:var(--bg3);}
+.what-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .3s;}
+.what-card:hover::before{background:var(--rose);}
+.what-icon{font-size:26px;margin-bottom:16px;}
+.what-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.what-body{font-size:13px;color:var(--muted);line-height:1.7;}
+.what-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.wtag{padding:3px 10px;border:1px solid var(--border);border-radius:2px;font-size:10px;color:var(--dim);}
+
+/* PRODUCT LIST */
+.products-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+.product-chip{padding:8px 18px;background:transparent;border:1px solid var(--border);border-radius:2px;font-size:12px;color:var(--muted);transition:border-color .25s,color .25s,background .25s;cursor:default;}
+.product-chip:hover{border-color:var(--rose);color:var(--rose);background:rgba(212,100,138,0.05);}
+
+/* ROADMAP */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-bottom:40px;}
+.roadmap-card{background:var(--bg2);padding:28px;transition:background .2s;}
+.roadmap-card:hover{background:var(--bg3);}
+.roadmap-phase{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);margin-bottom:10px;opacity:.7;}
+.roadmap-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:10px;}
+.roadmap-items{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.roadmap-items li{font-size:13px;color:var(--muted);padding-left:14px;position:relative;line-height:1.5;}
+.roadmap-items li::before{content:'→';position:absolute;left:0;color:var(--rose);font-size:10px;top:3px;opacity:.6;}
+
+/* FRAMEWORK */
+.framework{background:var(--bg2);border:1px solid var(--border);padding:40px;margin-bottom:40px;position:relative;overflow:hidden;}
+.framework::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(212,100,138,0.06),transparent 70%);pointer-events:none;}
+.fw-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:24px;}
+.fw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.fw-item{display:flex;flex-direction:column;gap:8px;}
+.fw-num{font-family:var(--serif);font-size:36px;font-weight:400;color:var(--rose);line-height:1;opacity:.8;}
+.fw-label{font-size:12px;font-weight:500;color:var(--text);}
+.fw-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* IMPACT BARS */
+.impact-block{background:var(--bg2);border:1px solid var(--border);padding:36px;margin-bottom:40px;}
+.impact-label-row{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:28px;}
+.irow{margin-bottom:24px;}
+.irow:last-child{margin-bottom:0;}
+.irow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.irow-name{font-size:13px;color:var(--text);}
+.irow-val{font-size:13px;color:var(--rose);font-weight:500;}
+.bar-bg{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.bar-fg{height:100%;background:var(--rose);border-radius:2px;width:0;transition:width 1.3s cubic-bezier(0.16,1,0.3,1);}
+.bar-fg.teal{background:var(--teal);}
+.bar-fg.gold{background:var(--gold);}
+
+/* RESEARCH METHODS */
+.methods-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);margin-bottom:40px;}
+.method-card{background:var(--bg2);padding:24px;text-align:center;transition:background .2s;cursor:default;}
+.method-card:hover{background:var(--bg3);}
+.method-icon{font-size:28px;margin-bottom:12px;}
+.method-name{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px;}
+.method-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+
+/* RESEARCH AREAS */
+.areas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);margin-bottom:40px;}
+.area-card{background:var(--bg2);padding:28px;transition:background .2s;cursor:default;}
+.area-card:hover{background:var(--bg3);}
+.area-num{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);margin-bottom:10px;}
+.area-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:8px;}
+.area-body{font-size:13px;color:var(--muted);line-height:1.7;}
+.area-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.achip{padding:3px 10px;border:1px solid var(--border);border-radius:2px;font-size:10px;color:var(--dim);}
+
+/* IMPACT NUMBERS - RESEARCH */
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:40px;}
+.res-stat{background:var(--bg2);padding:24px 20px;transition:background .2s;}
+.res-stat:hover{background:var(--bg3);}
+.res-num{font-family:var(--serif);font-size:36px;font-weight:400;color:var(--rose);line-height:1;margin-bottom:6px;}
+.res-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.res-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4;}
+
+/* CTA */
+.cta{border-top:1px solid var(--border);padding:80px 48px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:48px;}
+.cta-heading{font-family:var(--serif);font-size:clamp(26px,3.5vw,40px);font-weight:400;color:var(--text);line-height:1.15;margin-bottom:8px;}
+.cta-heading em{font-style:italic;color:var(--rose);}
+.cta-sub{font-size:14px;color:var(--muted);}
+.cta-btns{display:flex;flex-direction:column;gap:10px;}
+
+footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-links{display:flex;gap:20px;list-style:none;}
+.footer-links a{font-size:12px;color:var(--dim);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--text);}
+
+@media(max-width:900px){
+  nav,section,.hero,.panel,.cta,footer{padding-left:24px;padding-right:24px;}
+  .hero{padding-top:90px;}
+  .what-grid,.roadmap,.fw-grid,.areas-grid{grid-template-columns:1fr;}
+  .methods-grid,.res-stats{grid-template-columns:1fr 1fr;}
+  .cta{grid-template-columns:1fr;}
+  .pillars-toggle{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dr. Pushkar <span>Pandey</span></a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Design Operations · UX Research · Jio Platforms</div>
+    <h1 class="hero-title">Design Ops<br>&amp; <em>Research</em><br>at Jio.</h1>
+    <p class="hero-sub">My work at Jio Platforms sits across two interconnected disciplines — Design Operations and UX Research. Together they shape how the entire organisation thinks about, measures, and delivers experience quality across 30+ products.</p>
+    <div class="hero-btns">
+      <a href="Design_Ops___Research.pdf" target="_blank" class="btn-rose">View Full PDF ↗</a>
+      <a href="#pillars" class="btn-out">Explore Work ↓</a>
+    </div>
+  </div>
+
+  <!-- TWO PILLAR TABS -->
+  <div class="pillars-toggle" id="pillars">
+    <div class="pillar-tab active" data-panel="ops">
+      <p class="pillar-label">Pillar 01</p>
+      <p class="pillar-title">Design Operations</p>
+      <p class="pillar-desc">JDS adoption, training, CX standards, audit frameworks, communications and cross-team alignment across Jio's product ecosystem.</p>
+    </div>
+    <div class="pillar-tab" data-panel="research">
+      <p class="pillar-label">Pillar 02</p>
+      <p class="pillar-title">UX Research Lead</p>
+      <p class="pillar-desc">End-to-end research across digital and physical touchpoints — usability, journey audits, CX evaluations, and experience principle validation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PANEL: DESIGN OPS ═══════════ -->
+<div class="panel active" id="panel-ops">
+
+  <p class="sec-eyebrow">Design Operations</p>
+  <h2 class="sec-heading">What I do as <em>Design Ops Lead.</em></h2>
+  <p class="sec-sub">Design Operations at Jio means building the infrastructure that lets designers and product teams work at quality and scale — from systems adoption to audit automation to community communications.</p>
+
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="what-icon">📐</div>
+      <p class="what-title">JDS Integration & Adoption</p>
+      <p class="what-body">Leading adoption of the Jio Design System across product teams — from component governance and token alignment to design-dev handoff standards. Enabling consistent, scalable experiences across 30+ products.</p>
+      <div class="what-tags">
+        <span class="wtag">Design System</span><span class="wtag">Token governance</span><span class="wtag">Component library</span><span class="wtag">Design–Dev</span>
+      </div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">📋</div>
+      <p class="what-title">CX Standards & Audit Frameworks</p>
+      <p class="what-body">Defined the One Jio Experience Framework — 15 actionable CX standards and 10 Experience Principles that guide product, design, and engineering decisions across the organisation. Created structured audit checklists and reporting formats.</p>
+      <div class="what-tags">
+        <span class="wtag">15 CX standards</span><span class="wtag">44 criteria</span><span class="wtag">Audit checklists</span><span class="wtag">Quality scoring</span>
+      </div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">🤖</div>
+      <p class="what-title">AI-Powered Audit Automation</p>
+      <p class="what-body">Built two automated audit tools using Claude AI + Figma MCP — the CX Assessment Tool (44 criteria, 15 standards) and Experience Principles Verifier (27 criteria, 10 principles). Reduced audit time from 2–3 days to ~10 minutes. Enabled self-serve compliance for 32+ product teams.</p>
+      <div class="what-tags">
+        <span class="wtag">Claude AI</span><span class="wtag">Figma MCP</span><span class="wtag">Days → 10 mins</span><span class="wtag">32+ teams</span>
+      </div>
+    </div>
+    <div class="what-card">
+      <div class="what-icon">📣</div>
+      <p class="what-title">Training, Communication & Community</p>
+      <p class="what-body">Running structured design community programmes — from JDS onboarding workshops to design quality communications. Reduced onboarding time from 2.5 hours to 1 hour. Building a shared language for experience quality across the organisation.</p>
+      <div class="what-tags">
+        <span class="wtag">Workshops</span><span class="wtag">Onboarding</span><span class="wtag">Communications</span><span class="wtag">Community</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Coverage -->
+  <p class="sec-eyebrow" style="margin-top:16px;">Products Covered</p>
+  <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:16px;">30+ Jio products <em style="color:var(--rose);font-style:italic;">aligned.</em></h3>
+  <div class="products-row">
+    <span class="product-chip">JioTV</span>
+    <span class="product-chip">MyJio</span>
+    <span class="product-chip">Jio.com</span>
+    <span class="product-chip">JioTranslate</span>
+    <span class="product-chip">JioFinance</span>
+    <span class="product-chip">JioCinema</span>
+    <span class="product-chip">JioMart</span>
+    <span class="product-chip">JioHome</span>
+    <span class="product-chip">JioMessages</span>
+    <span class="product-chip">JioFit</span>
+    <span class="product-chip">JioHealth</span>
+    <span class="product-chip">Reliance Retail</span>
+  </div>
+
+  <!-- Roadmap -->
+  <p class="sec-eyebrow">Design Excellence Roadmap</p>
+  <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:24px;">Current Phase <em style="color:var(--rose);font-style:italic;">2025–2026.</em></h3>
+  <div class="roadmap">
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Phase 01</p>
+      <p class="roadmap-title">Migrating to JDS 3.0</p>
+      <ul class="roadmap-items">
+        <li>Resolve inconsistent experiences via standardisation</li>
+        <li>Implement new Jio Design System</li>
+        <li>Conduct Product Alignment Assessments</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Phase 02</p>
+      <p class="roadmap-title">System Integration</p>
+      <ul class="roadmap-items">
+        <li>Embed JDS into daily product workflows</li>
+        <li>Ensure systematic adoption across teams</li>
+        <li>Enable scalability across the organisation</li>
+      </ul>
+    </div>
+    <div class="roadmap-card">
+      <p class="roadmap-phase">Phase 03</p>
+      <p class="roadmap-title">Unified OneJio Experience</p>
+      <ul class="roadmap-items">
+        <li>Create seamless, cohesive UX across all Jio products</li>
+        <li>Achieve cross-product consistency</li>
+        <li>Final, unified design goal achieved</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Product Experience Framework -->
+  <p class="sec-eyebrow">Product Experience Framework</p>
+  <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:24px;">Purpose, Methodology, <em style="color:var(--rose);font-style:italic;">Outcome.</em></h3>
+  <div class="framework" id="ops-impact">
+    <p class="fw-title">The Framework in Numbers</p>
+    <div class="fw-grid">
+      <div class="fw-item">
+        <p class="fw-num">15</p>
+        <p class="fw-label">CX Standards</p>
+        <p class="fw-desc">Actionable standards guiding all product, design, and CX decisions across Jio</p>
+      </div>
+      <div class="fw-item">
+        <p class="fw-num">10</p>
+        <p class="fw-label">Experience Principles</p>
+        <p class="fw-desc">Imbued across all Jio products — from We Care to Celebrate We Are from India</p>
+      </div>
+      <div class="fw-item">
+        <p class="fw-num">44</p>
+        <p class="fw-label">Quality Criteria</p>
+        <p class="fw-desc">Evaluated against every product — scored as Pass, Partial, or Fail</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ops Impact Bars -->
+  <div class="impact-block" id="ops-bars">
+    <p class="impact-label-row">Design Ops Impact Metrics</p>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">DS adoption across product teams</span><span class="irow-val">+35–50%</span></div>
+      <div class="bar-bg"><div class="bar-fg" data-w="50"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Audit time reduced (days → minutes)</span><span class="irow-val">−95%</span></div>
+      <div class="bar-bg"><div class="bar-fg teal" data-w="95"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Designer onboarding time (2.5hrs → 1hr)</span><span class="irow-val">−60%</span></div>
+      <div class="bar-bg"><div class="bar-fg gold" data-w="60"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Component usage accuracy</span><span class="irow-val">+60%</span></div>
+      <div class="bar-bg"><div class="bar-fg" data-w="60"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Product teams enabled for self-serve audits</span><span class="irow-val">32+</span></div>
+      <div class="bar-bg"><div class="bar-fg teal" data-w="80"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ PANEL: RESEARCH ═══════════ -->
+<div class="panel" id="panel-research">
+
+  <p class="sec-eyebrow">UX Research Lead</p>
+  <h2 class="sec-heading">What I do as <em>Research Lead.</em></h2>
+  <p class="sec-sub">Driving research that shapes the Unified Jio Experience — understanding user needs, aligning product teams with experience standards, and improving adoption, usability, and trust at scale across digital and physical touchpoints.</p>
+
+  <!-- Research Stats -->
+  <div class="res-stats">
+    <div class="res-stat">
+      <p class="res-num">33+</p>
+      <p class="res-lbl">Research Studies</p>
+      <p class="res-sub">End-to-end studies across apps, web & DS</p>
+    </div>
+    <div class="res-stat">
+      <p class="res-num">350+</p>
+      <p class="res-lbl">Participants</p>
+      <p class="res-sub">Designers, developers & customers</p>
+    </div>
+    <div class="res-stat">
+      <p class="res-num">20+</p>
+      <p class="res-lbl">Stakeholders</p>
+      <p class="res-sub">Product, Engineering, Retail, Marketing</p>
+    </div>
+    <div class="res-stat">
+      <p class="res-num">300+</p>
+      <p class="res-lbl">Behaviour Patterns</p>
+      <p class="res-sub">Navigation, hesitation & assistance triggers</p>
+    </div>
+  </div>
+
+  <!-- Research Methods -->
+  <p class="sec-eyebrow">Research Methods</p>
+  <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:24px;">How I <em style="color:var(--rose);font-style:italic;">research.</em></h3>
+  <div class="methods-grid">
+    <div class="method-card">
+      <div class="method-icon">🎙</div>
+      <p class="method-name">Qualitative</p>
+      <p class="method-desc">Usability testing, 1:1 interviews, field visits, contextual inquiry</p>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">📊</div>
+      <p class="method-name">Quantitative</p>
+      <p class="method-desc">Surveys, funnel analytics, task success & behaviour metrics</p>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">🔍</div>
+      <p class="method-name">Benchmarking</p>
+      <p class="method-desc">Competitive + global standard studies across 10+ platforms</p>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">⚡</div>
+      <p class="method-name">Concept Evaluation</p>
+      <p class="method-desc">Rapid prototyping, iteration cycles & design validation</p>
+    </div>
+  </div>
+
+  <!-- Research Areas -->
+  <p class="sec-eyebrow">Research Areas</p>
+  <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:24px;">Where I drive <em style="color:var(--rose);font-style:italic;">impact.</em></h3>
+  <div class="areas-grid">
+    <div class="area-card">
+      <p class="area-num">01 — Product Research</p>
+      <p class="area-title">Digital Platform UX Research</p>
+      <p class="area-body">Led research across 10+ Jio digital products — JioTV, MyJio, JioTranslate, JioFinance, Jio.com, JioCinema, JioMart, and more. Conducted usability testing, journey audits, and CX evaluations to identify experience gaps and inform product decisions.</p>
+      <div class="area-chips">
+        <span class="achip">Usability testing</span><span class="achip">Journey audits</span><span class="achip">CX evaluation</span><span class="achip">10+ products</span>
+      </div>
+    </div>
+    <div class="area-card">
+      <p class="area-num">02 — Design System Research</p>
+      <p class="area-title">JDS Research & Adoption</p>
+      <p class="area-body">Led 21+ research studies informing the Jio Design System — from component usability and surface logic to motion design and documentation. Research directly improved DS adoption by 35–50% and reduced designer onboarding time from 2.5 hours to 1 hour.</p>
+      <div class="area-chips">
+        <span class="achip">21+ DS studies</span><span class="achip">Component research</span><span class="achip">Motion audit</span><span class="achip">Documentation UX</span>
+      </div>
+    </div>
+    <div class="area-card">
+      <p class="area-num">03 — Experience Framework</p>
+      <p class="area-title">One Jio Experience Standards</p>
+      <p class="area-body">Research underpinned the development of 15 CX standards and 10 experience principles guiding the entire organisation. Created measurable benchmarks for experience quality and a shared evaluation language across product, design, and engineering teams.</p>
+      <div class="area-chips">
+        <span class="achip">15 CX standards</span><span class="achip">10 XP principles</span><span class="achip">Quality framework</span><span class="achip">Org-wide adoption</span>
+      </div>
+    </div>
+    <div class="area-card">
+      <p class="area-num">04 — Retail & Field Research</p>
+      <p class="area-title">In-Store & Omnichannel Research</p>
+      <p class="area-body">Conducted 50+ field observations across Jio & JioMart retail stores — logging 300+ customer behaviour patterns covering navigation, hesitation points, and assistance triggers. Identified 25+ CX gaps in offline-to-online journeys and informed omnichannel improvements.</p>
+      <div class="area-chips">
+        <span class="achip">50+ field visits</span><span class="achip">300+ patterns</span><span class="achip">Omnichannel</span><span class="achip">CX gap analysis</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research Impact Bars -->
+  <div class="impact-block" id="res-bars">
+    <p class="impact-label-row">Research Impact Metrics</p>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Task completion rate improvement post-research</span><span class="irow-val">+25–40%</span></div>
+      <div class="bar-bg"><div class="bar-fg" data-w="40"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Reduction in destructive action errors</span><span class="irow-val">−70%</span></div>
+      <div class="bar-bg"><div class="bar-fg teal" data-w="70"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Motion inconsistencies reduced across apps</span><span class="irow-val">−40%</span></div>
+      <div class="bar-bg"><div class="bar-fg gold" data-w="40"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Customer drop-off reduced in pilot areas</span><span class="irow-val">~−20%</span></div>
+      <div class="bar-bg"><div class="bar-fg" data-w="20"></div></div>
+    </div>
+    <div class="irow">
+      <div class="irow-top"><span class="irow-name">Usability issues identified & prioritised</span><span class="irow-val">90+</span></div>
+      <div class="bar-bg"><div class="bar-fg teal" data-w="75"></div></div>
+    </div>
+  </div>
+
+  <!-- Platforms -->
+  <p class="sec-eyebrow" style="margin-top:8px;">Platforms Researched</p>
+  <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:16px;">Products I've <em style="color:var(--rose);font-style:italic;">touched.</em></h3>
+  <div class="products-row">
+    <span class="product-chip">JioTV</span>
+    <span class="product-chip">MyJio</span>
+    <span class="product-chip">Jio.com</span>
+    <span class="product-chip">JioTranslate</span>
+    <span class="product-chip">JioFinance</span>
+    <span class="product-chip">JioCinema</span>
+    <span class="product-chip">JioMart</span>
+    <span class="product-chip">JioHome</span>
+    <span class="product-chip">JioMessages</span>
+    <span class="product-chip">JioFit</span>
+  </div>
+
+</div>
+
+<!-- ═══════════ CTA ═══════════ -->
+<div class="cta">
+  <div>
+    <h2 class="cta-heading">Want the <em>full picture?</em></h2>
+    <p class="cta-sub">Download the complete Design Ops & Research document or get in touch to talk about the work in detail.</p>
+  </div>
+  <div class="cta-btns">
+    <a href="Design_Ops___Research.pdf" target="_blank" class="btn-rose">Download Full PDF ↗</a>
+    <a href="mailto:pushkarpandey1007@gmail.com" class="btn-out">Get in touch</a>
+    <a href="index.html" class="btn-out">← Back to Portfolio</a>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">India · © 2026 Dr. Pushkar Pandey</p>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pushkarpandey1007" target="_blank">LinkedIn</a></li>
+    <li><a href="mailto:pushkarpandey1007@gmail.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+// Pillar tab switching
+const tabs = document.querySelectorAll('.pillar-tab');
+const panels = document.querySelectorAll('.panel');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.panel;
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + target).classList.add('active');
+    // scroll to panel smoothly
+    document.getElementById('panel-' + target).scrollIntoView({behavior:'smooth', block:'start'});
+    // trigger bars if visible
+    setTimeout(animateBars, 400);
+  });
+});
+
+// Animate bars on scroll
+let animated = {ops: false, res: false};
+
+function animateBars() {
+  document.querySelectorAll('.panel.active .bar-fg').forEach(bar => {
+    bar.style.width = bar.dataset.w + '%';
+  });
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) animateBars();
+  });
+}, {threshold: 0.3});
+
+document.querySelectorAll('#ops-bars, #res-bars').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
