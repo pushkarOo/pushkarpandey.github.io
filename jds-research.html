@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jio Design System Research — Pushkar Pandey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0e0e0e;--bg2:#161616;--bg3:#1e1e1e;
+  --text:#f0ede6;--muted:#8a8880;--dim:#5a5855;
+  --accent:#7eb8a4;--accent2:#c8a96e;
+  --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
+  --serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(14,14,14,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;}
+.nav-logo{font-family:var(--serif);font-size:15px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--accent2);}
+.nav-back{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+
+/* HERO */
+.hero{min-height:85vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;gap:60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 20% 50%,rgba(126,184,164,0.06) 0%,transparent 60%);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(126,184,164,0.3);padding:5px 14px;border-radius:2px;margin-bottom:24px;width:fit-content;}
+.hero-title{font-family:var(--serif);font-size:clamp(32px,5vw,58px);font-weight:400;line-height:1.05;margin-bottom:20px;}
+.hero-title em{font-style:italic;color:var(--accent);}
+.hero-sub{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:32px;max-width:480px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-p{padding:11px 24px;background:var(--accent);color:#0e0e0e;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:2px;text-decoration:none;cursor:pointer;transition:background .2s;}
+.btn-p:hover{background:#6fa896;}
+.btn-g{padding:11px 24px;background:transparent;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);border-radius:2px;text-decoration:none;transition:border-color .2s,color .2s;}
+.btn-g:hover{border-color:var(--border-h);color:var(--text);}
+
+/* HERO RIGHT - animated stats */
+.hero-right{position:relative;z-index:1;}
+.stats-visual{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);}
+.stat-box{background:var(--bg2);padding:28px 24px;position:relative;overflow:hidden;transition:background .3s;}
+.stat-box:hover{background:var(--bg3);}
+.stat-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+.stat-box:hover::after{transform:scaleX(1);}
+.stat-num{font-family:var(--serif);font-size:42px;font-weight:400;color:var(--accent);line-height:1;margin-bottom:6px;}
+.stat-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.stat-sub{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4;}
+
+/* SECTIONS */
+section{padding:80px 48px;border-top:1px solid var(--border);}
+.sec-num{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.sec-title{font-family:var(--serif);font-size:clamp(24px,3.5vw,38px);font-weight:400;line-height:1.2;margin-bottom:36px;}
+.sec-title em{font-style:italic;color:var(--accent);}
+
+/* STUDIES GRID */
+.studies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
+.study-card{background:var(--bg2);padding:24px;cursor:default;transition:background .2s,transform .15s;}
+.study-card:hover{background:var(--bg3);}
+.study-tag{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.study-title{font-size:14px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.4;}
+.study-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* IMPACT BARS */
+.impact-section{background:var(--bg2);border:1px solid var(--border);padding:40px;}
+.impact-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:32px;}
+.impact-row{margin-bottom:28px;}
+.impact-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.impact-name{font-size:13px;color:var(--text);}
+.impact-val{font-size:13px;color:var(--accent);font-weight:500;}
+.bar-track{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.16,1,0.3,1);}
+.bar-fill.green{background:var(--accent);}
+.bar-fill.gold{background:var(--accent2);}
+
+/* PLATFORMS */
+.platforms{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.platform-chip{padding:6px 16px;background:transparent;border:1px solid var(--border);border-radius:2px;font-size:12px;color:var(--muted);transition:border-color .2s,color .2s,background .2s;}
+.platform-chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(126,184,164,0.05);}
+
+/* AI TOOLS */
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
+.ai-card{background:var(--bg2);padding:24px;transition:background .2s;}
+.ai-card:hover{background:var(--bg3);}
+.ai-icon{font-size:22px;margin-bottom:12px;}
+.ai-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px;}
+.ai-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:24px 0;border-bottom:1px solid var(--border);}
+.tl-item:first-child{border-top:1px solid var(--border);}
+.tl-phase{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:4px;}
+.tl-title{font-size:15px;font-weight:400;color:var(--text);margin-bottom:4px;}
+.tl-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* CTA */
+.cta{border-top:1px solid var(--border);padding:80px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(126,184,164,0.05),transparent 65%);pointer-events:none;}
+.cta-title{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--text);line-height:1.1;margin-bottom:12px;}
+.cta-title em{font-style:italic;color:var(--accent);}
+.cta-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-size:12px;color:var(--dim);}
+.footer-links{display:flex;gap:20px;list-style:none;}
+.footer-links a{font-size:12px;color:var(--dim);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--text);}
+
+@media(max-width:768px){
+  nav,section,.hero,.cta,footer{padding-left:24px;padding-right:24px;}
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:100px;}
+  .studies-grid,.ai-grid{grid-template-columns:1fr 1fr;}
+  .stats-visual{grid-template-columns:1fr 1fr;}
+  .tl-item{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dr. Pushkar <span>Pandey</span></a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-tag">UX Research · Design Systems · Jio</div>
+    <h1 class="hero-title">Jio Design<br><em>System</em><br>Research</h1>
+    <p class="hero-sub">Research-driven design across 33+ studies — shaping the Jio Design System through usability, motion, documentation, and adoption research across 32+ product teams.</p>
+    <div class="hero-btns">
+      <a href="JioDesign%20System%20Research.pdf" target="_blank" class="btn-p">View Full PDF ↗</a>
+      <a href="#studies" class="btn-g">Explore Research ↓</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-visual">
+      <div class="stat-box">
+        <p class="stat-num">33+</p>
+        <p class="stat-lbl">UX Studies</p>
+        <p class="stat-sub">End-to-end research across apps, web & DS</p>
+      </div>
+      <div class="stat-box">
+        <p class="stat-num">350+</p>
+        <p class="stat-lbl">Participants</p>
+        <p class="stat-sub">Designers, developers & customers</p>
+      </div>
+      <div class="stat-box">
+        <p class="stat-num">200+</p>
+        <p class="stat-lbl">Components</p>
+        <p class="stat-sub">Validated across research cycles</p>
+      </div>
+      <div class="stat-box">
+        <p class="stat-num">32+</p>
+        <p class="stat-lbl">Teams Enabled</p>
+        <p class="stat-sub">Standardised via DS-guided improvements</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IMPACT -->
+<section>
+  <p class="sec-num">Research Impact</p>
+  <h2 class="sec-title">Numbers that <em>moved.</em></h2>
+  <div class="impact-section" id="impact-section">
+    <p class="impact-title">Key Outcomes</p>
+    <div class="impact-row">
+      <div class="impact-label"><span class="impact-name">DS Adoption across product teams</span><span class="impact-val" id="v1">+35–50%</span></div>
+      <div class="bar-track"><div class="bar-fill green" id="b1" data-w="50"></div></div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label"><span class="impact-name">Component accuracy in usage</span><span class="impact-val" id="v2">+60%</span></div>
+      <div class="bar-track"><div class="bar-fill gold" id="b2" data-w="60"></div></div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label"><span class="impact-name">Task completion rate improvement</span><span class="impact-val" id="v3">+25–40%</span></div>
+      <div class="bar-track"><div class="bar-fill green" id="b3" data-w="40"></div></div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label"><span class="impact-name">Reduction in motion inconsistencies</span><span class="impact-val" id="v4">−40%</span></div>
+      <div class="bar-track"><div class="bar-fill gold" id="b4" data-w="40"></div></div>
+    </div>
+    <div class="impact-row" style="margin-bottom:0">
+      <div class="impact-label"><span class="impact-name">Designer onboarding time (2.5hrs → 1hr)</span><span class="impact-val" id="v5">−60%</span></div>
+      <div class="bar-track"><div class="bar-fill green" id="b5" data-w="60"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDIES -->
+<section id="studies">
+  <p class="sec-num">Research Studies</p>
+  <h2 class="sec-title">21+ studies that <em>shaped</em> the system.</h2>
+  <div class="studies-grid">
+    <div class="study-card">
+      <p class="study-tag">Usability</p>
+      <p class="study-title">DSP Alpha Usability Research</p>
+      <p class="study-desc">Evaluated how internal designers use the Design System Platform — uncovering usability gaps and improvement opportunities.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Perception</p>
+      <p class="study-title">Colours Perception Study</p>
+      <p class="study-desc">Evaluated user preferences for coloured vs non-coloured headers across Jio apps — informing brand-aligned design decisions.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Foundation</p>
+      <p class="study-title">Foundation Research</p>
+      <p class="study-desc">Measured how well users adapt to new design elements — colour scale, type scale, surface logic, buttons, input fields, navigation.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Patterns</p>
+      <p class="study-title">Design Patterns Research</p>
+      <p class="study-desc">Evaluated whether predefined patterns are more efficient, consistent, and user-friendly than atom-level component assembly.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Engineering</p>
+      <p class="study-title">Design–Engineering Handover</p>
+      <p class="study-desc">Understood and closed the gap between design in Figma and accurate implementation in development.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Surface</p>
+      <p class="study-title">Surface Logic Research</p>
+      <p class="study-desc">Identified which surface logic users prefer for differentiating UI elements — hierarchy, contrast, and accessibility across variations.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Brand</p>
+      <p class="study-title">Unified Jio Logo Research</p>
+      <p class="study-desc">Evaluated user perception of unified Jio product logos — brand association, recognition, and usability across variations.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Motion</p>
+      <p class="study-title">Motion Design Research</p>
+      <p class="study-desc">Audited animations and transitions across 7 major Jio apps — classified 120+ micro-interactions for usability impact.</p>
+    </div>
+    <div class="study-card">
+      <p class="study-tag">Retail</p>
+      <p class="study-title">Market Field Research</p>
+      <p class="study-desc">50+ field observations across Jio & JioMart stores — logged 300+ customer behaviour patterns across navigation and assistance triggers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section>
+  <p class="sec-num">Digital Platforms</p>
+  <h2 class="sec-title">Products <em>touched</em> by this research.</h2>
+  <p style="font-size:15px;color:var(--muted);margin-bottom:24px;max-width:600px;">Research insights were applied and validated across the following Jio digital platforms — ensuring consistent, high-quality experiences system-wide.</p>
+  <div class="platforms">
+    <span class="platform-chip">Reliance Industries</span>
+    <span class="platform-chip">JioTV</span>
+    <span class="platform-chip">MyJio</span>
+    <span class="platform-chip">Jio.com</span>
+    <span class="platform-chip">JioFit</span>
+    <span class="platform-chip">JioHome</span>
+    <span class="platform-chip">JioMessages</span>
+    <span class="platform-chip">JioTranslate</span>
+    <span class="platform-chip">JioCinema</span>
+    <span class="platform-chip">JioMart</span>
+  </div>
+</section>
+
+<!-- RESEARCH PROCESS -->
+<section>
+  <p class="sec-num">Research Approach</p>
+  <h2 class="sec-title">How the <em>research</em> was done.</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <p class="tl-phase">Qualitative</p>
+      <div><p class="tl-title">Usability Testing & Interviews</p><p class="tl-desc">Moderated and unmoderated sessions with designers, developers, and customers across 50+ usability sessions — identifying 90+ issues prioritised by severity.</p></div>
+    </div>
+    <div class="tl-item">
+      <p class="tl-phase">Quantitative</p>
+      <div><p class="tl-title">Surveys & Behaviour Metrics</p><p class="tl-desc">Funnel analytics, task success rates, and behavioural metrics across Jio apps — identifying hesitation points, drop-off triggers, and completion patterns.</p></div>
+    </div>
+    <div class="tl-item">
+      <p class="tl-phase">Benchmarking</p>
+      <div><p class="tl-title">Competitive & Global Standards</p><p class="tl-desc">Comparative studies against global design standards and competitor experiences to ensure Jio products meet or exceed industry benchmarks.</p></div>
+    </div>
+    <div class="tl-item">
+      <p class="tl-phase">Field</p>
+      <div><p class="tl-title">In-Store Observation</p><p class="tl-desc">50+ field observations across Jio & JioMart retail stores — logged 300+ customer behaviour patterns, identified 25+ major CX gaps in offline-to-online journeys.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI TOOLS -->
+<section>
+  <p class="sec-num">AI Tools Used</p>
+  <h2 class="sec-title">Research <em>accelerated</em> by AI.</h2>
+  <div class="ai-grid">
+    <div class="ai-card">
+      <div class="ai-icon">⚡</div>
+      <p class="ai-name">Claude</p>
+      <p class="ai-desc">Structured large observation volumes into behavioural themes, pain-point clusters, and recurring usability patterns — accelerating synthesis.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🎙</div>
+      <p class="ai-name">Notion AI</p>
+      <p class="ai-desc">Meeting summarisation, research documentation, action item extraction, and insight organisation across stakeholder workshops.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🔍</div>
+      <p class="ai-name">Dovetail</p>
+      <p class="ai-desc">Streamlined qualitative research workflows — tagging, clustering, and surfacing patterns from interview recordings and transcripts.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🤖</div>
+      <p class="ai-name">ChatGPT</p>
+      <p class="ai-desc">Accelerated synthesis and exploratory analysis during early-stage research — especially for rapid hypothesis generation.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🖊</div>
+      <p class="ai-name">Figma + AI Plugins</p>
+      <p class="ai-desc">AI-assisted visualisation support to create faster journey maps, research artifacts, and usability flow representations for stakeholders.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">💻</div>
+      <p class="ai-name">Cursor</p>
+      <p class="ai-desc">Rapid experimentation tool during early-stage concept validation — exploring technical feasibility of research-informed design hypotheses.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2 class="cta-title">Want to see the <em>full research?</em></h2>
+  <p class="cta-sub">Download the complete JDS Research document or get in touch to discuss the findings.</p>
+  <div class="cta-btns">
+    <a href="JioDesign%20System%20Research.pdf" target="_blank" class="btn-p">Download Full PDF ↗</a>
+    <a href="mailto:pushkarpandey1007@gmail.com" class="btn-g">Get in touch</a>
+    <a href="index.html" class="btn-g">← Back to Portfolio</a>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">India · © 2026 Dr. Pushkar Pandey</p>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pushkarpandey1007" target="_blank">LinkedIn</a></li>
+    <li><a href="mailto:pushkarpandey1007@gmail.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+// Animate bars on scroll into view
+const section = document.getElementById('impact-section');
+let animated = false;
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !animated) {
+      animated = true;
+      document.querySelectorAll('.bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+    }
+  });
+}, {threshold: 0.3});
+observer.observe(section);
+</script>
+</body>
+</html>
