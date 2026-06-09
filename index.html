@@ -7,7 +7,7 @@
 <meta name="description" content="Dr. Pushkar Pandey — UX Research & Design Ops Lead at Jio Platforms. PhD & M.Des from IIT Kanpur. Building experience standards across large-scale digital ecosystems.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -450,69 +450,254 @@
     background: var(--border);
   }
 
-  /* Work section */
+  /* ── WORK SECTION ── */
   #work { padding-top: 80px; padding-bottom: 80px; border-top: 1px solid var(--border); }
 
-  .work-list { list-style: none; }
-
-  .work-item {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
+  .tier-label {
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    display: flex;
     align-items: center;
-    gap: 32px;
-    padding: 40px 0;
-    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .tier-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* TIER 1 — 2×2 large cards */
+  .work-grid-t1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+  }
+
+  .work-card-t1 {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 32px;
     text-decoration: none;
     color: inherit;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
     position: relative;
-    transition: border-color 0.2s;
+    overflow: hidden;
+    transition: border-color .3s, background .3s, transform .2s;
     cursor: none;
   }
-  .work-item:first-child { border-top: 1px solid var(--border); }
-  .work-item:hover { border-bottom-color: var(--border-hover); }
-
-  .work-num {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-    font-variant-numeric: tabular-nums;
+  .work-card-t1::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: opacity .3s, transform .45s ease;
   }
-
-  .work-info { }
-
-  .work-tag {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 8px;
+  .work-card-t1:hover {
+    border-color: rgba(200,169,110,0.4);
+    background: var(--bg3);
+    transform: translateY(-4px);
   }
-
-  .work-title {
+  .work-card-t1:hover::after { opacity: 1; transform: scaleX(1); }
+  .wc-title-t1 {
     font-family: var(--serif);
-    font-size: clamp(22px, 3vw, 34px);
+    font-size: clamp(20px, 2.2vw, 27px);
     font-weight: 400;
     line-height: 1.2;
     color: var(--text);
-    transition: color 0.2s;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
+    flex: 1;
+    transition: color .2s;
   }
-  .work-item:hover .work-title { color: var(--accent); }
+  .work-card-t1:hover .wc-title-t1 { color: var(--accent); }
 
-  .work-desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    max-width: 480px;
+  /* TIER 2 — 2 smaller cards side by side */
+  .work-grid-t2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
-  .work-arrow {
-    font-size: 24px;
+  .work-card-t2 {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s, background .25s, transform .2s;
+    cursor: none;
+  }
+  .work-card-t2:hover {
+    border-color: rgba(200,169,110,0.3);
+    background: var(--bg3);
+    transform: translateY(-3px);
+  }
+  .work-card-t2::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .work-card-t2:hover::after { opacity: .6; }
+  .wc-title-t2 {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.8vw, 22px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 10px;
+    flex: 1;
+    transition: color .2s;
+  }
+  .work-card-t2:hover .wc-title-t2 { color: var(--accent); }
+
+  /* Shared card elements */
+  .wc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .wc-num {
+    font-size: 10px;
+    letter-spacing: .15em;
     color: var(--text-dim);
-    transition: color 0.2s, transform 0.2s;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+  .wc-arrow {
+    font-size: 20px;
+    color: var(--text-dim);
+    transition: color .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
     line-height: 1;
   }
-  .work-item:hover .work-arrow { color: var(--accent); transform: translate(4px, -4px); }
+  .work-card-t1:hover .wc-arrow,
+  .work-card-t2:hover .wc-arrow { color: var(--accent); transform: translate(4px,-4px); }
+  .wc-tag {
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 10px;
+  }
+  .wc-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .wc-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .wc-cta {
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    transition: color .2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .work-card-t1:hover .wc-cta,
+  .work-card-t2:hover .wc-cta { color: var(--accent); gap: 10px; }
+
+  /* TIER 3 — Earlier work text strip */
+  .work-earlier {
+    margin-top: 48px;
+  }
+  .earlier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+  .earlier-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 24px;
+    background: var(--bg);
+    text-decoration: none;
+    color: inherit;
+    transition: background .2s;
+    cursor: none;
+  }
+  .earlier-item:hover { background: var(--bg2); }
+  .earlier-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .earlier-num {
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    width: 24px;
+    flex-shrink: 0;
+  }
+  .earlier-tag {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 4px;
+  }
+  .earlier-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text);
+    transition: color .2s;
+  }
+  .earlier-item:hover .earlier-title { color: var(--accent); }
+  .earlier-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+  }
+  .earlier-meta {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .earlier-link {
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: color .2s;
+    white-space: nowrap;
+  }
+  .earlier-item:hover .earlier-link { color: var(--accent); }
 
   /* Image tooltip on hover */
   .work-preview {
@@ -646,7 +831,140 @@
     color: var(--text-dim);
   }
 
-  .about-right { padding-top: 8px; }
+  /* ── ABOUT SECTION ── */
+
+  /* Row 1: headline + stats */
+  .about-row1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    margin-bottom: 2px;
+  }
+  .about-headline-block {
+    background: var(--bg);
+    padding: 48px;
+  }
+  .about-headline {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .about-headline em { font-style: italic; color: var(--accent); }
+  .about-intro {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 480px;
+  }
+  .about-stats-block {
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .about-stat {
+    background: var(--bg);
+    padding: 32px 28px;
+    transition: background .2s;
+  }
+  .about-stat:hover { background: var(--bg2); }
+
+  /* Row 2: role card + awards */
+  .about-row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    margin-top: 40px;
+  }
+  .about-role-card {
+    background: var(--bg2);
+    padding: 40px 48px;
+  }
+  .about-body-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .about-right-col {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+    background: var(--bg2);
+    border-left: 2px solid var(--accent);
+    padding: 32px 36px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1;
+    transition: background .2s;
+  }
+  .about-award-card:hover { background: var(--bg3); }
+  .about-coauthor-card {
+    background: var(--bg2);
+    border-left: 2px solid rgba(200,169,110,0.3);
+    padding: 32px 36px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1;
+    transition: background .2s;
+  }
+  .about-coauthor-card:hover { background: var(--bg3); }
+  .award-icon-wrap {
+    flex-shrink: 0;
+    margin-top: 4px;
+    opacity: .7;
+  }
+  .award-eyebrow {
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .award-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .award-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Vertical credential cards — right column of bio row */
+  .about-creds-col {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+  .cred-card-v {
+    background: var(--bg2);
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1;
+    transition: background .2s;
+    cursor: default;
+  }
+  .cred-card-v:hover { background: var(--bg3); }
+  .cred-card-v:hover .cred-title { color: var(--accent); }
 
   /* Publications */
   .pub-card {
@@ -832,14 +1150,27 @@
     text-transform: uppercase;
   }
 
-  /* Education cards */
+  /* Education cards — match work card style */
+  .edu-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 2px;
+  }
   .edu-card {
-    background: var(--bg);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
     padding: 32px 28px;
     position: relative;
     overflow: hidden;
     cursor: default;
-    transition: background 0.3s;
+    transition: background .25s, border-color .3s, transform .2s;
+  }
+  .edu-card:hover {
+    background: var(--bg3);
+    border-color: rgba(200,169,110,0.35);
+    transform: translateY(-3px);
   }
   .edu-card::after {
     content: '';
@@ -847,11 +1178,11 @@
     bottom: 0; left: 0; right: 0;
     height: 2px;
     background: transparent;
-    transition: background 0.3s;
+    transition: opacity .3s;
   }
   .edu-highlight::after { background: var(--accent); }
   .edu-mdes::after { background: var(--accent2); }
-  .edu-card:hover { background: var(--bg3); }
+  .edu-btech::after { background: #d4648a; }
 
   .edu-card-inner { position: relative; z-index: 1; }
 
@@ -859,97 +1190,67 @@
     display: inline-block;
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--accent);
     border: 1px solid rgba(200,169,110,0.4);
-    padding: 4px 10px;
+    padding: 3px 10px;
     border-radius: 2px;
-    margin-bottom: 16px;
-    transition: background 0.3s, color 0.3s;
+    margin-bottom: 20px;
+    transition: background .3s, color .3s;
   }
-  .edu-highlight:hover .edu-badge {
-    background: var(--accent);
-    color: var(--bg);
-  }
-  .edu-mdes:hover .edu-badge {
-    background: var(--accent2);
-    color: var(--bg);
-  }
+  .edu-highlight:hover .edu-badge { background: var(--accent); color: var(--bg); }
+  .edu-mdes:hover .edu-badge { background: var(--accent2); color: var(--bg); }
 
   .edu-year-label {
     font-size: 11px;
-    letter-spacing: 0.15em;
+    letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 10px;
   }
-
   .edu-degree {
     font-family: var(--serif);
-    font-size: 22px;
+    font-size: clamp(20px, 2vw, 26px);
     font-weight: 400;
     color: var(--text);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     line-height: 1.2;
+    transition: color .2s;
   }
-
+  .edu-highlight:hover .edu-degree,
+  .edu-mdes:hover .edu-degree { color: var(--accent); }
   .edu-inst-name {
     font-size: 14px;
     font-weight: 500;
     color: var(--accent);
     margin-bottom: 6px;
-    letter-spacing: 0.02em;
-    transition: letter-spacing 0.3s;
+    transition: letter-spacing .3s;
   }
   .edu-highlight:hover .edu-inst-name,
-  .edu-mdes:hover .edu-inst-name {
-    letter-spacing: 0.06em;
-  }
-
+  .edu-mdes:hover .edu-inst-name { letter-spacing: .05em; }
   .edu-field {
     font-size: 12px;
     color: var(--text-dim);
     font-style: italic;
     margin-top: 4px;
   }
-
   .edu-iit-seal {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    opacity: 0.45;
+    top: 24px; right: 24px;
+    opacity: .35;
     transform: scale(1);
-    transition: opacity 0.35s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity .35s, transform .4s cubic-bezier(.34,1.56,.64,1);
   }
   .edu-highlight:hover .edu-iit-seal {
     opacity: 1;
-    transform: scale(1.15) rotate(12deg);
+    transform: scale(1.12) rotate(10deg);
     filter: drop-shadow(0 0 8px rgba(200,169,110,0.4));
   }
   .edu-mdes:hover .edu-iit-seal {
     opacity: 1;
-    transform: scale(1.15) rotate(12deg);
+    transform: scale(1.12) rotate(10deg);
     filter: drop-shadow(0 0 8px rgba(126,184,164,0.4));
-  }
-
-  /* Shimmer sweep on IIT cards */
-  .edu-highlight, .edu-mdes {
-    overflow: hidden;
-  }
-  .edu-highlight::before, .edu-mdes::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(200,169,110,0.04), transparent);
-    transition: left 0.6s ease;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .edu-highlight:hover::before, .edu-mdes:hover::before {
-    left: 150%;
   }
   .fade-up {
     opacity: 0;
@@ -981,7 +1282,12 @@
     .hero-portrait { order: -1; }
     .portrait-wrap { width: min(280px, 80%); margin: 0 auto; }
     section { padding: 80px 24px; }
-    .work-item { grid-template-columns: 48px 1fr auto; gap: 16px; padding: 28px 0; }
+    .work-grid-t1, .work-grid-t2 { grid-template-columns: 1fr; gap: 12px; }
+    .work-card-t1, .work-card-t2 { min-height: auto; transform: none !important; }
+    .earlier-right { display: none; }
+    .edu-strip { grid-template-columns: 1fr; gap: 12px; }
+    .edu-card { transform: none !important; }
+    .about-row1, .about-row2 { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
     .hero-grid-line { display: none; }
@@ -1308,7 +1614,7 @@
       <div class="portrait-circle"></div>
 
       <div class="portrait-photo">
-        <img src="pushkar.png" alt="Dr. Pushkar Pandey">
+        <img src="pushkar.png" alt="Dr. Pushkar Pandey" loading="lazy" decoding="async">
       </div>
 
       <!-- Floating keyword tags on hover -->
@@ -1334,139 +1640,97 @@
 <section id="work">
   <p class="section-label">Selected Work</p>
 
-  <ul class="work-list">
-    <li>
-      <a class="work-item" href="design-ops-research.html" data-preview="p1">
-        <span class="work-num">01</span>
-        <div class="work-info">
-          <p class="work-tag">Design Ops · Jio Platforms</p>
-          <h2 class="work-title">Design Operations & Research</h2>
-          <p class="work-desc">Driving JDS integration, CX audits, brand evaluations and a Research Centre of Excellence — aligning design operations across 30+ Jio products.</p>
-          <div class="work-metrics">
-            <span class="metric">30+ products aligned</span>
-            <span class="metric">15 experience standards</span>
-            <span class="metric">Org-wide adoption</span>
+  <!-- ── TIER 1: Signature work — 2×2 ── -->
+  <p class="tier-label">Case Studies</p>
+  <div class="work-grid-t1">
+    <a class="work-card-t1" href="design-ops-research.html" data-preview="p1">
+      <div class="wc-top"><span class="wc-num">01</span><span class="wc-arrow">↗</span></div>
+      <p class="wc-tag">Design Ops · Jio Platforms</p>
+      <h2 class="wc-title-t1">Design Operations & Research</h2>
+      <p class="wc-desc">Driving JDS integration, CX audits, and a Research Centre of Excellence — aligning design operations across 30+ Jio products and 400M+ users.</p>
+      <div class="wc-metrics"><span class="metric">30+ products</span><span class="metric">15 CX standards</span><span class="metric">Org-wide adoption</span></div>
+      <div class="wc-cta">View Case Study →</div>
+    </a>
+    <a class="work-card-t1" href="ai-audit.html" data-preview="p-ai">
+      <div class="wc-top"><span class="wc-num">02</span><span class="wc-arrow">↗</span></div>
+      <p class="wc-tag">AI · Design Ops · Automation</p>
+      <h2 class="wc-title-t1">AI-Powered Design Audit Automation</h2>
+      <p class="wc-desc">Replaced fully manual compliance reviews with a Claude + Figma MCP pipeline — cutting audit time from days to ~10 minutes for 32+ product teams.</p>
+      <div class="wc-metrics"><span class="metric">44 CX criteria automated</span><span class="metric">Days → ~10 minutes</span><span class="metric">32+ teams</span></div>
+      <div class="wc-cta">View Case Study →</div>
+    </a>
+    <a class="work-card-t1" href="jiotranslate-research.html" data-preview="p2">
+      <div class="wc-top"><span class="wc-num">03</span><span class="wc-arrow">↗</span></div>
+      <p class="wc-tag">UX Research · Product</p>
+      <h2 class="wc-title-t1">JioTranslate — UX Research</h2>
+      <p class="wc-desc">Beta-to-launch UX research — usability testing, heuristic evaluation, and competitor analysis across multiple product versions.</p>
+      <div class="wc-metrics"><span class="metric">Beta → V2 research</span><span class="metric">Nielsen heuristics</span><span class="metric">Multi-language</span></div>
+      <div class="wc-cta">View Case Study →</div>
+    </a>
+    <a class="work-card-t1" href="jds-research.html" data-preview="p3">
+      <div class="wc-top"><span class="wc-num">04</span><span class="wc-arrow">↗</span></div>
+      <p class="wc-tag">UX Research · Design Systems</p>
+      <h2 class="wc-title-t1">Jio Design System Research</h2>
+      <p class="wc-desc">33+ research studies shaping the Jio Design System — improving DS adoption by 35–50% and reducing designer onboarding from 2.5 hrs to 1 hr.</p>
+      <div class="wc-metrics"><span class="metric">+35–50% DS adoption</span><span class="metric">200+ components</span><span class="metric">32+ teams</span></div>
+      <div class="wc-cta">View Case Study →</div>
+    </a>
+  </div>
+
+  <!-- ── TIER 2: Supporting work — 2 cards ── -->
+  <p class="tier-label" style="margin-top:48px;">Supporting Work</p>
+  <div class="work-grid-t2">
+    <a class="work-card-t2" href="JioFinance.pdf" target="_blank" data-preview="p4">
+      <div class="wc-top"><span class="wc-num">05</span><span class="wc-arrow">↗</span></div>
+      <p class="wc-tag">UX Research · FinTech</p>
+      <h2 class="wc-title-t2">JioFinance</h2>
+      <p class="wc-desc">Destructive action psychology, fear & trust research, feature evaluation, and journey audits for Jio's smart financial platform.</p>
+      <div class="wc-metrics"><span class="metric">Fear & trust research</span><span class="metric">High-stakes UX</span><span class="metric">DS compliance</span></div>
+      <div class="wc-cta">View Project →</div>
+    </a>
+    <a class="work-card-t2" href="JioTranslate%20UI.pdf" target="_blank" data-preview="p5">
+      <div class="wc-top"><span class="wc-num">06</span><span class="wc-arrow">↗</span></div>
+      <p class="wc-tag">Brand Identity · UI Design</p>
+      <h2 class="wc-title-t2">JioTranslate — UI & Brand</h2>
+      <p class="wc-desc">Brand identity and UI audit — colour system, JioType typography, navigation patterns, and accessibility standards compliance.</p>
+      <div class="wc-metrics"><span class="metric">4-colour system</span><span class="metric">JioType</span><span class="metric">Accessibility</span></div>
+      <div class="wc-cta">View Project →</div>
+    </a>
+  </div>
+
+  <!-- ── TIER 3: Earlier work — text strip ── -->
+  <div class="work-earlier">
+    <p class="tier-label">Earlier Work</p>
+    <div class="earlier-list">
+      <a class="earlier-item" href="https://www.behance.net/gallery/155597149/DRDO-Drone-Design" target="_blank" data-preview="p6">
+        <div class="earlier-left">
+          <span class="earlier-num">07</span>
+          <div>
+            <p class="earlier-tag">UX Research · Defence · DRDO</p>
+            <p class="earlier-title">Mission-Critical UX — DRDO</p>
           </div>
         </div>
-        <span class="work-arrow">↗</span>
+        <div class="earlier-right">
+          <span class="earlier-meta">Interface design · task analysis · drone prototyping</span>
+          <span class="earlier-link">View on Behance ↗</span>
+        </div>
       </a>
-    </li>
-    <li>
-      <a class="work-item" href="ai-audit.html" data-preview="p-ai">
-        <span class="work-num">02</span>
-        <div class="work-info">
-          <p class="work-tag">AI · Design Ops · Case Study</p>
-          <h2 class="work-title">AI-Powered Design Audit Automation</h2>
-          <p class="work-desc">Replaced a fully manual compliance review with an AI-powered audit pipeline using Claude + Figma MCP — cutting audit time from days to minutes across 30+ product teams.</p>
-          <div class="work-metrics">
-            <span class="metric">44 CX criteria automated</span>
-            <span class="metric">27 XP criteria automated</span>
-            <span class="metric">Days → ~10 minutes</span>
-            <span class="metric">32+ teams enabled</span>
+      <a class="earlier-item" href="https://www.behance.net/gallery/155012161/Handheld-Augmented-Reality-Games" target="_blank" data-preview="p7">
+        <div class="earlier-left">
+          <span class="earlier-num">08</span>
+          <div>
+            <p class="earlier-tag">PhD Research · IIT Kanpur</p>
+            <p class="earlier-title">UX Design Patterns for AR Games</p>
           </div>
         </div>
-        <span class="work-arrow">↗</span>
-      </a>
-    </li>
-    <li>
-      <a class="work-item" href="jiotranslate-research.html" data-preview="p2">
-        <span class="work-num">03</span>
-        <div class="work-info">
-          <p class="work-tag">UX Research · Product</p>
-          <h2 class="work-title">JioTranslate — UX Research</h2>
-          <p class="work-desc">Beta-to-launch UX research — usability testing, heuristic evaluation, competitor analysis across multiple product versions.</p>
-          <div class="work-metrics">
-            <span class="metric">Beta → V2 research</span>
-            <span class="metric">Jakob Nielsen heuristics</span>
-            <span class="metric">Multi-language testing</span>
-          </div>
+        <div class="earlier-right">
+          <span class="earlier-meta">10 validated patterns · 2 Springer publications · IIT Kanpur</span>
+          <span class="earlier-link">View on Behance ↗</span>
         </div>
-        <span class="work-arrow">↗</span>
       </a>
-    </li>
-    <li>
-      <a class="work-item" href="jds-research.html" data-preview="p3">
-        <span class="work-num">04</span>
-        <div class="work-info">
-          <p class="work-tag">UX Research · Design Systems</p>
-          <h2 class="work-title">Jio Design System Research</h2>
-          <p class="work-desc">33+ research studies shaping the Jio Design System — improving DS adoption and reducing designer onboarding time.</p>
-          <div class="work-metrics">
-            <span class="metric">+35–50% DS adoption</span>
-            <span class="metric">2.5hrs → 1hr onboarding</span>
-            <span class="metric">200+ components validated</span>
-          </div>
-        </div>
-        <span class="work-arrow">↗</span>
-      </a>
-    </li>
-    <li>
-      <a class="work-item" href="JioFinance.pdf" target="_blank" data-preview="p4">
-        <span class="work-num">05</span>
-        <div class="work-info">
-          <p class="work-tag">UX Research · FinTech</p>
-          <h2 class="work-title">JioFinance</h2>
-          <p class="work-desc">End-to-end UX research for Jio's financial platform — destructive action psychology, feature evaluation, and journey audits.</p>
-          <div class="work-metrics">
-            <span class="metric">Fear & trust research</span>
-            <span class="metric">High-stakes UX flows</span>
-            <span class="metric">DS compliance audit</span>
-          </div>
-        </div>
-        <span class="work-arrow">↗</span>
-      </a>
-    </li>
-    <li>
-      <a class="work-item" href="JioTranslate%20UI.pdf" target="_blank" data-preview="p5">
-        <span class="work-num">06</span>
-        <div class="work-info">
-          <p class="work-tag">Brand Identity · UI Design</p>
-          <h2 class="work-title">JioTranslate — UI & Brand</h2>
-          <p class="work-desc">Brand identity and UI audit — colour system, JioType typography, navigation patterns, and accessibility standards.</p>
-          <div class="work-metrics">
-            <span class="metric">4-colour system</span>
-            <span class="metric">JioType integration</span>
-            <span class="metric">Accessibility audit</span>
-          </div>
-        </div>
-        <span class="work-arrow">↗</span>
-      </a>
-    </li>
-    <li>
-      <a class="work-item" href="https://www.behance.net/gallery/155597149/DRDO-Drone-Design" target="_blank" data-preview="p6">
-        <span class="work-num">07</span>
-        <div class="work-info">
-          <p class="work-tag">UX Research · Defence · DRDO &nbsp;↗ Behance</p>
-          <h2 class="work-title">Mission-Critical UX — DRDO</h2>
-          <p class="work-desc">UX research and interface design for mission-critical defence software at India's premier defence R&D organisation. Designed and evaluated UI screens based on operator workflows, task analysis, and usability principles. Also contributed to a palm-sized drone for object identification through prototyping and testing.</p>
-          <div class="work-metrics">
-            <span class="metric">Defence-grade UX</span>
-            <span class="metric">Task analysis & workflows</span>
-            <span class="metric">Palm drone prototyping</span>
-            <span class="metric">MATLAB & Python</span>
-          </div>
-        </div>
-        <span class="work-arrow">↗</span>
-      </a>
-    </li>
-    <li>
-      <a class="work-item" href="https://www.behance.net/gallery/155012161/Handheld-Augmented-Reality-Games" target="_blank" data-preview="p7">
-        <span class="work-num">08</span>
-        <div class="work-info">
-          <p class="work-tag">PhD Research · IIT Kanpur &nbsp;↗ Behance</p>
-          <h2 class="work-title">UX Design Patterns for AR Games</h2>
-          <p class="work-desc">Doctoral research at IIT Kanpur on handheld augmented reality game experiences — deriving 10 validated UX design patterns through empirical usability studies, UX questionnaires, and qualitative methods. Prototyped and validated patterns through a functional AR game concept. Published findings in Springer journals.</p>
-          <div class="work-metrics">
-            <span class="metric">10 validated UX patterns</span>
-            <span class="metric">2 Springer publications</span>
-            <span class="metric">IIT Kanpur PhD</span>
-            <span class="metric">AR prototyping</span>
-          </div>
-        </div>
-        <span class="work-arrow">↗</span>
-      </a>
-    </li>
-  </ul>
+    </div>
+  </div>
+
 </section>
 
 <!-- CAPABILITIES -->
@@ -1557,30 +1821,35 @@
 <section id="about">
   <p class="section-label">About</p>
 
-  <!-- Stats strip -->
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-bottom: 2px; background: var(--border);">
-    <div style="background: var(--bg); padding: 28px 24px;">
-      <p class="stat-num">6+</p>
-      <p class="stat-label">Years in UX & Design Ops</p>
+  <!-- ── ROW 1: Headline left + Stats right ── -->
+  <div class="about-row1">
+    <div class="about-headline-block">
+      <h2 class="about-headline">Research-led.<br>Systems-<em>minded.</em><br>Impact-driven.</h2>
+      <p class="about-intro">UX researcher and design operations lead with 6+ years driving organisation-wide experience standards, research frameworks, and design quality across India's largest digital ecosystem.</p>
     </div>
-    <div style="background: var(--bg); padding: 28px 24px;">
-      <p class="stat-num">10+</p>
-      <p class="stat-label">Jio Products Audited</p>
-    </div>
-    <div style="background: var(--bg); padding: 28px 24px;">
-      <p class="stat-num">15</p>
-      <p class="stat-label">Experience Standards</p>
-    </div>
-    <div style="background: var(--bg); padding: 28px 24px;">
-      <p class="stat-num">3</p>
-      <p class="stat-label">International Publications</p>
+    <div class="about-stats-block">
+      <div class="about-stat">
+        <p class="stat-num">6+</p>
+        <p class="stat-label">Years in UX & Design Ops</p>
+      </div>
+      <div class="about-stat">
+        <p class="stat-num">33+</p>
+        <p class="stat-label">Research Studies</p>
+      </div>
+      <div class="about-stat">
+        <p class="stat-num">400M+</p>
+        <p class="stat-label">Users Impacted</p>
+      </div>
+      <div class="about-stat">
+        <p class="stat-num">21+</p>
+        <p class="stat-label">Int'l Conferences</p>
+      </div>
     </div>
   </div>
 
-  <!-- Education horizontal strip -->
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-bottom: 64px; background: var(--border);">
-
-    <!-- PhD card — highlighted -->
+  <!-- ── EDUCATION — horizontal tiles, right after headline ── -->
+  <p class="tier-label" style="margin-top:2px;margin-bottom:0;">Education</p>
+  <div class="edu-strip">
     <div class="edu-card edu-highlight" id="edu-phd">
       <div class="edu-card-inner">
         <div class="edu-badge">PhD</div>
@@ -1599,12 +1868,10 @@
         </div>
       </div>
     </div>
-
-    <!-- M.Des card -->
     <div class="edu-card edu-mdes" id="edu-mdes">
       <div class="edu-card-inner">
-        <div class="edu-badge" style="color: var(--accent2); border-color: rgba(126,184,164,0.4);">M.Des</div>
-        <p class="edu-year-label" style="color: var(--accent2);">2019 – 2021</p>
+        <div class="edu-badge" style="color:var(--accent2);border-color:rgba(126,184,164,0.4);">M.Des</div>
+        <p class="edu-year-label" style="color:var(--accent2);">2019 – 2021</p>
         <p class="edu-degree">Master of Design</p>
         <p class="edu-inst-name">IIT Kanpur</p>
         <p class="edu-field">Design · Human-Computer Interaction</p>
@@ -1619,72 +1886,92 @@
         </div>
       </div>
     </div>
-
-    <!-- B.Tech card -->
     <div class="edu-card edu-btech" id="edu-btech">
       <div class="edu-card-inner">
-        <div class="edu-badge" style="color: var(--text-dim); border-color: rgba(90,88,85,0.4);">B.Tech</div>
-        <p class="edu-year-label" style="color: var(--text-dim);">2014 – 2018</p>
+        <div class="edu-badge" style="color:var(--text-dim);border-color:rgba(90,88,85,0.4);">B.Tech</div>
+        <p class="edu-year-label" style="color:var(--text-dim);">2014 – 2018</p>
         <p class="edu-degree">Mechanical Engineering</p>
-        <p class="edu-inst-name" style="color: var(--text-muted);">Nagpur University</p>
+        <p class="edu-inst-name" style="color:var(--text-muted);">Nagpur University</p>
         <p class="edu-field">Engineering Foundations</p>
       </div>
     </div>
-
   </div>
 
-  <!-- Two column: bio left, role right -->
-  <div class="about-grid">
-    <div class="about-left fade-up">
-      <h2 class="about-headline">Research-led.<br>Systems-<em>minded.</em><br>Impact-driven.</h2>
-      <div class="about-body" style="margin-top: 28px;">
-        <p>UX researcher and design operations lead with 6+ years driving organisation-wide experience standards, research frameworks, and design quality across large-scale digital ecosystems.</p>
-        <p>At Jio Platforms, I lead UX audits across 10+ products, defined the One Jio Experience Framework (15 actionable standards), and embed research insights into product roadmaps.</p>
-        <p>Before Jio — Project Associate at DRDO and doctoral researcher at IIT Kanpur, publishing in international journals and deriving validated UX design patterns.</p>
+  <!-- ── BIO + CREDENTIALS (right column) ── -->
+  <div class="about-row2">
+    <div class="about-role-card">
+      <p class="role-eyebrow">Currently</p>
+      <p class="role-title">UX Research & Design Ops Lead</p>
+      <p class="role-org">Jio Platforms Limited — India</p>
+      <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="about-body-text">At Jio Platforms, I lead UX audits across 10+ products, defined the One Jio Experience Framework (15 actionable standards), and partner with Product, Design, Engineering, and Leadership to embed research into roadmaps.</p>
+        <p class="about-body-text" style="margin-top:12px;">Before Jio — Project Associate at DRDO and doctoral researcher at IIT Kanpur, publishing in Springer journals and deriving 10 validated UX design patterns for AR games.</p>
       </div>
-      <div class="skills-list" style="margin-top: 28px;">
+      <div class="skills-list" style="margin-top:20px;">
         <span class="skill-chip">UX Research</span>
         <span class="skill-chip">Design Ops</span>
         <span class="skill-chip">Usability Testing</span>
         <span class="skill-chip">Figma</span>
         <span class="skill-chip">Design Systems</span>
-        <span class="skill-chip">Journey Mapping</span>
         <span class="skill-chip">CX Auditing</span>
+        <span class="skill-chip">Claude AI</span>
+        <span class="skill-chip">Figma MCP</span>
+        <span class="skill-chip">Journey Mapping</span>
         <span class="skill-chip">AR/VR</span>
-        <span class="skill-chip">Python</span>
-        <span class="skill-chip">Notion</span>
-        <span class="skill-chip">Miro</span>
       </div>
     </div>
 
-    <div class="about-right fade-up">
-      <div class="current-role">
-        <p class="role-eyebrow">Currently</p>
-        <p class="role-title">UX Research & Design Ops Lead</p>
-        <p class="role-org">Jio Platforms Limited — India</p>
-      </div>
+    <!-- Right: 3 credential cards stacked vertically -->
+    <div class="about-creds-col">
 
-      <!-- Academic Excellence Award -->
-      <div style="margin-top: 24px; padding: 24px 28px; background: var(--bg2); border: 1px solid rgba(200,169,110,0.25); border-left: 2px solid var(--accent); position: relative; overflow: hidden;">
-        <div style="position:absolute;top:16px;right:20px;opacity:0.12;">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <polygon points="24,4 29,18 44,18 32,27 37,42 24,33 11,42 16,27 4,18 19,18" stroke="#c8a96e" stroke-width="1.2" fill="none"/>
+      <div class="cred-card-v">
+        <div class="cred-icon gold">
+          <svg width="20" height="20" viewBox="0 0 48 48" fill="none">
+            <polygon points="24,4 29,18 44,18 32,27 37,42 24,33 11,42 16,27 4,18 19,18" stroke="rgba(200,169,110,0.9)" stroke-width="2" fill="rgba(200,169,110,0.1)"/>
           </svg>
         </div>
-        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;">🏆 Academic Award</p>
-        <p style="font-family:var(--serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:6px;">Academic Excellence Award</p>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:4px;">Indian Institute of Technology Kanpur</p>
-        <p style="font-size:12px;color:var(--text-dim);font-style:italic;">Awarded for outstanding research contributions during Master of Design (2019–21)</p>
+        <div>
+          <p class="cred-eyebrow">Academic Award · IIT Kanpur</p>
+          <p class="cred-title">Academic Excellence Award</p>
+          <p class="cred-sub">M.Des 2019–21 · Awarded for outstanding research contributions</p>
+        </div>
       </div>
 
-      <!-- Co-author -->
-      <div style="margin-top: 16px; padding: 20px 28px; background: var(--bg2); border: 1px solid var(--border); border-left: 2px solid rgba(200,169,110,0.3);">
-        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Co-Author</p>
-        <p style="font-family:var(--serif);font-size:16px;font-weight:400;color:var(--text);margin-bottom:4px;">A Textbook of Mathematics</p>
-        <p style="font-size:12px;color:var(--text-dim);font-style:italic;">Published academic textbook</p>
+      <div class="cred-card-v">
+        <div class="cred-icon gold">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="rgba(200,169,110,0.85)" stroke-width="1.4">
+            <rect x="4" y="2" width="18" height="24" rx="2"/>
+            <path d="M8 8h10M8 12h10M8 16h6"/>
+            <circle cx="23" cy="23" r="5"/>
+            <path d="M21 23l1.5 1.5L25 21"/>
+          </svg>
+        </div>
+        <div>
+          <p class="cred-eyebrow">Co-Author</p>
+          <p class="cred-title">A Textbook of Mathematics</p>
+          <p class="cred-sub">Published academic textbook</p>
+        </div>
       </div>
+
+      <div class="cred-card-v">
+        <div class="cred-icon teal">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="rgba(126,184,164,0.85)" stroke-width="1.4">
+            <circle cx="16" cy="16" r="12"/>
+            <path d="M8 8 Q16 14 24 8"/>
+            <path d="M4 16 Q10 20 16 16 Q22 12 28 16"/>
+            <path d="M8 24 Q16 18 24 24"/>
+          </svg>
+        </div>
+        <div>
+          <p class="cred-eyebrow" style="color:var(--accent2);">Sports · IIT Kanpur</p>
+          <p class="cred-title">Volleyball Team Captain</p>
+          <p class="cred-sub">Captain, IIT Kanpur Volleyball Team · Inter-IIT Sports Meet</p>
+        </div>
+      </div>
+
     </div>
   </div>
+
 </section>
 
 <!-- PUBLICATIONS -->
@@ -1755,6 +2042,55 @@
   <a href="mailto:pushkarpandey1007@gmail.com" class="btn-primary">Let's talk ↗</a>
 </section>
 
+<!-- RESUME / CV -->
+<section style="border-top: 1px solid var(--border); padding: 64px 48px;">
+  <p class="section-label">Resume</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border);">
+
+    <!-- Left: summary -->
+    <div style="background: var(--bg2); padding: 40px;">
+      <p style="font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px;">Dr. Pushkar Pandey</p>
+      <p style="font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 16px; line-height: 1.3;">UX Research Lead · Design Ops · Experience Strategy · AI-Powered Design Quality</p>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">PhD & M.Des from IIT Kanpur · 6+ years · 33+ studies · 350+ participants · 30+ Jio products · 400M+ users</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">UX Research</span>
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">Design Ops</span>
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">AI Audit Automation</span>
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">Figma MCP</span>
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">CX Standards</span>
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">Usability Testing</span>
+        <span style="padding:4px 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;color:var(--text-muted);">Claude AI</span>
+      </div>
+    </div>
+
+    <!-- Right: download links -->
+    <div style="background: var(--bg2); padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
+      <div>
+        <p style="font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px;">Available formats</p>
+
+        <a href="Pushkar_2026-2.pdf" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--bg);border:1px solid var(--border);border-radius:2px;text-decoration:none;color:inherit;transition:border-color .2s;margin-bottom:10px;gap:16px;" onmouseover="this.style.borderColor='rgba(200,169,110,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+          <div>
+            <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">Portfolio Resume (PDF)</p>
+            <p style="font-size:11px;color:var(--text-dim);">Visual, detailed — for recruiters & interviews</p>
+          </div>
+          <span style="font-size:13px;color:var(--accent);white-space:nowrap;">View ↗</span>
+        </a>
+
+        <a href="Pushkar_Pandey_Resume_2.docx" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--bg);border:1px solid var(--border);border-radius:2px;text-decoration:none;color:inherit;transition:border-color .2s;gap:16px;" onmouseover="this.style.borderColor='rgba(200,169,110,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+          <div>
+            <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">ATS-Friendly Resume (DOCX)</p>
+            <p style="font-size:11px;color:var(--text-dim);">Plain text, ATS-optimised — for job applications</p>
+          </div>
+          <span style="font-size:13px;color:var(--accent);white-space:nowrap;">View ↗</span>
+        </a>
+      </div>
+
+      <p style="font-size:11px;color:var(--text-dim);font-style:italic;line-height:1.6;">Both formats are ATS-compatible. The DOCX version is optimised for applicant tracking systems.</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- CONTACT / CTA -->
 <section id="contact">
   <p class="cta-eyebrow">Let's connect</p>
@@ -1796,7 +2132,7 @@
   }
   animateRing();
 
-  document.querySelectorAll('a, button, .work-item, .skill-chip').forEach(el => {
+  document.querySelectorAll('a, button, .work-card-t1, .work-card-t2, .earlier-item, .skill-chip').forEach(el => {
     el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
     el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
   });
@@ -1805,10 +2141,9 @@
   const preview = document.getElementById('work-preview');
   let activeCard = null;
 
-  document.querySelectorAll('.work-item').forEach(item => {
+  document.querySelectorAll('.work-card-t1[data-preview], .work-card-t2[data-preview], .earlier-item[data-preview]').forEach(item => {
     item.addEventListener('mouseenter', () => {
       const key = item.dataset.preview;
-      // hide previous
       if (activeCard) activeCard.classList.remove('active');
       activeCard = document.getElementById('wp-' + key);
       if (activeCard) activeCard.classList.add('active');
