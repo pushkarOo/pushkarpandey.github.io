@@ -966,8 +966,56 @@
   .cred-card-v:hover { background: var(--bg3); }
   .cred-card-v:hover .cred-title { color: var(--accent); }
 
-  /* Publications */
-  .pub-card {
+  /* International / Open-to / Resume sections */
+  .intl-sec {
+    border-top: 1px solid var(--border);
+    padding: 64px 48px;
+    background: var(--bg2);
+  }
+  .open-sec {
+    border-top: 1px solid var(--border);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .resume-sec {
+    border-top: 1px solid var(--border);
+    padding: 64px 48px;
+  }
+  .resume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+  .resume-left {
+    background: var(--bg2);
+    padding: 36px;
+  }
+  .resume-right {
+    background: var(--bg2);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .resume-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    text-decoration: none;
+    color: inherit;
+    gap: 12px;
+    transition: border-color .2s;
+  }
+  .resume-link:hover { border-color: rgba(200,169,110,0.4); }
     background: var(--bg);
     padding: 32px 28px;
     border: 1px solid var(--border);
@@ -1261,7 +1309,9 @@
 
   /* Responsive */
   @media (max-width: 900px) {
-    nav { padding: 0 24px; }
+
+    /* ── NAV ── */
+    nav { padding: 0 20px; }
     .nav-links { display: none; }
     .nav-links.open {
       display: flex;
@@ -1269,31 +1319,118 @@
       position: fixed;
       inset: 0;
       background: var(--bg);
-      padding: calc(var(--nav-h) + 40px) 32px 40px;
-      gap: 24px;
+      padding: calc(var(--nav-h) + 40px) 28px 40px;
+      gap: 20px;
       z-index: 99;
     }
-    .nav-links.open a { font-size: 20px; }
+    .nav-links.open a { font-size: 18px; letter-spacing: .08em; }
     .nav-toggle { display: flex; }
-    .hero {
-      grid-template-columns: 1fr;
-      padding: calc(var(--nav-h) + 32px) 24px 80px;
-    }
-    .hero-portrait { order: -1; }
-    .portrait-wrap { width: min(280px, 80%); margin: 0 auto; }
-    section { padding: 80px 24px; }
-    .work-grid-t1, .work-grid-t2 { grid-template-columns: 1fr; gap: 12px; }
-    .work-card-t1, .work-card-t2 { min-height: auto; transform: none !important; }
-    .earlier-right { display: none; }
-    .edu-strip { grid-template-columns: 1fr; gap: 12px; }
-    .edu-card { transform: none !important; }
-    .about-row1, .about-row2 { grid-template-columns: 1fr; }
-    .about-grid { grid-template-columns: 1fr; gap: 48px; }
-    footer { flex-direction: column; gap: 16px; text-align: center; }
-    .hero-grid-line { display: none; }
+
+    /* ── CURSOR ── */
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
-    #contact { padding: 100px 24px 80px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 52px 20px; }
+    .section-label { margin-bottom: 32px; }
+
+    /* ── HERO ── */
+    .hero {
+      grid-template-columns: 1fr;
+      padding: calc(var(--nav-h) + 28px) 20px 60px;
+      gap: 32px;
+      min-height: auto;
+    }
+    .hero-portrait { order: -1; }
+    .portrait-wrap { width: min(240px, 75%); margin: 0 auto; }
+    .hero-headline { font-size: clamp(32px, 9vw, 48px); }
+    .hero-sub { font-size: 14px; }
+    .hero-grid-line { display: none; }
+    .hero-scroll-hint { display: none; }
+    .hero-actions { flex-wrap: wrap; gap: 10px; }
+    .btn-primary, .btn-ghost { padding: 11px 20px; font-size: 11px; }
+
+    /* ── WORK ── */
+    .work-grid-t1, .work-grid-t2 { grid-template-columns: 1fr; gap: 12px; }
+    .work-card-t1, .work-card-t2 { min-height: auto; transform: none !important; }
+    .work-card-t1 { padding: 24px 20px; }
+    .work-card-t2 { padding: 20px; }
+    .wc-title-t1 { font-size: 20px; }
+    .wc-title-t2 { font-size: 18px; }
+    .earlier-item { flex-direction: column; gap: 8px; padding: 16px 20px; }
+    .earlier-right { flex-direction: column; gap: 4px; align-items: flex-start; }
+    .earlier-meta { display: none; }
+
+    /* ── CAPABILITIES ── */
+    #capabilities { padding: 52px 20px; }
+    .caps-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+
+    /* ── ABOUT ── */
+    #about { padding: 52px 20px; }
+    .about-row1 { grid-template-columns: 1fr; background: transparent; gap: 0; }
+    .about-headline-block { padding: 28px 24px; }
+    .about-headline { font-size: clamp(26px, 7vw, 36px); }
+    .about-stats-block { grid-template-columns: 1fr 1fr; }
+    .about-stat { padding: 20px 16px; }
+    .stat-num { font-size: 26px; }
+    .edu-strip { grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
+    .edu-card { transform: none !important; }
+    .edu-iit-seal { display: none; }
+    .about-row2 { grid-template-columns: 1fr; background: transparent; gap: 12px; margin-top: 24px; }
+    .about-role-card { padding: 24px 20px; }
+    .about-creds-col { gap: 10px; background: transparent; }
+    .cred-card-v { padding: 20px; border: 1px solid var(--border); border-radius: 4px; }
+
+    /* ── PUBLICATIONS ── */
+    #publications { padding: 40px 20px; }
+    .pub-grid { grid-template-columns: 1fr !important; }
+    .pub-card { padding: 20px; }
+
+    /* ── INTERNATIONAL ── */
+    .intl-sec { padding: 48px 20px; }
+    .intl-chips { gap: 8px; }
+    .intl-chip { font-size: 11px; padding: 6px 12px; }
+
+    /* ── OPEN TO ── */
+    .open-sec { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .open-chips { gap: 6px; }
+    .open-chip { font-size: 11px; padding: 6px 12px; }
+
+    /* ── RESUME SECTION ── */
+    .resume-sec { padding: 40px 20px; }
+    .resume-grid { grid-template-columns: 1fr; }
+    .resume-left, .resume-right { padding: 24px 20px; }
+    .intl-sec { padding: 40px 20px; }
+    .open-sec { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+
+    /* ── CTA ── */
+    #contact { padding: 64px 20px 52px; }
+    .cta-headline { font-size: clamp(26px, 8vw, 36px); }
+    .hero-actions { justify-content: flex-start; }
+    .cta-btns-row { flex-direction: column; align-items: center; gap: 10px; }
+
+    /* ── FOOTER ── */
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; }
+    .footer-links { justify-content: center; }
+
+    /* ── PORTRAIT HOVER TAGS (hide on mobile) ── */
+    .portrait-tag { display: none; }
+    .work-preview { display: none; }
+
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 40px 16px; }
+    nav { padding: 0 16px; }
+    .caps-grid { grid-template-columns: 1fr; }
+    .about-stats-block { grid-template-columns: 1fr 1fr; }
+    .wc-metrics { display: none; }
+    .hero-eyebrow { font-size: 9px; }
+    .pub-card { padding: 16px; }
+    .cred-card-v { padding: 16px; }
+    .edu-card { padding: 20px 16px; }
+    .tier-label { font-size: 9px; }
+    .metric { font-size: 9px; }
   }
 </style>
 </head>
@@ -1977,7 +2114,7 @@
 <!-- PUBLICATIONS -->
 <section id="publications" style="border-top: 1px solid var(--border); padding: 80px 48px;">
   <p class="section-label">Published Research</p>
-  <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border);">
+  <div class="pub-grid" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border);">
 
     <div class="pub-card">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
@@ -2010,7 +2147,7 @@
 </section>
 
 <!-- INTERNATIONAL EXPOSURE -->
-<section style="border-top: 1px solid var(--border); padding: 64px 48px; background: var(--bg2);">
+<section class="intl-sec">
   <p class="section-label">International Exposure</p>
   <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
     <span class="intl-chip">🇺🇸 New York & Manhattan, USA</span>
@@ -2028,7 +2165,7 @@
 </section>
 
 <!-- OPEN TO -->
-<section style="border-top: 1px solid var(--border); padding: 48px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+<section class="open-sec">
   <div>
     <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">Currently open to</p>
     <div style="display:flex;flex-wrap:wrap;gap:10px;">
@@ -2043,12 +2180,12 @@
 </section>
 
 <!-- RESUME / CV -->
-<section style="border-top: 1px solid var(--border); padding: 64px 48px;">
+<section class="resume-sec">
   <p class="section-label">Resume</p>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border);">
+  <div class="resume-grid">
 
     <!-- Left: summary -->
-    <div style="background: var(--bg2); padding: 40px;">
+    <div class="resume-left">
       <p style="font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px;">Dr. Pushkar Pandey</p>
       <p style="font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 16px; line-height: 1.3;">UX Research Lead · Design Ops · Experience Strategy · AI-Powered Design Quality</p>
       <p style="font-size: 13px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">PhD & M.Des from IIT Kanpur · 6+ years · 33+ studies · 350+ participants · 30+ Jio products · 400M+ users</p>
@@ -2064,11 +2201,10 @@
     </div>
 
     <!-- Right: download links -->
-    <div style="background: var(--bg2); padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
-      <div>
-        <p style="font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px;">Available formats</p>
+    <div class="resume-right">
+      <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;">Available formats</p>
 
-        <a href="Pushkar_2026-2.pdf" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--bg);border:1px solid var(--border);border-radius:2px;text-decoration:none;color:inherit;transition:border-color .2s;margin-bottom:10px;gap:16px;" onmouseover="this.style.borderColor='rgba(200,169,110,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+        <a href="Pushkar_2026-2.pdf" target="_blank" class="resume-link">
           <div>
             <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">Portfolio Resume (PDF)</p>
             <p style="font-size:11px;color:var(--text-dim);">Visual, detailed — for recruiters & interviews</p>
@@ -2076,16 +2212,14 @@
           <span style="font-size:13px;color:var(--accent);white-space:nowrap;">View ↗</span>
         </a>
 
-        <a href="Pushkar_Pandey_Resume_2.docx" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:var(--bg);border:1px solid var(--border);border-radius:2px;text-decoration:none;color:inherit;transition:border-color .2s;gap:16px;" onmouseover="this.style.borderColor='rgba(200,169,110,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+        <a href="Pushkar_Pandey_Resume_2.docx" target="_blank" class="resume-link">
           <div>
             <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">ATS-Friendly Resume (DOCX)</p>
             <p style="font-size:11px;color:var(--text-dim);">Plain text, ATS-optimised — for job applications</p>
           </div>
           <span style="font-size:13px;color:var(--accent);white-space:nowrap;">View ↗</span>
         </a>
-      </div>
-
-      <p style="font-size:11px;color:var(--text-dim);font-style:italic;line-height:1.6;">Both formats are ATS-compatible. The DOCX version is optimised for applicant tracking systems.</p>
+      <p style="font-size:11px;color:var(--text-dim);font-style:italic;line-height:1.6;margin-top:16px;">Both formats are ATS-compatible. The DOCX version is optimised for applicant tracking systems.</p>
     </div>
 
   </div>
