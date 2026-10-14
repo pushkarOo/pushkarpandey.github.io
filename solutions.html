@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pushkar Design Solution · Websites, WhatsApp auto-reply and lead follow-up for businesses across India</title>
+<meta name="description" content="We build your website, reply to every enquiry on WhatsApp within seconds, keep all leads in one list on your phone and remind your team to follow up. For real estate, coaching institutes, clinics and service businesses across India.">
+<meta property="og:title" content="Pushkar Design Solution">
+<meta property="og:description" content="Every enquiry gets a reply in seconds, even at 11 PM. Set up in 7 days, managed for you, anywhere in India.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pushkarpandey.com/solutions">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Pushkar Design Solution",
+  "url": "https://pushkarpandey.com/solutions",
+  "telephone": "+91-9021818161",
+  "email": "pushkarpandey1007@gmail.com",
+  "founder": {"@type": "Person", "name": "Dr. Pushkar Pandey"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Pune", "addressRegion": "Maharashtra", "addressCountry": "IN"},
+  "areaServed": {"@type": "Country", "name": "India"},
+  "description": "Websites, WhatsApp auto-reply, lead management and monthly reports for businesses across India."
+}
+</script>
+<style>
+/* ============================================================
+   Pushkar Design Solution — service page
+   Scoped under .pds; every class is prefixed pds- so nothing
+   clashes with the portfolio.
+   Palette: sage wall, lamp green, warm wood, lamp-light glow.
+   ============================================================ */
+.pds {
+  --pds-wall-1: #E6EEDF;
+  --pds-wall-2: #CBDBC2;
+  --pds-wall-3: #A9C29F;
+  --pds-paper: #EFF4EA;
+  --pds-sage: #DDE8D5;
+  --pds-white: #FBFCF7;
+  --pds-ink: #1E2A21;
+  --pds-ink-2: #48594C;
+  --pds-ink-3: #728276;
+  --pds-green: #3D7A4F;
+  --pds-green-dark: #2C5D3B;
+  --pds-wood: #D9873F;
+  --pds-wood-dark: #B2632A;
+  --pds-wood-soft: #F6E3CC;
+  --pds-glow: #FBF8DC;
+  --pds-line: #C9D7C1;
+  --pds-radius-lg: 24px;
+  --pds-radius: 14px;
+  --pds-font: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pds-wrap: 1160px;
+
+  background: var(--pds-paper);
+  color: var(--pds-ink);
+  font-family: var(--pds-font);
+  font-optical-sizing: auto;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+.pds *, .pds *::before, .pds *::after { box-sizing: border-box; }
+.pds h1, .pds h2, .pds h3, .pds h4, .pds p, .pds ul, .pds ol, .pds dl { margin: 0; padding: 0; }
+.pds ul, .pds ol { list-style: none; }
+.pds a { color: inherit; }
+.pds svg { display: block; }
+.pds button { font-family: inherit; }
+.pds :focus-visible { outline: 3px solid var(--pds-wood); outline-offset: 3px; border-radius: 6px; }
+
+.pds-wrap { max-width: var(--pds-wrap); margin: 0 auto; padding: 0 28px; }
+.pds-section { padding: 104px 0; }
+.pds-h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; max-width: 20ch; }
+.pds-lead { font-size: 19px; color: var(--pds-ink-2); max-width: 58ch; margin-top: 18px; }
+
+/* buttons */
+.pds-btn { display: inline-flex; align-items: center; gap: 10px; font: 600 16px/1 var(--pds-font); text-decoration: none; padding: 16px 22px; border-radius: 999px; border: 1.5px solid transparent; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s, transform .2s; }
+.pds-btn:active { transform: scale(.98); }
+.pds-btn--primary { background: var(--pds-green); color: #fff; }
+.pds-btn--primary:hover { background: var(--pds-green-dark); }
+.pds-btn--ghost { border-color: var(--pds-ink); color: var(--pds-ink); background: transparent; }
+.pds-btn--ghost:hover { background: var(--pds-ink); color: var(--pds-paper); }
+.pds-btn svg { width: 18px; height: 18px; flex: none; }
+
+/* ---------- top bar ---------- */
+.pds-top { position: sticky; top: 0; z-index: 30; background: rgba(230,238,223,.85); backdrop-filter: saturate(1.3) blur(10px); -webkit-backdrop-filter: saturate(1.3) blur(10px); border-bottom: 1px solid rgba(61,122,79,.15); }
+.pds-top .pds-wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; gap: 24px; }
+.pds-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.pds-brand-mark { width: 30px; height: 30px; border-radius: 9px; background: var(--pds-green); position: relative; flex: none; }
+.pds-brand-mark::after { content: ""; position: absolute; right: -3px; bottom: -3px; width: 12px; height: 12px; border-radius: 50%; background: var(--pds-wood); border: 2.5px solid var(--pds-wall-1); }
+.pds-nav { display: flex; align-items: center; gap: 28px; }
+.pds-nav a { text-decoration: none; font-size: 15px; color: var(--pds-ink-2); }
+.pds-nav a:hover { color: var(--pds-ink); }
+.pds-nav .pds-btn { padding: 11px 18px; font-size: 15px; color: #fff; }
+.pds-nav .pds-back { font-size: 14px; color: var(--pds-ink-3); }
+
+/* ============================================================
+   HERO — the lamp scene
+   ============================================================ */
+.pds-hero { position: relative; padding: 64px 0 72px; background: linear-gradient(100deg, var(--pds-wall-1) 0%, var(--pds-wall-2) 58%, var(--pds-wall-3) 100%); overflow: hidden; }
+.pds-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(38,58,43,.12), rgba(28,46,33,.42)); opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+.pds-hero.is-off::before { opacity: 1; }
+.pds-hero > .pds-wrap { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.pds-hero-for { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--pds-green-dark); background: rgba(251,252,247,.7); padding: 7px 14px 7px 10px; border-radius: 999px; }
+.pds-hero-for i { width: 8px; height: 8px; border-radius: 50%; background: var(--pds-green); box-shadow: 0 0 0 4px rgba(61,122,79,.2); }
+.pds-hero h1 { font-size: clamp(42px, 5.4vw, 70px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 650; margin-top: 22px; max-width: 13ch; }
+.pds-hero-sub { font-size: 20px; color: var(--pds-ink-2); max-width: 44ch; margin-top: 24px; }
+.pds-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.pds-hero-facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 32px; color: var(--pds-ink-2); font-size: 15px; }
+.pds-hero-facts li { display: flex; align-items: center; gap: 8px; }
+.pds-hero-facts svg { width: 18px; height: 18px; color: var(--pds-green); }
+
+/* tabs above the scene */
+.pds-demo-tabs { display: flex; gap: 6px; padding: 5px; background: rgba(251,252,247,.75); border-radius: 999px; width: max-content; margin: 0 auto 10px; position: relative; z-index: 3; }
+.pds-demo-tabs button { font: 500 14px/1 var(--pds-font); color: var(--pds-ink-2); background: transparent; border: 0; padding: 10px 16px; border-radius: 999px; cursor: pointer; }
+.pds-demo-tabs button[aria-selected="true"] { background: var(--pds-ink); color: var(--pds-white); }
+
+/* the scene is drawn at 520×640 and scaled to fit */
+.pds-scene-wrap { position: relative; height: 640px; }
+.pds-scene { position: absolute; top: 0; left: 0; width: 520px; height: 640px; transform-origin: 0 0; }
+.pds-scene > * { position: absolute; }
+.pds-lamp-back, .pds-lamp-front { inset: 0; width: 520px; height: 640px; overflow: visible; }
+.pds-lamp-back { z-index: 1; }
+.pds-lamp-front { z-index: 5; pointer-events: none; }
+.pds-lamp-hit { pointer-events: auto; cursor: pointer; }
+.pds-table { left: -110px; right: -60px; top: 560px; height: 34px; z-index: 2; border-radius: 20px / 16px; background: linear-gradient(180deg, #EAA767 0, #E39A57 34%, #C7722F 36%, #A9581F 100%); box-shadow: 0 22px 34px -18px rgba(70,45,20,.45); }
+.pds-leg { position: absolute; left: 150px; top: 30px; width: 30px; height: 60px; background: linear-gradient(90deg, #7FA078, #94B48C 50%, #6E8F68); border-radius: 0 0 6px 6px; }
+
+.pds-phone { left: 40px; top: 52px; z-index: 3; width: 270px; background: var(--pds-ink); border-radius: 42px; padding: 9px; box-shadow: 0 30px 50px -26px rgba(30,42,33,.55); transition: box-shadow .6s ease; }
+.pds-hero.is-off .pds-phone { box-shadow: 0 30px 50px -26px rgba(30,42,33,.6), 0 0 70px 6px rgba(246,247,214,.45); }
+.pds-screen { background: #EEF2EA; border-radius: 34px; overflow: hidden; height: 490px; display: flex; flex-direction: column; }
+.pds-chat-head { background: var(--pds-white); display: flex; align-items: center; gap: 10px; padding: 18px 16px 12px; border-bottom: 1px solid var(--pds-line); }
+.pds-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--pds-sage); color: var(--pds-green-dark); font-weight: 700; font-size: 14px; display: grid; place-items: center; flex: none; }
+.pds-chat-head b { display: block; font-size: 14.5px; line-height: 1.2; }
+.pds-chat-head span { font-size: 12px; color: var(--pds-green); }
+.pds-chat { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.pds-day { align-self: center; font-size: 11.5px; color: var(--pds-ink-3); background: rgba(255,255,255,.75); padding: 4px 10px; border-radius: 8px; }
+.pds-bubble { max-width: 86%; padding: 9px 12px 7px; border-radius: 14px; font-size: 13.5px; line-height: 1.42; opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
+.pds-bubble.is-in { opacity: 1; transform: none; }
+.pds-bubble--them { align-self: flex-start; background: var(--pds-white); border-top-left-radius: 4px; }
+.pds-bubble--us { align-self: flex-end; background: #D5EDD9; border-top-right-radius: 4px; }
+.pds-bubble small { display: block; text-align: right; font-size: 10.5px; color: var(--pds-ink-3); margin-top: 3px; }
+.pds-attach { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.7); border-radius: 8px; padding: 7px 9px; margin-top: 7px; font-size: 12.5px; }
+.pds-attach i { width: 22px; height: 26px; border-radius: 4px; background: var(--pds-wood); flex: none; position: relative; }
+.pds-attach i::after { content: ""; position: absolute; left: 5px; right: 5px; top: 8px; height: 2px; background: #fff; box-shadow: 0 4px 0 #fff, 0 8px 0 #fff; }
+.pds-typing { align-self: flex-end; background: #D5EDD9; border-radius: 14px; border-top-right-radius: 4px; padding: 11px 14px; display: none; gap: 4px; }
+.pds-typing.is-on { display: flex; }
+.pds-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--pds-green); animation: pds-dot 1s infinite ease-in-out; }
+.pds-typing span:nth-child(2) { animation-delay: .15s; }
+.pds-typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes pds-dot { 0%, 80%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-3px); opacity: 1; } }
+.pds-speed { align-self: flex-end; font-size: 11.5px; font-weight: 600; color: var(--pds-wood-dark); background: var(--pds-wood-soft); border-radius: 999px; padding: 4px 10px; opacity: 0; transition: opacity .3s; }
+.pds-speed.is-in { opacity: 1; }
+
+.pds-lead-card { left: 246px; top: 352px; z-index: 4; width: 220px; background: var(--pds-white); border-radius: var(--pds-radius); padding: 14px 16px 16px; box-shadow: 0 22px 40px -22px rgba(30,42,33,.45); opacity: 0; transform: translate(14px, 10px) rotate(2deg); transition: opacity .45s ease, transform .5s cubic-bezier(.2,.9,.3,1.2); }
+.pds-lead-card.is-in { opacity: 1; transform: rotate(-1.5deg); }
+.pds-lead-card h4 { font-size: 12px; font-weight: 500; color: var(--pds-ink-3); display: flex; justify-content: space-between; }
+.pds-lead-card h4 em { font-style: normal; color: var(--pds-green); font-weight: 600; }
+.pds-lead-card b { display: block; font-size: 16px; margin-top: 8px; }
+.pds-lead-card dl { margin-top: 6px; display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; font-size: 13px; }
+.pds-lead-card dt { color: var(--pds-ink-3); }
+.pds-lead-card dd { margin: 0; }
+.pds-remind { margin-top: 12px; display: flex; align-items: center; gap: 8px; background: var(--pds-wood-soft); border-radius: 10px; padding: 8px 10px; font-size: 13px; font-weight: 500; }
+.pds-remind svg { width: 16px; height: 16px; color: var(--pds-wood-dark); flex: none; }
+
+/* lamp parts */
+.pds-beam { transition: opacity .5s ease; }
+.pds-hero.is-off .pds-beam { opacity: 0; }
+.pds-hero.is-booting .pds-beam { animation: pds-flicker 1.1s steps(1, end) both; }
+@keyframes pds-flicker { 0% { opacity: 0; } 12% { opacity: .7; } 18% { opacity: .1; } 30% { opacity: .9; } 36% { opacity: .25; } 50%, 100% { opacity: 1; } }
+.pds-bulb { transition: fill .4s ease; }
+.pds-hero.is-off .pds-bulb { fill: #7E9A80; }
+
+/* controls under the scene */
+.pds-demo-ctrl { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 18px; margin-top: 14px; position: relative; z-index: 3; }
+.pds-lamp-btn { display: inline-flex; align-items: center; gap: 10px; font: 600 14.5px/1 var(--pds-font); color: var(--pds-ink); background: rgba(251,252,247,.8); border: 0; border-radius: 999px; padding: 10px 16px 10px 10px; cursor: pointer; }
+.pds-lamp-btn:hover { background: var(--pds-white); }
+.pds-lamp-btn i { width: 34px; height: 20px; border-radius: 999px; background: var(--pds-wood); position: relative; transition: background-color .3s; flex: none; }
+.pds-lamp-btn i::after { content: ""; position: absolute; top: 3px; left: 17px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: left .3s cubic-bezier(.3,.8,.3,1.2); }
+.pds-lamp-btn[aria-pressed="true"] i { background: var(--pds-ink-3); }
+.pds-lamp-btn[aria-pressed="true"] i::after { left: 3px; }
+.pds-replay { font: 500 14px/1 var(--pds-font); color: var(--pds-ink-2); background: none; border: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 8px; }
+.pds-replay:hover { color: var(--pds-ink); }
+.pds-caption { text-align: center; font-size: 15px; color: var(--pds-ink-2); margin-top: 10px; min-height: 1.6em; position: relative; z-index: 3; }
+.pds-hero.is-off .pds-caption { color: var(--pds-ink); font-weight: 500; }
+
+/* ============================================================
+   FLIP SWITCH — before / after
+   ============================================================ */
+.pds-flip { margin-top: 48px; border-radius: 28px; padding: 36px 40px 30px; background: #E2E8DD; transition: background-color .6s ease, box-shadow .6s ease; position: relative; overflow: hidden; }
+.pds-flip::before { content: ""; position: absolute; left: 50%; top: -60%; width: 120%; height: 160%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255,251,214,.95), rgba(255,251,214,0)); opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+.pds-flip.is-on { background: #F4F3E2; box-shadow: 0 30px 60px -40px rgba(178,150,60,.45); }
+.pds-flip.is-on::before { opacity: 1; }
+.pds-flip-head { position: relative; display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 18px; font-weight: 600; }
+.pds-flip-head span { transition: color .3s; }
+.pds-flip:not(.is-on) .pds-flip-head span:first-child, .pds-flip.is-on .pds-flip-head span:last-child { color: var(--pds-ink); }
+.pds-flip:not(.is-on) .pds-flip-head span:last-child, .pds-flip.is-on .pds-flip-head span:first-child { color: var(--pds-ink-3); }
+.pds-switch { width: 76px; height: 42px; border-radius: 999px; border: 0; padding: 0; background: var(--pds-ink-3); position: relative; cursor: pointer; transition: background-color .3s; flex: none; }
+.pds-switch::after { content: ""; position: absolute; top: 5px; left: 5px; width: 32px; height: 32px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2); transition: left .35s cubic-bezier(.3,.8,.3,1.25); }
+.pds-switch[aria-checked="true"] { background: var(--pds-green); }
+.pds-switch[aria-checked="true"]::after { left: 39px; }
+.pds-flip-hint { position: relative; text-align: center; color: var(--pds-ink-3); font-size: 14px; margin-top: 10px; transition: opacity .3s; }
+.pds-flip.is-on .pds-flip-hint { opacity: 0; }
+.pds-flip-list { position: relative; margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pds-flip-list li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; background: rgba(255,255,255,.55); border-radius: var(--pds-radius); padding: 18px 20px; transition: background-color .5s ease; }
+.pds-flip.is-on .pds-flip-list li { background: rgba(255,255,255,.85); }
+.pds-flip-ico { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #EBD9D1; color: #9A4A2F; transition: background-color .4s, color .4s; }
+.pds-flip.is-on .pds-flip-ico { background: var(--pds-green); color: #fff; }
+.pds-flip-ico svg { width: 14px; height: 14px; }
+.pds-flip-ico .pds-ico-on, .pds-flip.is-on .pds-flip-ico .pds-ico-off { display: none; }
+.pds-flip.is-on .pds-flip-ico .pds-ico-on { display: block; }
+.pds-flip-txt { display: grid; }
+.pds-flip-txt > span { grid-area: 1 / 1; font-size: 16.5px; transition: opacity .35s ease, transform .35s ease; }
+.pds-flip-txt .pds-t-off { color: var(--pds-ink-2); }
+.pds-flip-txt .pds-t-on { opacity: 0; transform: translateY(6px); color: var(--pds-ink); }
+.pds-flip.is-on .pds-t-off { opacity: 0; transform: translateY(-6px); }
+.pds-flip.is-on .pds-t-on { opacity: 1; transform: none; }
+.pds-flip-list li:nth-child(2) .pds-flip-txt > span { transition-delay: .05s; }
+.pds-flip-list li:nth-child(3) .pds-flip-txt > span { transition-delay: .1s; }
+.pds-flip-list li:nth-child(4) .pds-flip-txt > span { transition-delay: .15s; }
+
+/* ============================================================
+   WHAT YOU GET — cards with a little spotlight
+   ============================================================ */
+.pds-get { background: var(--pds-white); }
+.pds-get-grid { margin-top: 52px; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 20px; }
+.pds-get-item { --mx: -400px; --my: -400px; border-radius: var(--pds-radius-lg); padding: 30px; background: radial-gradient(260px circle at var(--mx) var(--my), rgba(255,247,200,.95), rgba(255,247,200,0) 70%), var(--pds-paper); }
+.pds-get-item h3 { font-size: 21px; font-weight: 600; margin-top: 18px; letter-spacing: -0.01em; }
+.pds-get-item p { color: var(--pds-ink-2); margin-top: 8px; font-size: 16px; }
+.pds-get-item svg { width: 34px; height: 34px; color: var(--pds-green); }
+.pds-get-item--hero { grid-row: span 2; color: #fff; display: flex; flex-direction: column; background: radial-gradient(300px circle at var(--mx) var(--my), rgba(255,244,190,.22), rgba(255,244,190,0) 70%), var(--pds-green); }
+.pds-get-item--hero svg { color: #F2C37E; width: 40px; height: 40px; }
+.pds-get-item--hero h3 { font-size: 30px; line-height: 1.12; margin-top: 22px; max-width: 14ch; }
+.pds-get-item--hero p { color: rgba(255,255,255,.85); font-size: 17px; max-width: 36ch; }
+.pds-get-item--hero ul { margin-top: auto; padding-top: 28px; display: grid; gap: 10px; }
+.pds-get-item--hero li { display: flex; gap: 10px; align-items: flex-start; font-size: 15.5px; }
+.pds-get-item--hero li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #F2C37E; margin-top: 9px; flex: none; }
+.pds-get-item--wide { grid-column: span 2; display: grid; grid-template-columns: auto 1fr; gap: 0 22px; align-items: start; }
+.pds-get-item--wide h3 { margin-top: 0; }
+
+/* ============================================================
+   PROCESS — lights up as you scroll
+   ============================================================ */
+.pds-steps { --p: 0; margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+.pds-steps::before, .pds-steps::after { content: ""; position: absolute; left: 0; right: 0; top: 23px; height: 3px; border-radius: 3px; }
+.pds-steps::before { background: var(--pds-line); }
+.pds-steps::after { background: linear-gradient(90deg, var(--pds-green), var(--pds-wood)); transform-origin: left; transform: scaleX(var(--p)); }
+.pds-step { position: relative; padding-right: 26px; }
+.pds-step-day { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 18px; border-radius: 999px; background: var(--pds-paper); border: 2px solid var(--pds-line); color: var(--pds-ink-3); font-weight: 600; font-size: 15px; transition: background-color .4s, border-color .4s, color .4s, box-shadow .4s; }
+.pds-step.is-lit .pds-step-day { background: var(--pds-green); border-color: var(--pds-green); color: #fff; box-shadow: 0 0 0 6px rgba(61,122,79,.14); }
+.pds-step:last-child.is-lit .pds-step-day { background: var(--pds-wood); border-color: var(--pds-wood); color: var(--pds-ink); box-shadow: 0 0 0 6px rgba(217,135,63,.2), 0 0 40px rgba(255,236,170,.9); }
+.pds-step h3 { font-size: 20px; font-weight: 600; margin-top: 22px; }
+.pds-step p { color: var(--pds-ink-2); margin-top: 6px; font-size: 16px; max-width: 26ch; }
+
+/* ============================================================
+   PLANS
+   ============================================================ */
+.pds-plans { background: var(--pds-sage); }
+.pds-plans-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
+.pds-picker { position: relative; display: inline-grid; grid-template-columns: repeat(3, 1fr); padding: 6px; background: var(--pds-white); border-radius: 999px; }
+.pds-picker-pill { position: absolute; top: 6px; bottom: 6px; left: 6px; width: calc((100% - 12px) / 3); border-radius: 999px; background: var(--pds-green); transition: transform .35s cubic-bezier(.3,.8,.3,1.1); }
+.pds-picker button { position: relative; z-index: 1; font: 600 16px/1 var(--pds-font); border: 0; background: transparent; color: var(--pds-ink-2); padding: 14px 24px; border-radius: 999px; cursor: pointer; transition: color .25s; }
+.pds-picker button[aria-selected="true"] { color: #fff; }
+.pds-plan { margin-top: 36px; display: grid; grid-template-columns: .9fr 1.1fr; background: var(--pds-white); border-radius: var(--pds-radius-lg); overflow: hidden; }
+.pds-plan-price { padding: 40px; border-right: 1px solid var(--pds-line); display: flex; flex-direction: column; }
+.pds-plan-name { display: flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 600; }
+.pds-plan-tag { font-size: 13px; font-weight: 600; background: var(--pds-wood); color: var(--pds-ink); padding: 5px 11px; border-radius: 999px; }
+.pds-plan-tag[hidden] { display: none; }
+.pds-plan-for { color: var(--pds-ink-2); margin-top: 6px; }
+.pds-plan-amount { margin-top: 30px; font-size: 64px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.pds-plan-amount small { font-size: 18px; letter-spacing: 0; font-weight: 500; color: var(--pds-ink-2); margin-left: 6px; }
+.pds-plan-setup { margin-top: 12px; color: var(--pds-ink-2); }
+.pds-plan-offer { margin-top: auto; padding-top: 28px; }
+.pds-plan-offer p { background: var(--pds-wood-soft); border-radius: var(--pds-radius); padding: 14px 16px; font-size: 15.5px; }
+.pds-plan-offer b { font-weight: 600; }
+.pds-plan-feat { padding: 40px; }
+.pds-plan-feat h3 { font-size: 17px; font-weight: 600; color: var(--pds-ink-2); }
+.pds-plan-feat ul { margin-top: 18px; display: grid; gap: 4px; }
+.pds-plan-feat li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--pds-line); font-size: 17px; animation: pds-in .35s ease both; }
+.pds-plan-feat li:nth-child(2) { animation-delay: .04s; }
+.pds-plan-feat li:nth-child(3) { animation-delay: .08s; }
+.pds-plan-feat li:nth-child(4) { animation-delay: .12s; }
+@keyframes pds-in { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+.pds-plan-feat li:last-child { border-bottom: 0; }
+.pds-plan-feat li svg { width: 20px; height: 20px; color: var(--pds-green); flex: none; margin-top: 2px; }
+.pds-plan-feat .pds-btn { margin-top: 26px; }
+.pds-plan-note { margin-top: 22px; color: var(--pds-ink-2); font-size: 15px; max-width: 80ch; }
+
+/* all services accordion */
+.pds-services { margin-top: 64px; }
+.pds-services > h3 { font-size: 24px; font-weight: 600; }
+.pds-services > p { color: var(--pds-ink-2); margin-top: 6px; }
+.pds-acc { margin-top: 22px; border-top: 1px solid var(--pds-line); }
+.pds-acc details { border-bottom: 1px solid var(--pds-line); }
+.pds-acc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 4px; font-size: 20px; font-weight: 600; }
+.pds-acc summary::-webkit-details-marker { display: none; }
+.pds-acc summary span { font-size: 15px; font-weight: 400; color: var(--pds-ink-3); margin-left: 12px; margin-right: auto; }
+.pds-acc summary i { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--pds-ink); position: relative; flex: none; transition: transform .3s ease, background-color .2s; }
+.pds-acc summary i::before, .pds-acc summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); }
+.pds-acc summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+.pds-acc details[open] summary i { background: var(--pds-ink); color: var(--pds-white); transform: rotate(45deg); }
+.pds-svc { padding: 0 4px 22px; }
+.pds-svc li { display: grid; grid-template-columns: 1fr auto; gap: 4px 24px; padding: 14px 0; border-top: 1px dashed var(--pds-line); }
+.pds-svc b { font-weight: 600; }
+.pds-svc em { font-style: normal; font-weight: 600; color: var(--pds-green-dark); text-align: right; white-space: nowrap; }
+.pds-svc span { grid-column: 1 / -1; color: var(--pds-ink-2); font-size: 15.5px; }
+
+/* about */
+.pds-about .pds-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 64px; align-items: center; }
+.pds-mono { aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--pds-glow), var(--pds-wood-soft) 70%); display: grid; place-items: center; position: relative; }
+.pds-mono span { font-size: 92px; font-weight: 650; letter-spacing: -0.05em; color: var(--pds-green); }
+.pds-mono::after { content: "Working across India"; position: absolute; bottom: 12%; right: -10%; background: var(--pds-white); font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 999px; box-shadow: 0 10px 24px -16px rgba(30,42,33,.4); }
+.pds-about p { font-size: 19px; color: var(--pds-ink-2); max-width: 60ch; margin-top: 18px; }
+.pds-about a.pds-link { display: inline-block; margin-top: 22px; font-weight: 600; color: var(--pds-green-dark); text-underline-offset: 4px; }
+
+/* FAQ */
+.pds-faq .pds-wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; }
+.pds-faq .pds-acc { margin-top: 0; }
+.pds-faq .pds-acc summary { font-size: 18px; }
+.pds-faq .pds-acc p { padding: 0 4px 24px; color: var(--pds-ink-2); max-width: 62ch; }
+
+/* CTA */
+.pds-cta { padding: 0 0 104px; }
+.pds-cta-box { background: linear-gradient(115deg, var(--pds-green) 0%, var(--pds-green-dark) 100%); color: #fff; border-radius: 32px; padding: 64px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 48px; align-items: center; position: relative; overflow: hidden; }
+.pds-cta-box::after { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,240,180,.35), rgba(255,240,180,0)); pointer-events: none; }
+.pds-cta h2 { font-size: clamp(32px, 4vw, 50px); line-height: 1.06; font-weight: 600; letter-spacing: -0.025em; max-width: 16ch; }
+.pds-cta p { color: rgba(255,255,255,.86); font-size: 19px; margin-top: 18px; max-width: 48ch; }
+.pds-cta-actions { display: grid; gap: 12px; position: relative; z-index: 1; }
+.pds-cta .pds-btn--primary { background: var(--pds-wood); color: var(--pds-ink); justify-content: center; }
+.pds-cta .pds-btn--primary:hover { background: #E59A56; }
+.pds-cta .pds-btn--ghost { border-color: rgba(255,255,255,.6); color: #fff; justify-content: center; }
+.pds-cta .pds-btn--ghost:hover { background: #fff; color: var(--pds-green-dark); }
+.pds-cta-actions small { text-align: center; color: rgba(255,255,255,.78); font-size: 14px; }
+
+/* footer */
+.pds-foot { border-top: 1px solid var(--pds-line); padding: 34px 0 40px; font-size: 15px; color: var(--pds-ink-2); }
+.pds-foot .pds-wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.pds-foot a { text-decoration: none; }
+.pds-foot a:hover { text-decoration: underline; }
+.pds-foot nav { display: flex; gap: 22px; flex-wrap: wrap; }
+
+/* responsive */
+@media (max-width: 980px) {
+  .pds-section { padding: 80px 0; }
+  .pds-hero > .pds-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .pds-get-grid { grid-template-columns: 1fr 1fr; }
+  .pds-get-item--hero { grid-row: auto; grid-column: span 2; }
+  .pds-steps { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+  .pds-steps::before, .pds-steps::after { display: none; }
+  .pds-plan { grid-template-columns: 1fr; }
+  .pds-plan-price { border-right: 0; border-bottom: 1px solid var(--pds-line); }
+  .pds-about .pds-wrap, .pds-faq .pds-wrap, .pds-cta-box { grid-template-columns: 1fr; gap: 40px; }
+  .pds-mono { max-width: 240px; }
+}
+@media (max-width: 760px) {
+  .pds-nav a:not(.pds-btn) { display: none; }
+  .pds-flip { padding: 28px 20px 22px; }
+  .pds-flip-list { grid-template-columns: 1fr; }
+  .pds-get-grid { grid-template-columns: 1fr; }
+  .pds-get-item--hero, .pds-get-item--wide { grid-column: auto; }
+  .pds-get-item--wide { grid-template-columns: 1fr; }
+  .pds-get-item--wide h3 { margin-top: 18px; }
+  .pds-steps { grid-template-columns: 1fr; }
+  .pds-plan-price, .pds-plan-feat { padding: 28px; }
+  .pds-plan-amount { font-size: 52px; }
+  .pds-picker button { padding: 12px 18px; }
+  .pds-cta-box { padding: 40px 28px; border-radius: 24px; }
+}
+@media (max-width: 420px) {
+  .pds-wrap { padding: 0 20px; }
+  .pds-demo-tabs button { padding: 9px 12px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pds *, .pds *::before, .pds *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body style="margin:0">
+<div class="pds" id="pds-top">
+
+  <header class="pds-top">
+    <div class="pds-wrap">
+      <a class="pds-brand" href="/solutions" aria-label="Pushkar Design Solution home">
+        <span class="pds-brand-mark" aria-hidden="true"></span>
+        Pushkar Design Solution
+      </a>
+      <nav class="pds-nav" aria-label="Service page">
+        <a href="#pds-how">How it works</a>
+        <a href="#pds-plans">Plans</a>
+        <a href="#pds-faq">Questions</a>
+        <a class="pds-back" href="/">Portfolio</a>
+        <a class="pds-btn pds-btn--primary" href="https://wa.me/919021818161?text=Hi%20Pushkar%2C%20I%27d%20like%20the%20free%20business%20check-up" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+  <!-- ================= HERO ================= -->
+  <section class="pds-hero" id="pds-hero" aria-labelledby="pds-hero-title">
+    <div class="pds-wrap">
+      <div>
+        <p class="pds-hero-for"><i aria-hidden="true"></i>For real estate, coaching, clinics and service businesses across India</p>
+        <h1 id="pds-hero-title">Every enquiry gets a reply in seconds, even at 11 PM.</h1>
+        <p class="pds-hero-sub">We build your website, reply to every customer on WhatsApp automatically, keep all your leads in one list on your phone, and remind your team to follow up. Set up in 7 days. Managed for you.</p>
+        <div class="pds-hero-ctas">
+          <a class="pds-btn pds-btn--primary" href="https://wa.me/919021818161?text=Hi%20Pushkar%2C%20I%27d%20like%20the%20free%20business%20check-up" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2Z"/></svg>
+            Get a free business check-up
+          </a>
+          <a class="pds-btn pds-btn--ghost" href="#pds-how">See how it works</a>
+        </div>
+        <ul class="pds-hero-facts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>No software to learn</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>You own your data</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>Works for any city in India</li>
+        </ul>
+      </div>
+
+      <!-- live demo: lamp, table, phone -->
+      <div class="pds-demo">
+        <div class="pds-demo-tabs" role="tablist" aria-label="Choose a business to see the demo">
+          <button role="tab" aria-selected="true" data-case="realty">Real estate</button>
+          <button role="tab" aria-selected="false" data-case="coaching">Coaching</button>
+          <button role="tab" aria-selected="false" data-case="clinic">Clinic</button>
+        </div>
+
+        <div class="pds-scene-wrap" id="pds-scene-wrap">
+          <div class="pds-scene" id="pds-scene">
+            <!-- lamp stand (behind the phone) -->
+            <svg class="pds-lamp-back" viewBox="0 0 520 640" aria-hidden="true">
+              <g fill="none" stroke="#3D7A4F" stroke-width="5" stroke-linecap="round">
+                <ellipse cx="432" cy="566" rx="46" ry="9"/>
+                <path d="M402 570 Q470 574 468 530 L468 134"/>
+                <path d="M452 566 L452 156 Q452 136 466 132" stroke-width="4" opacity=".85"/>
+              </g>
+            </svg>
+
+            <div class="pds-table" aria-hidden="true"><i class="pds-leg"></i></div>
+
+            <div class="pds-phone" aria-live="polite">
+              <div class="pds-screen">
+                <div class="pds-chat-head">
+                  <div class="pds-avatar" id="pds-avatar">SR</div>
+                  <div><b id="pds-biz">Skyline Realty</b><span>Business account</span></div>
+                </div>
+                <div class="pds-chat">
+                  <span class="pds-day">Today</span>
+                  <div class="pds-bubble pds-bubble--them" id="pds-q"></div>
+                  <div class="pds-typing" id="pds-typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="pds-bubble pds-bubble--us" id="pds-a"></div>
+                  <span class="pds-speed" id="pds-speed">Replied automatically in 4 seconds</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pds-lead-card" id="pds-card">
+              <h4>Today’s enquiries <em>New</em></h4>
+              <b id="pds-name"></b>
+              <dl>
+                <dt>Looking for</dt><dd id="pds-need"></dd>
+                <dt>Came from</dt><dd id="pds-src"></dd>
+              </dl>
+              <p class="pds-remind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M5 3 2 6M19 3l3 3"/></svg><span id="pds-rem"></span></p>
+            </div>
+
+            <!-- lamp head + light beam (in front, follows the cursor) -->
+            <svg class="pds-lamp-front" viewBox="0 0 520 640" aria-hidden="true">
+              <defs>
+                <linearGradient id="pds-beam-g" gradientUnits="userSpaceOnUse" x1="0" y1="76" x2="0" y2="610">
+                  <stop offset="0" stop-color="#FFFDE6" stop-opacity="1"/>
+                  <stop offset=".55" stop-color="#FCF8D2" stop-opacity=".55"/>
+                  <stop offset="1" stop-color="#FCF8D2" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="pds-head-g" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#2B6140"/>
+                  <stop offset=".42" stop-color="#529463"/>
+                  <stop offset=".7" stop-color="#3D7A4F"/>
+                  <stop offset="1" stop-color="#29593A"/>
+                </linearGradient>
+                <radialGradient id="pds-bulb-g" cx=".45" cy=".45" r=".7">
+                  <stop offset="0" stop-color="#FFFFF2"/>
+                  <stop offset="1" stop-color="#E4EDC2"/>
+                </radialGradient>
+                <filter id="pds-blur" x="-30%" y="-10%" width="160%" height="130%"><feGaussianBlur stdDeviation="7"/></filter>
+              </defs>
+              <!-- back half of the yoke ring -->
+              <path d="M374 128 A46 13 0 0 1 466 128" fill="none" stroke="#2F6842" stroke-width="5" stroke-linecap="round"/>
+              <g id="pds-head" transform="translate(420 128) rotate(43)">
+                <g class="pds-beam" filter="url(#pds-blur)">
+                  <polygon points="-30,76 30,76 250,610 -250,610" fill="url(#pds-beam-g)" style="mix-blend-mode:soft-light"/>
+                  <polygon points="-30,76 30,76 250,610 -250,610" fill="url(#pds-beam-g)" opacity=".28"/>
+                </g>
+                <g class="pds-lamp-hit" id="pds-lamp-hit">
+                  <path d="M-32 -36 L-32 74 A32 10 0 0 0 32 74 L32 -36 Z" fill="url(#pds-head-g)"/>
+                  <ellipse cx="0" cy="-36" rx="32" ry="10" fill="#5C9C6C"/>
+                  <ellipse class="pds-bulb" cx="0" cy="74" rx="30" ry="9.5" fill="url(#pds-bulb-g)" stroke="#6DA678" stroke-width="3"/>
+                </g>
+              </g>
+              <!-- front half of the yoke ring -->
+              <path d="M374 128 A46 13 0 0 0 466 128" fill="none" stroke="#3D7A4F" stroke-width="5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="pds-demo-ctrl">
+          <button class="pds-lamp-btn" id="pds-lamp-btn" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>Switch off the lamp</span></button>
+          <button class="pds-replay" id="pds-replay" type="button">Play the demo again</button>
+        </div>
+        <p class="pds-caption" id="pds-caption" aria-live="polite">Move your mouse around. The lamp follows you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROBLEM / FLIP ================= -->
+  <section class="pds-section" id="pds-how" aria-labelledby="pds-problem-title">
+    <div class="pds-wrap">
+      <h2 class="pds-h2" id="pds-problem-title">Most customers ask two or three businesses. They go with whoever replies first.</h2>
+      <p class="pds-lead">You already pay for ads, portal listings and your shop’s location. The enquiries come in. What usually goes wrong is the reply and the follow-up.</p>
+
+      <div class="pds-flip" id="pds-flip">
+        <div class="pds-flip-head">
+          <span id="pds-flip-off">How it usually goes today</span>
+          <button class="pds-switch" id="pds-switch" type="button" role="switch" aria-checked="false" aria-label="Show how it works with Pushkar Design Solution"></button>
+          <span>How it works with us</span>
+        </div>
+        <p class="pds-flip-hint">Flip the switch to see the difference.</p>
+        <ul class="pds-flip-list">
+          <li>
+            <span class="pds-flip-ico" aria-hidden="true"><svg class="pds-ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6 6 18"/></svg><svg class="pds-ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="m5 12 5 5L20 7"/></svg></span>
+            <span class="pds-flip-txt"><span class="pds-t-off">Enquiries are scattered across WhatsApp, calls, Instagram, 99acres and JustDial.</span><span class="pds-t-on">Every enquiry lands in one simple list on your phone.</span></span>
+          </li>
+          <li>
+            <span class="pds-flip-ico" aria-hidden="true"><svg class="pds-ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6 6 18"/></svg><svg class="pds-ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="m5 12 5 5L20 7"/></svg></span>
+            <span class="pds-flip-txt"><span class="pds-t-off">A customer messages at night. Nobody replies until the next afternoon.</span><span class="pds-t-on">The customer gets a WhatsApp reply in seconds, with your details and next step.</span></span>
+          </li>
+          <li>
+            <span class="pds-flip-ico" aria-hidden="true"><svg class="pds-ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6 6 18"/></svg><svg class="pds-ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="m5 12 5 5L20 7"/></svg></span>
+            <span class="pds-flip-txt"><span class="pds-t-off">Your team forgets to call back, and interested people go cold.</span><span class="pds-t-on">Your team gets a reminder until the customer says yes or no.</span></span>
+          </li>
+          <li>
+            <span class="pds-flip-ico" aria-hidden="true"><svg class="pds-ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6 6 18"/></svg><svg class="pds-ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="m5 12 5 5L20 7"/></svg></span>
+            <span class="pds-flip-txt"><span class="pds-t-off">You spend on ads but can’t tell which ones bring real customers.</span><span class="pds-t-on">Each month you get a short report: enquiries, visits, closed deals.</span></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT YOU GET ================= -->
+  <section class="pds-section pds-get" aria-labelledby="pds-get-title">
+    <div class="pds-wrap">
+      <h2 class="pds-h2" id="pds-get-title">What we set up for you</h2>
+      <p class="pds-lead">One system, built around how your business already works. We do the setup and the upkeep. You and your team just use it on your phones.</p>
+      <div class="pds-get-grid">
+        <article class="pds-get-item pds-get-item--hero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.7L4 19.5Z"/><path d="M9 10.5h6M9 13.5h4"/></svg>
+          <h3>WhatsApp that replies for you</h3>
+          <p>The moment someone enquires, they get a friendly reply in your business name, day or night.</p>
+          <ul>
+            <li>Brochure, price list or class timings sent automatically</li>
+            <li>Follow-up message if they go quiet</li>
+            <li>Site visit, demo class or appointment reminders</li>
+          </ul>
+        </article>
+        <article class="pds-get-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8M12 18v3"/></svg>
+          <h3>A website that brings enquiries</h3>
+          <p>Fast, mobile-first and designed properly, with an enquiry form and WhatsApp button.</p>
+        </article>
+        <article class="pds-get-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+          <h3>Every lead in one list</h3>
+          <p>Website, ads, Google and portal enquiries collected in one place your whole team can see.</p>
+        </article>
+        <article class="pds-get-item pds-get-item--wide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+          <div>
+            <h3>A monthly report you can read in two minutes</h3>
+            <p>How many enquiries came in, how fast your team replied, how many visited and how many closed. Plus a short call to decide what to improve next month.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="pds-section" aria-labelledby="pds-steps-title">
+    <div class="pds-wrap">
+      <h2 class="pds-h2" id="pds-steps-title">Live in 7 days</h2>
+      <p class="pds-lead">You give us one 30-minute call. We handle the rest, wherever you are in India.</p>
+      <ol class="pds-steps" id="pds-steps">
+        <li class="pds-step"><span class="pds-step-day">Day 1</span><h3>We talk</h3><p>A short video call about your enquiries, your team and how you sell today.</p></li>
+        <li class="pds-step"><span class="pds-step-day">Day 2 to 5</span><h3>We build</h3><p>Website, lead list and WhatsApp messages set up in your business name.</p></li>
+        <li class="pds-step"><span class="pds-step-day">Day 6</span><h3>We train</h3><p>We test everything and show your team how to use it on a 20-minute video call.</p></li>
+        <li class="pds-step"><span class="pds-step-day">Day 7</span><h3>You go live</h3><p>Enquiries start getting instant replies. First report after 30 days.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= PLANS ================= -->
+  <section class="pds-section pds-plans" id="pds-plans" aria-labelledby="pds-plans-title">
+    <div class="pds-wrap">
+      <div class="pds-plans-head">
+        <div>
+          <h2 class="pds-h2" id="pds-plans-title">Simple monthly plans</h2>
+          <p class="pds-lead">One extra deal or admission a month usually covers the whole cost.</p>
+        </div>
+        <div class="pds-picker" role="tablist" aria-label="Choose a plan">
+          <span class="pds-picker-pill" id="pds-pill" aria-hidden="true"></span>
+          <button role="tab" aria-selected="false" data-plan="lite">Lite</button>
+          <button role="tab" aria-selected="true" data-plan="growth">Growth</button>
+          <button role="tab" aria-selected="false" data-plan="pro">Pro</button>
+        </div>
+      </div>
+
+      <div class="pds-plan" role="tabpanel" aria-live="polite">
+        <div class="pds-plan-price">
+          <p class="pds-plan-name"><span id="pds-p-name">Growth</span><span class="pds-plan-tag" id="pds-p-tag">Most chosen</span></p>
+          <p class="pds-plan-for" id="pds-p-for">For a growing team of 3 to 8 people</p>
+          <p class="pds-plan-amount"><span id="pds-p-mo">₹12,000</span><small>per month</small></p>
+          <p class="pds-plan-setup">One-time setup <span id="pds-p-setup">₹25,000</span></p>
+          <div class="pds-plan-offer">
+            <p><b>Founding offer.</b> The first 3 businesses pay <b id="pds-p-half">₹12,500</b> setup (50% off) and keep the same monthly price for 12 months.</p>
+          </div>
+        </div>
+        <div class="pds-plan-feat">
+          <h3>What’s included</h3>
+          <ul id="pds-p-list"></ul>
+          <a class="pds-btn pds-btn--primary" id="pds-p-cta" href="https://wa.me/919021818161" target="_blank" rel="noopener">Ask about the Growth plan</a>
+        </div>
+      </div>
+      <p class="pds-plan-note">Billed monthly, in advance. 6-month minimum. The WhatsApp Business tool, message charges, CRM licences, domain and any ad budget are paid by you directly, in your own name, so you always own your accounts and your data. These usually cost ₹2,000 to ₹3,500 a month depending on use.</p>
+
+      <div class="pds-services">
+        <h3>Need just one thing?</h3>
+        <p>Every service is also available on its own.</p>
+        <div class="pds-acc">
+          <details>
+            <summary>Websites <span>5 services</span><i aria-hidden="true"></i></summary>
+            <ul class="pds-svc">
+              <li><b>Landing page</b><em>₹8,000</em><span>One page for a project, course or offer.</span></li>
+              <li><b>Business website</b><em>₹15,000 to ₹25,000</em><span>Up to 5 pages, enquiry form, WhatsApp button, map and basic SEO.</span></li>
+              <li><b>Premium website</b><em>from ₹40,000</em><span>Custom design, copywriting, blog, 8 to 10 pages.</span></li>
+              <li><b>Website redesign</b><em>from ₹12,000</em><span>Make an old or slow site modern and mobile-first.</span></li>
+              <li><b>Website care</b><em>₹1,500 a month</em><span>Hosting help, backups, updates and small changes.</span></li>
+            </ul>
+          </details>
+          <details>
+            <summary>Leads and automation <span>4 services</span><i aria-hidden="true"></i></summary>
+            <ul class="pds-svc">
+              <li><b>CRM setup</b><em>₹15,000</em><span>All your lead sources into one list, with a sales pipeline and team training.</span></li>
+              <li><b>WhatsApp automation</b><em>₹10,000 + ₹3,000 a month</em><span>Instant replies, follow-up messages and reminders.</span></li>
+              <li><b>Lead tracking report</b><em>₹2,000 a month</em><span>Monthly enquiries, reply speed and conversions.</span></li>
+              <li><b>Lead Growth System</b><em>₹8,000 to ₹15,000 a month</em><span>Website, CRM, WhatsApp and reports, fully managed. See the plans above.</span></li>
+            </ul>
+          </details>
+          <details>
+            <summary>Growth and marketing <span>5 services</span><i aria-hidden="true"></i></summary>
+            <ul class="pds-svc">
+              <li><b>Google Business Profile setup</b><em>₹2,500</em><span>Photos, services, timings and a review QR code.</span></li>
+              <li><b>Google profile management</b><em>₹3,000 a month</em><span>4 posts a month, replies to reviews, regular updates.</span></li>
+              <li><b>Local SEO</b><em>₹5,000 a month</em><span>Show up when people in your city search for what you offer.</span></li>
+              <li><b>Social media posts</b><em>₹5,000 a month</em><span>8 designed posts with captions every month.</span></li>
+              <li><b>Ads management</b><em>₹6,000 to ₹10,000 a month</em><span>Meta and Google ads. Ad budget is paid separately.</span></li>
+            </ul>
+          </details>
+          <details>
+            <summary>Brand and design <span>5 services</span><i aria-hidden="true"></i></summary>
+            <ul class="pds-svc">
+              <li><b>Logo design</b><em>₹5,000 to ₹8,000</em><span>2 concepts, final files for print and digital.</span></li>
+              <li><b>Brand kit</b><em>₹12,000 to ₹20,000</em><span>Logo, colours, fonts, visiting card and letterhead.</span></li>
+              <li><b>Print design</b><em>₹1,500 each</em><span>Flyer, brochure, standee or menu.</span></li>
+              <li><b>Sales or pitch deck</b><em>₹15,000 to ₹30,000</em><span>A clear, persuasive presentation of up to 15 slides.</span></li>
+              <li><b>UX audit</b><em>₹15,000 to ₹25,000</em><span>A review of your app or website, with a list of fixes.</span></li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="pds-section pds-about" aria-labelledby="pds-about-title">
+    <div class="pds-wrap">
+      <div class="pds-mono" aria-hidden="true"><span>PP</span></div>
+      <div>
+        <h2 class="pds-h2" id="pds-about-title">Hi, I’m Pushkar.</h2>
+        <p>I’m a UX/UI designer. My day job is designing apps and websites used by millions of people, so I know what makes someone trust a business online and what makes them leave.</p>
+        <p>I started Pushkar Design Solution to give growing businesses the same quality of design and technology that big companies use, at a price that makes sense for you. You deal with me directly, wherever you are in India. Everything is set up online, and we stay in touch on WhatsApp and video calls.</p>
+        <a class="pds-link" href="/">See my design work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="pds-section pds-faq" id="pds-faq" aria-labelledby="pds-faq-title" style="padding-top:0">
+    <div class="pds-wrap">
+      <div>
+        <h2 class="pds-h2" id="pds-faq-title">Questions owners usually ask</h2>
+        <p class="pds-lead">Anything else, just ask on WhatsApp.</p>
+      </div>
+      <div class="pds-acc">
+        <details>
+          <summary>Do I or my team need to learn new software?<i aria-hidden="true"></i></summary>
+          <p>No. Your team gets one simple app on their phones that shows today’s enquiries and reminders. We set it up and train them in about 20 minutes.</p>
+        </details>
+        <details>
+          <summary>Will customers know the reply is automatic?<i aria-hidden="true"></i></summary>
+          <p>The first reply is written in your voice and sent in your business name. It shares useful details and the next step. Your team then continues the conversation personally.</p>
+        </details>
+        <details>
+          <summary>Who owns the website, the WhatsApp account and the customer data?<i aria-hidden="true"></i></summary>
+          <p>You do. The domain, WhatsApp Business account and CRM are registered in your name. If you ever stop working with us, everything stays with you.</p>
+        </details>
+        <details>
+          <summary>What extra costs should I expect?<i aria-hidden="true"></i></summary>
+          <p>WhatsApp Business tools and message charges, CRM licences and your domain, usually ₹2,000 to ₹3,500 a month in total, paid directly by you. Ad budgets are separate and fully in your control.</p>
+        </details>
+        <details>
+          <summary>Can I cancel?<i aria-hidden="true"></i></summary>
+          <p>Plans have a 6-month minimum so there is enough time to see results. After that you can stop with 30 days’ notice.</p>
+        </details>
+        <details>
+          <summary>Do you work with businesses outside my city?<i aria-hidden="true"></i></summary>
+          <p>Yes. I work with businesses anywhere in India. Setup, training and monthly reviews all happen over video calls and WhatsApp, so your location doesn’t matter. If you’re in or near Pune, we can also meet in person.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="pds-cta" aria-labelledby="pds-cta-title">
+    <div class="pds-wrap">
+      <div class="pds-cta-box">
+        <div>
+          <h2 id="pds-cta-title">Get a free 15-minute business check-up</h2>
+          <p>I’ll look at your Google listing, your website and how fast your enquiries get a reply, then send you 3 improvements you can use right away. No cost, no obligation.</p>
+        </div>
+        <div class="pds-cta-actions">
+          <a class="pds-btn pds-btn--primary" href="https://wa.me/919021818161?text=Hi%20Pushkar%2C%20I%27d%20like%20the%20free%20business%20check-up" target="_blank" rel="noopener">Book on WhatsApp</a>
+          <a class="pds-btn pds-btn--ghost" href="mailto:pushkarpandey1007@gmail.com?subject=Free%20business%20check-up">Email me instead</a>
+          <small>+91 90218 18161</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="pds-foot">
+    <div class="pds-wrap">
+      <p>Pushkar Design Solution. Founded by Dr. Pushkar Pandey. Based in Pune, working with businesses across India.</p>
+      <nav aria-label="Footer">
+        <a href="tel:+919021818161">+91 90218 18161</a>
+        <a href="mailto:pushkarpandey1007@gmail.com">pushkarpandey1007@gmail.com</a>
+        <a href="/">Portfolio</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.querySelector('.pds');
+  if (!root) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var WA = 'https://wa.me/919021818161?text=';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia('(pointer: fine)').matches;
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  /* ---------------- scene scaling ---------------- */
+  var hero = $('pds-hero'), wrap = $('pds-scene-wrap'), scene = $('pds-scene');
+  var SW = 470, SX = 30, scale = 1;           // visible part of the 520px scene
+  function fit() {
+    var w = wrap.clientWidth;
+    scale = Math.min(1, w / SW);
+    var left = (w - SW * scale) / 2 - SX * scale;
+    scene.style.transform = 'translate(' + left + 'px,0) scale(' + scale + ')';
+    wrap.style.height = (640 * scale) + 'px';
+  }
+  fit();
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(wrap); else window.addEventListener('resize', fit);
+
+  /* ---------------- lamp follows the pointer ---------------- */
+  var head = $('pds-head');
+  var PX = 420, PY = 128, REST = 43;
+  var cur = REST, target = REST, raf = 0;
+  function draw() {
+    cur += (target - cur) * 0.12;
+    if (Math.abs(target - cur) < 0.05) { cur = target; raf = 0; }
+    head.setAttribute('transform', 'translate(' + PX + ' ' + PY + ') rotate(' + cur.toFixed(2) + ')');
+    if (raf) raf = requestAnimationFrame(draw);
+  }
+  function aim(a) { target = Math.max(8, Math.min(76, a)); if (!raf) raf = requestAnimationFrame(draw); }
+  if (finePointer && !reduce) {
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var r = scene.getBoundingClientRect();
+      var x = (e.clientX - r.left) / scale, y = (e.clientY - r.top) / scale;
+      aim(Math.atan2(-(x - PX), y - PY) * 180 / Math.PI);
+    });
+    hero.addEventListener('pointerleave', function () { aim(REST); });
+  } else {
+    $('pds-caption').textContent = 'Tap the switch to see what happens after hours.';
+  }
+
+  /* ---------------- lamp on / off ---------------- */
+  var lampBtn = $('pds-lamp-btn'), caption = $('pds-caption');
+  var onText = finePointer && !reduce ? 'Move your mouse around. The lamp follows you.' : 'Tap the switch to see what happens after hours.';
+  function setLamp(off) {
+    hero.classList.toggle('is-off', off);
+    lampBtn.setAttribute('aria-pressed', off ? 'true' : 'false');
+    lampBtn.querySelector('span').textContent = off ? 'Switch the lamp back on' : 'Switch off the lamp';
+    caption.textContent = off ? 'Office closed, nobody at the desk. The customer still gets a reply in seconds.' : onText;
+    if (!off && !reduce) { hero.classList.remove('is-booting'); void hero.offsetWidth; hero.classList.add('is-booting'); }
+    play(current);
+  }
+  lampBtn.addEventListener('click', function () { setLamp(!hero.classList.contains('is-off')); });
+  $('pds-lamp-hit').addEventListener('click', function () { setLamp(!hero.classList.contains('is-off')); });
+
+  /* ---------------- chat demo ---------------- */
+  var cases = {
+    realty: { biz: 'Skyline Realty', init: 'SR',
+      q: 'Hi, is the 2BHK on your listing still available? Budget around 85L.',
+      a: 'Hi Rohan, thanks for contacting Skyline Realty. Yes, 2BHK homes from ₹78L to ₹92L are available. Here is the brochure. Would Saturday or Sunday suit you for a site visit?',
+      file: '2BHK-project-brochure.pdf', name: 'Rohan Patil', need: '2BHK, ₹85L budget', src: '99acres', rem: 'Call tomorrow at 10:00 AM' },
+    coaching: { biz: 'Achievers Academy', init: 'AA',
+      q: 'Hello, are admissions open for the NEET 2027 batch? What are the fees?',
+      a: 'Hello! Thanks for contacting Achievers Academy. The NEET 2027 batch starts on 1 December. Fee details are attached. There is a free demo class this Saturday at 11 AM. Shall I book a seat?',
+      file: 'NEET-2027-fees.pdf', name: 'Sneha Kulkarni', need: 'NEET 2027 batch', src: 'Instagram ad', rem: 'Confirm demo class on Friday' },
+    clinic: { biz: 'Smile Dental Clinic', init: 'SD',
+      q: 'Hi, I have tooth pain. Can I get an appointment tomorrow evening?',
+      a: 'Hi, sorry to hear that. Smile Dental Clinic has 6:30 PM and 7:15 PM free tomorrow. Reply 1 or 2 to book, and we will send you the location.',
+      file: null, name: 'Amit Shah', need: 'Tooth pain, evening slot', src: 'Google search', rem: 'Send reminder at 4:00 PM' }
+  };
+  var q = $('pds-q'), a = $('pds-a'), typing = $('pds-typing'), speed = $('pds-speed'), card = $('pds-card');
+  var timers = [], current = 'realty';
+  function clear() { timers.forEach(clearTimeout); timers = []; }
+  function at(ms, fn) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+  function play(key) {
+    clear(); current = key;
+    var c = cases[key];
+    $('pds-biz').textContent = c.biz; $('pds-avatar').textContent = c.init;
+    q.innerHTML = esc(c.q) + '<small>11:02 PM</small>';
+    a.innerHTML = esc(c.a) + (c.file ? '<span class="pds-attach"><i aria-hidden="true"></i>' + esc(c.file) + '</span>' : '') + '<small>11:02 PM</small>';
+    $('pds-name').textContent = c.name; $('pds-need').textContent = c.need; $('pds-src').textContent = c.src; $('pds-rem').textContent = c.rem;
+    [q, a, speed, card].forEach(function (el) { el.classList.remove('is-in'); });
+    typing.classList.remove('is-on');
+    at(400, function () { q.classList.add('is-in'); });
+    at(1300, function () { typing.classList.add('is-on'); });
+    at(2900, function () { typing.classList.remove('is-on'); a.classList.add('is-in'); });
+    at(3500, function () { speed.classList.add('is-in'); });
+    at(4300, function () { card.classList.add('is-in'); });
+  }
+  var tabs = root.querySelectorAll('.pds-demo-tabs [role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+      play(t.dataset.case);
+    });
+  });
+  $('pds-replay').addEventListener('click', function () { play(current); });
+
+  // one orchestrated moment: the lamp flickers on, then the demo plays
+  var started = false;
+  function boot() {
+    if (started) return; started = true;
+    if (!reduce) hero.classList.add('is-booting');
+    at(700, function () { play('realty'); });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { boot(); io.disconnect(); } }, { threshold: 0.25 });
+    io.observe(wrap);
+  } else boot();
+
+  /* ---------------- flip switch ---------------- */
+  var sw = $('pds-switch'), flip = $('pds-flip');
+  sw.addEventListener('click', function () {
+    var on = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', on ? 'true' : 'false');
+    flip.classList.toggle('is-on', on);
+  });
+
+  /* ---------------- spotlight on cards ---------------- */
+  if (finePointer && !reduce) {
+    root.querySelectorAll('.pds-get-item').forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      el.addEventListener('pointerleave', function () { el.style.setProperty('--mx', '-400px'); el.style.setProperty('--my', '-400px'); });
+    });
+  }
+
+  /* ---------------- process lights up on scroll ---------------- */
+  var stepsEl = $('pds-steps'), steps = stepsEl.querySelectorAll('.pds-step'), ticking = false;
+  function lightSteps() {
+    ticking = false;
+    var r = stepsEl.getBoundingClientRect(), vh = window.innerHeight;
+    var p = reduce ? 1 : Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (vh * 0.5)));
+    stepsEl.style.setProperty('--p', p.toFixed(3));
+    steps.forEach(function (s, i) { s.classList.toggle('is-lit', p >= i / (steps.length - 1) - 0.001 || p >= 0.999); });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(lightSteps); } }, { passive: true });
+  lightSteps();
+
+  /* ---------------- plan picker ---------------- */
+  var plans = {
+    lite: { i: 0, name: 'Lite', tag: false, for: 'For a small office of 1 to 3 people', mo: 8000, setup: 15000,
+      list: ['1-page website with enquiry form', 'WhatsApp auto-reply to every enquiry', 'Leads from 2 sources in one list', 'Monthly report'] },
+    growth: { i: 1, name: 'Growth', tag: true, for: 'For a growing team of 3 to 8 people', mo: 12000, setup: 25000,
+      list: ['Website up to 5 pages', 'Leads from all sources: website, ads, Google, portals', 'Automatic follow-ups and visit or demo reminders', 'Team training and a monthly review call'] },
+    pro: { i: 2, name: 'Pro', tag: false, for: 'For many branches or a large sales team', mo: 15000, setup: 35000,
+      list: ['Everything in Growth', 'Extra landing pages for ads and new projects', 'Weekly report and a custom dashboard', 'Priority support'] }
+  };
+  var inr = function (n) { return '₹' + Math.round(n).toLocaleString('en-IN'); };
+  var shown = 12000, tweenRaf = 0;
+  function tween(to) {
+    cancelAnimationFrame(tweenRaf);
+    var el = $('pds-p-mo'), from = shown, t0 = performance.now(), dur = reduce ? 0 : 450;
+    function step(t) {
+      var k = dur ? Math.min(1, (t - t0) / dur) : 1; k = 1 - Math.pow(1 - k, 3);
+      shown = from + (to - from) * k; el.textContent = inr(Math.round(shown / 100) * 100);
+      if (k < 1) tweenRaf = requestAnimationFrame(step); else { shown = to; el.textContent = inr(to); }
+    }
+    tweenRaf = requestAnimationFrame(step);
+  }
+  var tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>';
+  function showPlan(k, first) {
+    var p = plans[k];
+    $('pds-pill').style.transform = 'translateX(' + (p.i * 100) + '%)';
+    $('pds-p-name').textContent = p.name;
+    $('pds-p-tag').hidden = !p.tag;
+    $('pds-p-for').textContent = p.for;
+    if (first) $('pds-p-mo').textContent = inr(p.mo); else tween(p.mo);
+    $('pds-p-setup').textContent = inr(p.setup);
+    $('pds-p-half').textContent = inr(p.setup / 2);
+    $('pds-p-list').innerHTML = p.list.map(function (f) { return '<li>' + tick + '<span>' + esc(f) + '</span></li>'; }).join('');
+    var cta = $('pds-p-cta');
+    cta.textContent = 'Ask about the ' + p.name + ' plan';
+    cta.href = WA + encodeURIComponent('Hi Pushkar, I would like to know more about the ' + p.name + ' plan.');
+  }
+  var pt = root.querySelectorAll('.pds-picker [role="tab"]');
+  pt.forEach(function (t) {
+    t.addEventListener('click', function () {
+      pt.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+      showPlan(t.dataset.plan);
+    });
+  });
+  showPlan('growth', true);
+})();
+</script>
+</body>
+</html>
