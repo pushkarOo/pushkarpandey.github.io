@@ -1307,6 +1307,46 @@
   }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+  /* Solutions teaser */
+  .solutions-teaser {
+    border-top: 1px solid var(--border);
+    padding: 64px 48px;
+  }
+  .st-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent2);
+    border-radius: 4px;
+    padding: 40px 48px;
+    transition: border-color .3s, background .3s;
+  }
+  .st-inner:hover { border-color: rgba(126,184,164,0.4); background: var(--bg3); }
+  .st-eyebrow {
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 10px;
+  }
+  .st-title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .st-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
 
@@ -1395,6 +1435,10 @@
     .open-sec { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
     .open-chips { gap: 6px; }
     .open-chip { font-size: 11px; padding: 6px 12px; }
+
+    /* ── SOLUTIONS TEASER ── */
+    .solutions-teaser { padding: 40px 20px; }
+    .st-inner { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
 
     /* ── RESUME SECTION ── */
     .resume-sec { padding: 40px 20px; }
@@ -1724,6 +1768,7 @@
     <li><a href="#work">Work</a></li>
     <li><a href="#capabilities">Capabilities</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="/solutions">Solutions</a></li>
     <li><a href="mailto:pushkarpandey1007@gmail.com" class="contact-link">Contact</a></li>
   </ul>
 </nav>
@@ -2179,6 +2224,18 @@
   <a href="mailto:pushkarpandey1007@gmail.com" class="btn-primary">Let's talk ↗</a>
 </section>
 
+<!-- SOLUTIONS TEASER -->
+<section class="solutions-teaser">
+  <div class="st-inner fade-up">
+    <div class="st-text">
+      <p class="st-eyebrow">Side Business</p>
+      <h2 class="st-title">Pushkar Design Solution</h2>
+      <p class="st-desc">Websites, WhatsApp auto-reply, lead management and monthly reports for businesses anywhere in India.</p>
+    </div>
+    <a href="/solutions" class="btn-primary">Explore Solutions ↗</a>
+  </div>
+</section>
+
 <!-- RESUME / CV -->
 <section class="resume-sec">
   <p class="section-label">Resume</p>
@@ -2240,6 +2297,7 @@
 <footer>
   <p class="footer-copy">India &nbsp;·&nbsp; © 2026 Dr. Pushkar Pandey</p>
   <ul class="footer-links">
+    <li><a href="/solutions">Solutions</a></li>
     <li><a href="https://www.linkedin.com/in/pushkarpandey1007" target="_blank">LinkedIn</a></li>
     <li><a href="mailto:pushkarpandey1007@gmail.com">Email</a></li>
   </ul>
