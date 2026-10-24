@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+<title>Lead Growth System prototype — Pushkar Design Solution</title>
+<style>
+/* ============ Tokens (same system as the pitch deck) ============ */
+:root{
+  color-scheme:light;
+  --surface:#FFFFFF; --sunken:#F5F7FA; --line:#E4E7EC; --line-2:#D0D5DD;
+  --ink:#0F172A; --ink-2:#475467; --ink-3:#667085;
+  --blue:#2453FF; --blue-ink:#1A3FD6; --blue-50:#EEF2FF;
+  --green:#059669; --green-ink:#047857; --green-50:#ECFDF3;
+  --amber:#F79009; --violet:#7A5AF8;
+  --wa:#00A884; --wa-dark:#008069; --wa-bg:#EFEAE2; --wa-out:#D9FDD3; --wa-meta:#667781;
+  --font:"Inter","SF Pro Text","SF Pro Display",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,sans-serif;
+  --k:1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--font);color:var(--ink);background:linear-gradient(180deg,#FFFFFF 0%,#EEF1F5 100%) fixed;min-height:100vh;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============ Page chrome ============ */
+.top{max-width:1320px;margin:0 auto;padding:20px 32px 8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.01em;margin-right:auto}
+.brand .mark{width:28px;height:28px;border-radius:8px;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px}
+.brand small{font-weight:500;color:var(--ink-3);font-size:15px;margin-left:4px}
+.seg{display:flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px}
+.seg button{height:38px;padding:0 16px;border-radius:999px;font-size:15px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+.app{max-width:1320px;margin:0 auto;padding:16px 32px 40px;display:grid;gap:40px;
+  grid-template-columns:280px auto minmax(300px,360px);grid-template-areas:"rail phone panel";justify-content:center;align-items:start}
+
+/* step rail */
+.rail{grid-area:rail;padding-top:8px}
+.rail h2{font-size:14px;font-weight:600;color:var(--ink-3);margin:18px 0 8px 4px;display:flex;align-items:center;gap:8px}
+.rail h2:first-child{margin-top:0}
+.rail h2 svg.i{width:16px;height:16px}
+.rail ol{list-style:none;display:grid;gap:2px}
+.rail li button{width:100%;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:center;padding:7px 10px 7px 6px;border-radius:12px;font-size:15px;color:var(--ink-2);line-height:1.3}
+.rail li button:hover{background:rgba(255,255,255,.7)}
+.rail .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;background:#fff;border:1px solid var(--line);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.rail .n svg.i{width:14px;height:14px;stroke-width:2.6}
+.rail .done .n{background:var(--green);border-color:var(--green);color:#fff}
+.rail .now{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(16,24,40,.06);border:1px solid var(--line)}
+.rail .now .n{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* phone */
+.phone-wrap{grid-area:phone;width:calc(399px*var(--k));height:calc(836px*var(--k));position:relative}
+.phone{width:399px;height:836px;border-radius:58px;background:#1D2433;padding:12px;position:absolute;left:0;top:0;transform:scale(var(--k));transform-origin:0 0;
+  box-shadow:0 40px 80px -24px rgba(15,23,42,.35),0 12px 24px -8px rgba(15,23,42,.18)}
+.phone::after{content:"";position:absolute;inset:3px;border-radius:55px;border:1px solid #3A4458;pointer-events:none}
+.screen{width:375px;height:812px;border-radius:46px;overflow:hidden;position:relative;background:#fff;isolation:isolate}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:122px;height:35px;border-radius:20px;background:#000;z-index:30;pointer-events:none}
+
+/* explainer panel */
+.panel{grid-area:panel;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 28px 24px;position:sticky;top:20px}
+.who{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:999px;font-size:14px;font-weight:600;background:var(--blue-50);color:var(--blue-ink)}
+.who.owner{background:var(--green-50);color:var(--green-ink)}
+.who svg.i{width:16px;height:16px}
+.when{margin-top:18px;font-size:15px;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.panel h1{margin-top:4px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing:-.025em}
+.panel .desc{margin-top:12px;font-size:17px;line-height:1.55;color:var(--ink-2)}
+.bts{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+.bts h3{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.bts h3 svg.i{width:18px;height:18px;color:var(--blue)}
+.bts ul{list-style:none;display:grid;gap:10px}
+.bts li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:15px;line-height:1.45;color:var(--ink-2)}
+.bts li i{width:20px;height:20px;border-radius:50%;background:var(--green-50);color:var(--green);display:grid;place-items:center;margin-top:1px}
+.bts li i svg.i{width:12px;height:12px;stroke-width:3}
+.pnav{margin-top:28px;display:flex;gap:10px;align-items:center}
+.btn{height:48px;padding:0 20px;border-radius:14px;font-weight:600;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn svg.i{width:18px;height:18px}
+.btn-pri{background:var(--blue);color:#fff;flex:1}
+.btn-pri:hover{background:var(--blue-ink)}
+.btn-sec{border:1px solid var(--line-2);background:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.tip{margin-top:14px;font-size:14px;color:var(--ink-3);line-height:1.45}
+.mnav{display:none}
+
+/* hint ring on the next tap target */
+.hint{animation:ring 1.8s ease-out infinite;position:relative;z-index:2}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(36,83,255,.55)}80%,100%{box-shadow:0 0 0 14px rgba(36,83,255,0)}}
+.ig-cta.hint,.lp-btn.hint,.sheet-btn.hint{animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{0%,100%{filter:none}50%{filter:brightness(1.3) saturate(1.1)}}
+
+/* screen transitions */
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;overflow:hidden;color:#111B21}
+.scr.fwd{animation:fwd .26s ease both}.scr.back{animation:bk .26s ease both}
+@keyframes fwd{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes bk{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+.scr::after{content:"";position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(0,0,0,.85);z-index:25;pointer-events:none}
+.scr.dark::after{background:rgba(255,255,255,.9)}
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.scroll::-webkit-scrollbar{display:none}
+.scr.still .sheet,.scr.still .nb.drop{animation:none}
+.tapall{cursor:pointer}
+
+/* ============ Inside the phone ============ */
+.sb{height:50px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:12px 30px 0 40px;font-size:16px;font-weight:600;letter-spacing:-.01em;position:relative;z-index:3}
+.sb .ic{display:flex;gap:6px;align-items:center}
+.bars{display:flex;gap:2px;align-items:flex-end;height:11px}
+.bars i{width:3px;background:currentColor;border-radius:1px}
+.bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}.bars i:nth-child(3){height:8.5px}.bars i:nth-child(4){height:11px}
+.bat{width:25px;height:12px;border:1.5px solid currentColor;border-radius:4px;position:relative;opacity:.9}
+.bat::after{content:"";position:absolute;inset:1.5px;right:6px;background:currentColor;border-radius:1.5px}
+.wifi{width:16px;height:12px}
+
+/* Instagram */
+.ig-top{display:flex;align-items:center;padding:4px 16px 8px;gap:18px}
+.ig-logo{font-family:"Snell Roundhand","Segoe Script","Brush Script MT",cursive;font-size:28px;font-weight:700;margin-right:auto;letter-spacing:-.01em}
+.ig-stories{display:flex;gap:14px;padding:4px 12px 12px;border-bottom:1px solid #EFEFEF;overflow:hidden;flex:none}
+.ig-st{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11.5px;color:#262626;flex:none;width:66px}
+.ig-ring{width:66px;height:66px;border-radius:50%;padding:2.5px;background:conic-gradient(from 200deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5,#FEDA75)}
+.ig-ring i{display:block;width:100%;height:100%;border-radius:50%;border:2.5px solid #fff}
+.ig-ph{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.ig-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none}
+.ig-ph b{font-size:14px;display:block}
+.ig-ph small{font-size:12px;color:#737373}
+.ig-ph .dots{margin-left:auto;font-weight:700;letter-spacing:1px}
+.ig-img{width:100%;aspect-ratio:1;position:relative;overflow:hidden}
+.ig-img svg.art{position:absolute;inset:0;width:100%;height:100%}
+.ig-ovl{position:absolute;left:0;right:0;bottom:0;padding:60px 18px 18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));color:#fff;font-size:24px;line-height:1.15;font-weight:700;letter-spacing:-.02em}
+.ig-cta{display:flex;justify-content:space-between;align-items:center;width:100%;height:46px;padding:0 14px;color:#fff;font-weight:600;font-size:15px}
+.ig-cta svg.i{width:18px;height:18px}
+.ig-acts{display:flex;gap:16px;padding:10px 14px 6px}
+.ig-acts .bm{margin-left:auto}
+.ig-cap{padding:0 14px 16px;font-size:14px;line-height:1.4}
+.ig-likes{padding:0 14px 4px;font-size:14px;font-weight:600}
+.ig-tab{flex:none;display:flex;justify-content:space-around;padding:10px 0 30px;border-top:1px solid #EFEFEF}
+
+/* in-app browser + landing page (uses the client's brand colour --b) */
+.br-top{flex:none;display:flex;align-items:center;gap:12px;padding:4px 16px 10px;border-bottom:1px solid #EFEFEF}
+.br-top div{flex:1;text-align:center;line-height:1.2}
+.br-top b{font-size:14px;display:block}
+.br-top small{font-size:12px;color:#737373;display:inline-flex;align-items:center;gap:4px}
+.br-top small svg.i{width:11px;height:11px;stroke-width:2.4}
+.lp-hero{background:var(--b);color:var(--bt,#fff);padding:22px 20px 0}
+.lp-logo{display:flex;gap:10px;align-items:center;font-weight:700;font-size:15px;letter-spacing:-.01em}
+.lp-logo i{width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.16);display:grid;place-items:center;font-style:normal}
+.lp-hero h1{margin:20px 0 10px;font-size:30px;line-height:1.12;font-weight:700;letter-spacing:-.025em}
+.lp-hero p{font-size:16px;line-height:1.5;opacity:.88}
+.lp-rate{margin-top:14px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.lp-rate .stars{color:#FFC94D;letter-spacing:1px}
+.lp-art{margin-top:20px;height:190px;border-radius:16px 16px 0 0;overflow:hidden;position:relative}
+.lp-art svg.art,.th svg.art{width:100%;height:100%;display:block}
+.lp-proof{padding:20px 20px 8px;display:grid;gap:14px}
+.lp-proof div{display:flex;gap:12px;align-items:center;font-size:15px;font-weight:500}
+.lp-proof i{width:24px;height:24px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;flex:none}
+.lp-proof i svg.i{width:13px;height:13px;stroke-width:3}
+.lp-work{padding:16px 0 20px}
+.lp-work h2{font-size:18px;font-weight:700;padding:0 20px 12px;letter-spacing:-.01em}
+.lp-row{display:flex;gap:10px;padding:0 20px;overflow:hidden}
+.th{flex:none;width:150px}
+.th div{height:150px;border-radius:14px;overflow:hidden}
+.th p{font-size:13px;color:#555;margin-top:6px}
+.lp-sticky{flex:none;padding:12px 16px 30px;border-top:1px solid #EFEFEF;background:#fff}
+.lp-btn{width:100%;height:52px;border-radius:14px;background:var(--b);color:var(--bt,#fff);font-weight:600;font-size:17px;text-align:center}
+
+/* form */
+.form{padding:20px 20px 24px}
+.form h1{font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-.02em}
+.form > p{margin-top:6px;font-size:15px;color:#555}
+.fld{margin-top:18px}
+.fld label,.fld .lb{font-size:13px;font-weight:600;color:#475467;display:block}
+.inp{height:48px;border:1px solid #D0D5DD;border-radius:12px;padding:0 14px;display:flex;align-items:center;font-size:16px;margin-top:6px;gap:8px}
+.inp .cc{color:#667085;padding-right:8px;border-right:1px solid #E4E7EC}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.opt{height:38px;padding:0 14px;border-radius:999px;border:1px solid #D0D5DD;font-size:14px;font-weight:500;color:#344054;text-align:center}
+.opt.on{background:var(--b);border-color:var(--b);color:var(--bt,#fff)}
+.chk{display:flex;gap:10px;align-items:center;margin-top:20px;font-size:15px}
+.chk i{width:22px;height:22px;border-radius:6px;background:var(--b);color:#fff;display:grid;place-items:center}
+.chk i svg.i{width:14px;height:14px;stroke-width:3}
+
+/* thank-you */
+.ty{padding:40px 24px 24px;text-align:center}
+.ty-check{width:72px;height:72px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;margin:0 auto}
+.ty-check svg.i{width:36px;height:36px;stroke-width:2.6}
+.ty h1{margin-top:20px;font-size:26px;line-height:1.2;font-weight:700;letter-spacing:-.02em}
+.ty > p{margin-top:8px;font-size:16px;line-height:1.5;color:#555}
+.ty-next{margin-top:28px;background:#F5F7FA;border-radius:16px;padding:18px;text-align:left;display:grid;gap:14px}
+.ty-next h2{font-size:14px;font-weight:600;color:#667085}
+.ty-next div{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:center;font-size:15px;line-height:1.35}
+.ty-next b{width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid #E4E7EC;display:grid;place-items:center;font-size:13px}
+
+/* iOS notification banner */
+.nb{position:absolute;left:8px;right:8px;top:54px;z-index:20;background:rgba(246,246,248,.94);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-radius:22px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;box-shadow:0 12px 32px -8px rgba(0,0,0,.28);text-align:left;width:auto;color:#111}
+.nb.drop{animation:drop .5s cubic-bezier(.2,.9,.3,1.1) .9s both}
+@keyframes drop{from{transform:translateY(-140%);opacity:0}to{transform:none;opacity:1}}
+.app-ic{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;color:#fff;flex:none}
+.app-ic svg.i{width:22px;height:22px}
+.app-ic.wa{background:#25D366}
+.app-ic.crm{background:var(--blue)}
+.nb .tx{flex:1;min-width:0}
+.nb .row{display:flex;justify-content:space-between;gap:8px}
+.nb b{font-size:15px;font-weight:600}
+.nb small{font-size:13px;color:#8A8A8E;white-space:nowrap}
+.nb p{font-size:15px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* WhatsApp */
+.wa-head{flex:none;display:flex;align-items:center;gap:8px;padding:2px 12px 8px;background:#fff;border-bottom:1px solid #E9EDEF}
+.wa-head > svg.i{color:#007AFF}
+.wa-av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none}
+.wa-name{flex:1;min-width:0;line-height:1.2}
+.wa-name b{font-size:16px;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-name small{font-size:12px;color:var(--wa-meta)}
+.vbadge{width:15px;height:15px;flex:none}
+.wa-head .acts{display:flex;gap:18px;color:#007AFF}
+.wa-body{background:var(--wa-bg);padding:10px 10px 12px;display:flex;flex-direction:column;gap:6px}
+.wa-day{align-self:center;background:#fff;color:#54656F;font-size:12px;padding:4px 10px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);margin:4px 0}
+.wa-note{align-self:center;max-width:88%;background:#FFEECD;color:#54656F;font-size:12px;line-height:1.35;text-align:center;padding:6px 10px;border-radius:8px}
+.bub{max-width:84%;padding:7px 9px 5px 10px;border-radius:10px;font-size:15px;line-height:1.38;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.bub.in{align-self:flex-start;background:#fff;border-top-left-radius:3px}
+.bub.out{align-self:flex-end;background:var(--wa-out);border-top-right-radius:3px}
+.bub a{color:#027EB5}
+.meta{display:flex;justify-content:flex-end;align-items:center;gap:3px;font-size:11px;color:var(--wa-meta);margin-top:2px}
+.ticks{width:16px;height:11px}
+.doc{display:flex;gap:10px;align-items:center;background:#F5F6F6;border-radius:8px;padding:9px;margin-bottom:2px}
+.bub.out .doc{background:rgba(255,255,255,.55)}
+.pdf{width:32px;height:38px;border-radius:5px;background:#fff;border:1px solid #E9EDEF;display:grid;place-items:center;font-size:9px;font-weight:700;color:#D92D20;flex:none}
+.doc b{font-size:13.5px;font-weight:600;display:block;line-height:1.25}
+.doc small{font-size:12px;color:var(--wa-meta)}
+.wa-btns{align-self:flex-start;width:84%;display:grid;gap:3px;margin-top:-2px}
+.wa-btns button,.wa-btns div{background:#fff;color:#027EB5;font-size:15px;font-weight:500;text-align:center;padding:10px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);display:flex;align-items:center;justify-content:center;gap:6px}
+.wa-btns svg.i{width:16px;height:16px}
+.wa-btns .used{color:#8696A0}
+.flow-r{font-size:12.5px;color:#54656F;display:flex;gap:6px;align-items:center;margin-bottom:4px}
+.flow-r svg.i{width:14px;height:14px;color:var(--wa)}
+.wa-input{flex:none;display:flex;gap:10px;align-items:center;padding:8px 12px 30px;background:#F6F6F6;color:#007AFF}
+.wa-input div{flex:1;height:36px;border-radius:18px;background:#fff;border:1px solid #E4E4E4}
+.wa-input svg.i{width:24px;height:24px}
+
+/* bottom sheet */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.38);z-index:4}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:#fff;border-radius:16px 16px 0 0;display:flex;flex-direction:column;max-height:88%;animation:up .32s cubic-bezier(.2,.9,.3,1) both}
+@keyframes up{from{transform:translateY(40%);opacity:0}to{transform:none;opacity:1}}
+.sheet-h{flex:none;display:flex;align-items:center;gap:10px;padding:16px 16px 14px;border-bottom:1px solid #E9EDEF}
+.sheet-h b{flex:1;text-align:center;font-size:17px;font-weight:600}
+.sheet-h span{width:24px}
+.sheet-body{flex:1;overflow-y:auto;padding:4px 16px 12px;scrollbar-width:none}
+.sheet .lbl{font-size:14px;font-weight:600;color:#54656F;margin:18px 0 8px}
+.radio{display:flex;align-items:center;gap:12px;height:50px;padding:0 14px;border:1px solid #E9EDEF;border-radius:12px;font-size:15px;width:100%;margin-bottom:8px}
+.radio i{width:20px;height:20px;border-radius:50%;border:2px solid #AEBAC1;flex:none}
+.radio.on{border-color:var(--wa)}
+.radio.on i{border:6px solid var(--wa)}
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.day{border:1px solid #E9EDEF;border-radius:12px;padding:8px 0;text-align:center;line-height:1.2}
+.day small{display:block;font-size:12px;color:#667781}
+.day b{display:block;font-size:20px;font-weight:700;margin:2px 0}
+.day.on{background:var(--wa);border-color:var(--wa);color:#fff}
+.day.on small{color:#E6FFF6}
+.day:disabled{opacity:.45;cursor:default}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tm{height:44px;border:1px solid #E9EDEF;border-radius:10px;font-size:14px;font-weight:500;text-align:center}
+.tm.on{background:var(--wa);border-color:var(--wa);color:#fff}
+.tm:disabled{color:#AEBAC1;text-decoration:line-through;cursor:default}
+.sheet-f{flex:none;padding:10px 16px 30px;border-top:1px solid #E9EDEF}
+.sheet-f small{display:block;text-align:center;font-size:12px;color:#667781;margin-bottom:10px}
+.sheet-btn{width:100%;height:50px;border-radius:25px;background:var(--wa);color:#fff;font-weight:600;font-size:16px;text-align:center}
+.sheet-btn.crm{background:var(--blue);border-radius:14px}
+
+/* lock screens */
+.ls{color:#fff;text-align:center}
+.ls .sb{color:#fff}
+.ls-date{margin-top:34px;font-size:20px;font-weight:600;opacity:.92}
+.ls-time{font-size:92px;line-height:1;font-weight:700;letter-spacing:-3px;font-variant-numeric:tabular-nums;margin-top:2px}
+.ls-focus{margin:10px auto 0;display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:600;background:rgba(255,255,255,.18);padding:5px 10px;border-radius:999px}
+.ls-focus svg.i{width:14px;height:14px}
+.ls-notifs{margin-top:auto;padding:0 8px 18px;display:grid;gap:8px;text-align:left}
+.ls-notifs .nb{position:static;background:rgba(250,250,252,.82)}
+.ls-group{font-size:13px;font-weight:600;color:rgba(255,255,255,.85);padding:0 8px}
+.ls-bottom{flex:none;display:flex;justify-content:space-between;padding:6px 44px 44px}
+.ls-bottom span{width:50px;height:50px;border-radius:50%;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:grid;place-items:center}
+.ls-bottom svg.i{width:22px;height:22px}
+
+/* CRM app (owner) */
+.crm{background:#F5F7FA}
+.crm-bar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:2px 16px 8px;color:var(--blue);font-size:16px;font-weight:500;background:#fff}
+.crm-bar span{display:flex;align-items:center;gap:2px}
+.crm-tab{flex:none;display:flex;justify-content:space-around;padding:8px 0 28px;background:#fff;border-top:1px solid var(--line)}
+.crm-tab button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:#98A2B3;width:72px}
+.crm-tab button.on{color:var(--blue)}
+.ld{background:#fff;padding:6px 20px 20px;text-align:center}
+.ld-av{width:64px;height:64px;border-radius:50%;background:var(--blue-50);color:var(--blue-ink);display:grid;place-items:center;font-size:22px;font-weight:700;margin:0 auto}
+.ld h1{margin-top:10px;font-size:24px;font-weight:700;letter-spacing:-.02em}
+.pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;margin-top:8px;background:#FFFAEB;color:#B54708}
+.pill i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.won{background:var(--green-50);color:var(--green-ink)}
+.ld-acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.ld-acts button{height:62px;border-radius:14px;background:#F5F7FA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12.5px;font-weight:600;color:var(--blue)}
+.ld-acts svg.i{width:20px;height:20px}
+.card{background:#fff;margin:12px 12px 0;border-radius:16px;padding:4px 16px}
+.card h2{font-size:15px;font-weight:700;padding:14px 0 6px}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #F0F2F5;font-size:15px}
+.kv:last-child{border-bottom:0}
+.kv span{color:var(--ink-3)}
+.kv b{font-weight:600;text-align:right}
+.tl{list-style:none;padding:4px 0 12px}
+.tl li{display:grid;grid-template-columns:88px 14px 1fr;gap:10px;font-size:14px;line-height:1.35;padding:7px 0;position:relative}
+.tl time{color:var(--ink-3);font-variant-numeric:tabular-nums;font-size:13px;padding-top:1px}
+.tl .dot{width:10px;height:10px;border-radius:50%;background:var(--green);margin-top:4px;position:relative}
+.tl li:not(:last-child) .dot::after{content:"";position:absolute;left:4px;top:12px;width:2px;height:32px;background:#E4E7EC}
+.auto{display:inline-block;font-size:11px;font-weight:700;color:var(--green-ink);background:var(--green-50);border-radius:5px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+.pg-h{background:#fff;padding:4px 16px 12px}
+.pg-h h1{font-size:30px;font-weight:700;letter-spacing:-.025em}
+.pg-h p{font-size:14px;color:var(--ink-3);margin-top:2px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none;background:#fff;flex:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;height:34px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13.5px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+.tabs button i{width:7px;height:7px;border-radius:50%}
+.tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.list{padding:12px;display:grid;gap:8px}
+.lc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.lc .t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lc b{font-size:15px;font-weight:650}
+.lc time,.lc .v{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.lc .v{color:var(--green-ink);font-weight:700}
+.lc .ph{font-size:13px;color:var(--ink-3);margin-top:2px}
+.lc .tag{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--blue-ink);background:var(--blue-50);border-radius:6px;padding:3px 8px}
+.lc.hl{border-color:#A4BCFD;background:#F5F8FF;box-shadow:0 0 0 3px #E0E8FF}
+.lc .moved{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:12.5px;color:var(--green-ink);font-weight:600}
+.lc .moved svg.i{width:14px;height:14px}
+.td-h{background:#fff;padding:6px 20px 16px}
+.td-h p{font-size:14px;color:var(--ink-3)}
+.td-h h1{font-size:26px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
+.night{margin:12px 12px 0;border-radius:18px;background:var(--ink);color:#fff;padding:16px 16px 14px}
+.night p{font-size:13px;color:#94A3B8;font-weight:600}
+.night h2{font-size:18px;line-height:1.3;margin-top:4px;letter-spacing:-.01em}
+.night .st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.night .st div{background:#1E293B;border-radius:12px;padding:10px}
+.night .st b{display:block;font-size:20px}
+.night .st small{font-size:11.5px;color:#94A3B8}
+.ap{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid #F0F2F5;font-size:14.5px}
+.ap:last-child{border-bottom:0}
+.ap time{font-weight:700;font-variant-numeric:tabular-nums}
+.ap small{display:block;color:var(--ink-3);font-size:13px}
+.fu{padding:6px 0 14px}
+.fu .t{display:flex;justify-content:space-between;align-items:baseline}
+.fu b{font-size:15px}
+.fu .warn{font-size:12.5px;font-weight:600;color:#B54708}
+.fu .ph{font-size:13px;color:var(--ink-3);margin-top:2px}
+.fu blockquote{margin-top:10px;background:#F5F7FA;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.4;color:var(--ink-2)}
+.fu-btn{margin-top:10px;width:100%;height:44px;border-radius:12px;background:var(--blue);color:#fff;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px}
+.fu-btn.sent{background:var(--green-50);color:var(--green-ink)}
+.fu-btn svg.i{width:18px;height:18px}
+.toast{position:absolute;left:16px;right:16px;bottom:96px;z-index:10;background:var(--ink);color:#fff;border-radius:14px;padding:12px 14px;font-size:14px;font-weight:500;display:flex;gap:10px;align-items:center;animation:up .3s both}
+.toast svg.i{width:18px;height:18px;color:#6CE9A6}
+.stg{display:flex;align-items:center;gap:12px;height:52px;padding:0 14px;border:1px solid var(--line);border-radius:12px;font-size:15px;width:100%;margin-bottom:8px}
+.stg i.d{width:9px;height:9px;border-radius:50%}
+.stg .r{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid #D0D5DD}
+.stg small{color:var(--ink-3);font-size:12.5px}
+.stg.on{border-color:var(--blue);background:#F5F8FF}
+.stg.on .r{border:6px solid var(--blue)}
+.val{height:52px;border:1px solid var(--line-2);border-radius:12px;padding:0 14px;display:flex;align-items:center;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.sheet .note{font-size:13px;color:var(--ink-3);margin-top:8px}
+.won-s{background:linear-gradient(180deg,#ECFDF3 0%,#FFFFFF 46%)}
+.won-top{text-align:center;padding:30px 24px 8px}
+.won-top .ok{width:84px;height:84px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;margin:0 auto;box-shadow:0 12px 30px -8px rgba(5,150,105,.5)}
+.won-top .ok svg.i{width:42px;height:42px;stroke-width:2.6}
+.won-top p{margin-top:18px;font-size:16px;font-weight:600;color:var(--green-ink)}
+.won-top h1{font-size:46px;font-weight:700;letter-spacing:-.035em;margin-top:2px;font-variant-numeric:tabular-nums}
+.won-top small{display:block;font-size:15px;color:var(--ink-2);margin-top:4px}
+.path{margin:20px 16px 0;border:1px solid var(--line);border-radius:16px;padding:6px 16px 8px;background:#fff}
+.path h2{font-size:15px;font-weight:700;padding:12px 0 4px}
+.path .tl li{grid-template-columns:96px 14px 1fr}
+.rp-h{background:#fff;padding:4px 20px 14px}
+.rp-h p{font-size:13px;color:var(--ink-3)}
+.rp-h h1{font-size:26px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 12px 0}
+.kpi{background:#fff;border-radius:14px;padding:12px 14px}
+.kpi span{font-size:12.5px;color:var(--ink-3);font-weight:600}
+.kpi b{display:block;font-size:26px;font-weight:700;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
+.kpi small{font-size:12px;color:var(--green-ink);font-weight:600}
+.rev{margin:8px 12px 0;background:var(--ink);color:#fff;border-radius:16px;padding:16px}
+.rev span{font-size:13px;color:#94A3B8;font-weight:600}
+.rev b{display:block;font-size:34px;letter-spacing:-.03em;margin-top:2px}
+.rev small{font-size:13px;color:#CBD5E1}
+.chart{display:flex;align-items:flex-end;gap:14px;height:96px;padding:8px 4px 0}
+.chart div{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;color:var(--ink-3);height:100%;justify-content:flex-end}
+.chart i{width:100%;border-radius:6px 6px 2px 2px;background:var(--blue)}
+.chart div:last-child i{background:var(--blue-ink)}
+.src{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:14px;padding:6px 0 14px}
+.src .bar{grid-column:1/-1;height:8px;border-radius:4px;background:#EEF2FF;overflow:hidden;margin-bottom:6px}
+.src .bar i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.zero{display:flex;gap:10px;align-items:center;margin:8px 12px 0;background:var(--green-50);color:var(--green-ink);border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600}
+.zero svg.i{width:20px;height:20px}
+.restart{margin:14px 12px 16px;height:48px;border-radius:14px;border:1px solid var(--line-2);background:#fff;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100% - 24px)}
+.restart svg.i{width:18px;height:18px}
+
+/* ============ Responsive ============ */
+@media (max-width:1179px){
+  .app{grid-template-columns:auto minmax(280px,400px);grid-template-areas:"phone panel" "phone rail";gap:24px 32px;padding:16px 20px 40px}
+  .top{padding:20px 20px 8px}
+  .rail{padding:0 4px}
+  .panel{position:static}
+}
+@media (max-width:719px){
+  .top{padding:14px 14px 6px;gap:10px}
+  .brand small{display:none}
+  .seg{width:100%;overflow-x:auto;scrollbar-width:none}
+  .seg button{flex:1;padding:0 8px;font-size:14px;height:36px}
+  .app{grid-template-columns:1fr;grid-template-areas:"mnav" "phone" "panel";padding:8px 12px 32px;gap:12px}
+  .rail{display:none}
+  .phone-wrap{width:100%;height:auto}
+  .phone{position:relative;width:100%;height:auto;padding:0;background:none;box-shadow:none;border-radius:0;transform:none}
+  .phone::after,.island{display:none}
+  .screen{width:100%;height:min(812px,calc(100svh - 170px));min-height:560px;border-radius:24px;border:1px solid var(--line)}
+  .panel{position:static;padding:20px}
+  .panel h1{font-size:24px}
+  .pnav{display:none}
+  .mnav{grid-area:mnav;display:flex;align-items:center;gap:8px}
+  .mnav .lbl{flex:1;min-width:0;font-size:14px;font-weight:600;line-height:1.25}
+  .mnav .lbl small{display:block;font-size:12px;color:var(--ink-3);font-weight:600}
+  .mnav .lbl span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mnav button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:#fff;display:grid;place-items:center;flex:none}
+  .mnav button.go{background:var(--blue);border-color:var(--blue);color:#fff}
+  .mnav button:disabled{opacity:.4}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hint{box-shadow:0 0 0 3px rgba(36,83,255,.55)}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="19" cy="12" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.4 3.6 4 7 4c2.1 0 3.5 1.2 5 3 1.5-1.8 2.9-3 5-3 3.4 0 5.6 3.4 4.3 6.8C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-comment" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.1-4.2A8.5 8.5 0 1 1 20.5 12z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21.5 3 10 14.5M21.5 3 15 21l-3.5-7.5L4 10z"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3.5h12v17l-6-4.5-6 4.5z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20a.5.5 0 0 1-.5.5h-5.5v-6h-5v6H4a.5.5 0 0 1-.5-.5z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/></symbol>
+  <symbol id="i-reels" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 8.5h18M8 3l3 5.5M14 3l3 5.5M10 12v5l4.5-2.5z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 7.5h14l-1 13H6zM9 7.5V6a3 3 0 0 1 6 0v1.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3.5 20.5l1.3-4.2a8.5 8.5 0 1 1 3.2 3z"/><path d="M9 8.5c0 3.2 3.3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-1-.5-2-1.5-2.5-2.5l.8-1-1-2z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M20 16.2v2.7a1.8 1.8 0 0 1-2 1.8A17.8 17.8 0 0 1 3.3 6a1.8 1.8 0 0 1 1.8-2h2.7a1.8 1.8 0 0 1 1.8 1.5c.1.8.3 1.6.6 2.4a1.8 1.8 0 0 1-.4 1.9L8.6 11a14.4 14.4 0 0 0 4.4 4.4l1.2-1.2a1.8 1.8 0 0 1 1.9-.4c.8.3 1.6.5 2.4.6a1.8 1.8 0 0 1 1.5 1.8z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3.5 8.5a2 2 0 0 1 2-2h2l1.5-2h6l1.5 2h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+  <symbol id="i-flash" viewBox="0 0 24 24"><path d="M9 2.5h6l-1 5h3l-7 14 1-9H8z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-kanban" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 7v9M12 7v5M16 7v7"/></symbol>
+  <symbol id="i-today" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.4 3.2-5.5 6.5-5.5s5.9 2.1 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.6.8 2.7 2.6 3 5.2"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3.5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9z"/><path d="M14 3.5v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h3"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5"/><path d="M3.5 3.5v5h5"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+</defs></svg>
+
+<header class="top">
+  <div class="brand"><span class="mark">P</span>Pushkar Design Solution<small>Lead Growth System prototype</small></div>
+  <div class="seg" role="group" aria-label="Business type" id="seg">
+    <button data-p="interior" aria-pressed="true">Interior designer</button>
+    <button data-p="detailing" aria-pressed="false">Car detailing</button>
+    <button data-p="clinic" aria-pressed="false">Skin clinic</button>
+  </div>
+</header>
+
+<main class="app">
+  <nav class="rail" id="rail" aria-label="Journey steps"></nav>
+
+  <div class="mnav">
+    <button id="mprev" aria-label="Previous step"><svg class="i"><use href="#i-left"/></svg></button>
+    <div class="lbl" id="mlbl"></div>
+    <button id="mnext" class="go" aria-label="Next step"><svg class="i"><use href="#i-right"/></svg></button>
+  </div>
+
+  <div class="phone-wrap" id="pw">
+    <div class="phone"><div class="screen" id="screen" aria-live="polite"></div><div class="island"></div></div>
+  </div>
+
+  <aside class="panel" id="panel">
+    <span class="who" id="who"></span>
+    <p class="when" id="when"></p>
+    <h1 id="ptitle"></h1>
+    <p class="desc" id="pdesc"></p>
+    <div class="bts"><h3><svg class="i"><use href="#i-zap"/></svg>What the system does</h3><ul id="pbts"></ul></div>
+    <div class="pnav">
+      <button class="btn btn-sec" id="prev"><svg class="i"><use href="#i-left"/></svg>Back</button>
+      <button class="btn btn-pri" id="next">Next<svg class="i"><use href="#i-right"/></svg></button>
+    </div>
+    <p class="tip">Tap the highlighted spot on the phone, or use the arrow keys.</p>
+  </aside>
+</main>
+
+<script>
+/* =========================================================
+   PERSONAS — edit names, prices and copy here
+   ========================================================= */
+const P = {
+  interior:{
+    brand:"Aangan Interiors", handle:"aanganinteriors", domain:"aangan.in", b:"#1F4D3A", ini:"A", art:"interior",
+    owner:"Ritu", ownerFull:"Ritu Kapoor", ownerRole:"lead designer",
+    cust:"Rahul Sharma",
+    ad:{h:"See your 3BHK in 3D before you spend a rupee", cap:"Free 3D consultation for 2 and 3BHK homes. Fixed, itemised quote in 48 hours.", likes:"1,284"},
+    lp:{h:"Interiors for your new home, designed in 3D first", sub:"Free 3D consultation. Fixed, itemised quote in 48 hours.", rate:"4.8", reviews:"212",
+        proof:["45-day handover, in writing","10-year warranty on modular work","Itemised quote, no hidden costs"],
+        work:["3BHK, 1,450 sq ft","2BHK, 980 sq ft","Villa, 2,800 sq ft"], workTitle:"Recent homes"},
+    form:{q1:"Home type", o1:["2BHK","3BHK","Villa","Office"], s1:1, q2:"Budget", o2:["₹5–10 L","₹10–15 L","₹15 L+"], s2:1, q3:"When do you want to start?", o3:["This month","1–3 months","Just exploring"], s3:0, extra:null},
+    guide:"lookbook and pricing guide",
+    reply:"Hi Rahul! Thanks for reaching out to Aangan Interiors. Here is our lookbook and pricing guide for 3BHK homes. Would you like to schedule a free 3D consultation?",
+    pdf:"Aangan lookbook and pricing.pdf", pages:"14 pages", btns:["Book free 3D consultation","Talk to a designer"],
+    book:{title:"Book your free 3D consultation", what:"free 3D consultation", modes:["Site visit at my home","At the studio"], meet:["Ritu, our lead designer, will visit your home.","Ritu, our lead designer, will meet you at the studio."]},
+    need:"3BHK interior", source:"Instagram ad: 3BHK in 3D", stage3:"Site visit booked", visit:"site visit",
+    deal:"₹11,80,000", dealShort:"₹11.8 L", close:"Rahul signs the design contract", closeShort:"Signed the design contract",
+    leads:{
+      0:[["Ananya Kulkarni","99231 0","Modular kitchen","18m"],["Vikram Desai","97654 2","2BHK interior","2h"],["Kabir Anand","98230 1","Home office","5h"]],
+      1:[["Meera Joshi","98500 7","Living room revamp","2d"],["Farhan Shaikh","90490 1","3BHK interior","1d"],["Aarav Joshi","97670 8","Kitchen and dining","1d"],["Pallavi Rane","98221 9","3BHK interior","2d"]],
+      2:[["Nikhil Patil","98810 5","Villa interior","2d"],["Sana Kapoor","97300 4","Wardrobes","3d"]],
+      3:[["Rohan Mehta","99700 3","3BHK interior","₹9.6 L"],["Isha Bhat","98902 6","Office fit-out","₹7.4 L"]]
+    },
+    fu:{name:"Meera Joshi", ph:"98500 7", what:"Living room revamp", msg:"Hi Meera, just checking if you had a chance to look at our lookbook. Would a free 3D consultation this week help?"},
+    appts:[["11:00 AM","Nikhil Patil","Villa site visit"],["4:00 PM","Sana Kapoor","Wardrobe design review"]],
+    report:{leads:46, delta:"+38%", booked:19, won:6, rev:"₹48.6 L", weeks:[8,11,12,15], src:[["Instagram ads",58],["Website",27],["QR code",15]]}
+  },
+  detailing:{
+    brand:"Gloss Lab Detailing", handle:"glosslab.detailing", domain:"glosslab.in", b:"#16181D", ini:"G", art:"detailing",
+    owner:"Vikram", ownerFull:"Vikram Singh", ownerRole:"studio head",
+    cust:"Arjun Rao",
+    ad:{h:"Rock chips on your Thar? Get it PPF-protected", cap:"Self-healing PPF with a 5-year written warranty. Free paint inspection this week.", likes:"2,031"},
+    lp:{h:"Paint protection that looks better than new", sub:"Self-healing PPF and ceramic coating. Free paint inspection.", rate:"4.9", reviews:"386",
+        proof:["5-year written warranty","Done in 2 days, in a dust-free bay","Pick-up and drop available"],
+        work:["Thar, full PPF","Fortuner, ceramic","XUV700, front PPF"], workTitle:"Recent cars"},
+    form:{q1:"Service", o1:["Full PPF","Front PPF","Ceramic coat","Detailing"], s1:0, q2:"Budget", o2:["Under ₹50k","₹50k–1 L","₹1 L+"], s2:1, q3:"When do you need it?", o3:["This week","This month","Just exploring"], s3:0, extra:["Car","Mahindra Thar"]},
+    guide:"PPF packages and prices",
+    reply:"Hi Arjun! Thanks for reaching out to Gloss Lab Detailing. Here are our PPF packages and prices for the Thar. Would you like to book a free paint inspection?",
+    pdf:"Gloss Lab PPF packages.pdf", pages:"6 pages", btns:["Book free inspection","Call me"],
+    book:{title:"Book your free paint inspection", what:"free paint inspection", modes:["At the studio","Pick-up from my home"], meet:["Bring the car in. The inspection takes about 20 minutes.","We'll pick the car up from your home and drop it back."]},
+    need:"Full PPF, Mahindra Thar", source:"Instagram ad: Thar PPF", stage3:"Inspection booked", visit:"inspection",
+    deal:"₹85,000", dealShort:"₹85k", close:"Arjun books the full-body PPF job", closeShort:"Booked the full-body PPF job",
+    leads:{
+      0:[["Siddharth Nair","99231 0","Ceramic coat, Creta","25m"],["Pooja Reddy","97654 2","Interior detailing, City","3h"],["Harsh Vora","98230 1","PPF coating, Thar","4h"]],
+      1:[["Aman Gill","98500 7","PPF, XUV700","2d"],["Tanvi Shah","90490 1","Graphene coat, Seltos","1d"],["Yash Kohli","97670 8","Front PPF, Thar","1d"],["Ira Saxena","98221 9","Detailing, Innova","2d"]],
+      2:[["Karan Malhotra","98810 5","Full PPF, Fortuner","2d"],["Neel Ghosh","97300 4","Ceramic coat, Nexon","3d"]],
+      3:[["Dev Arora","99700 3","PPF coating, Thar","₹78,000"],["Riya Sen","98902 6","Ceramic coat, Verna","₹32,000"]]
+    },
+    fu:{name:"Aman Gill", ph:"98500 7", what:"PPF, XUV700", msg:"Hi Aman, did you get a chance to look at our PPF packages? We have an inspection slot free this Saturday."},
+    appts:[["10:00 AM","Karan Malhotra","Fortuner PPF handover"],["3:00 PM","Neel Ghosh","Ceramic coat inspection"]],
+    report:{leads:64, delta:"+41%", booked:22, won:14, rev:"₹7.9 L", weeks:[12,15,17,20], src:[["Instagram ads",64],["Website",21],["QR code",15]]}
+  },
+  clinic:{
+    brand:"Bloom Skin Clinic", handle:"bloomskinclinic", domain:"bloomskin.in", b:"#7A2E4F", ini:"B", art:"clinic",
+    owner:"Dr. Kavita", ownerFull:"Dr. Kavita Menon", ownerRole:"dermatologist",
+    cust:"Sneha Iyer",
+    ad:{h:"Laser hair removal, done by dermatologists", cap:"Free skin consultation with a dermatologist. Patch test before every treatment.", likes:"3,412"},
+    lp:{h:"Smooth skin, planned by a dermatologist", sub:"Free skin consultation. Clear package prices before you start.", rate:"4.8", reviews:"540",
+        proof:["Treatments by qualified dermatologists","Patch test before every treatment","Easy EMI on packages"],
+        work:["Laser hair removal","Hydrafacial","Acne care"], workTitle:"Popular treatments"},
+    form:{q1:"Treatment", o1:["Laser hair removal","Hydrafacial","Acne care","Other"], s1:0, q2:"Budget", o2:["Under ₹20k","₹20–50k","₹50k+"], s2:1, q3:"When would you like to start?", o3:["This week","This month","Just exploring"], s3:0, extra:null},
+    guide:"treatment and pricing guide",
+    reply:"Hi Sneha! Thanks for reaching out to Bloom Skin Clinic. Here is our treatment and pricing guide for laser hair removal. Would you like to book a free skin consultation?",
+    pdf:"Bloom treatments and pricing.pdf", pages:"8 pages", btns:["Book free consultation","Call me"],
+    book:{title:"Book your free skin consultation", what:"free skin consultation", modes:["At the clinic","Video call"], meet:["You'll meet Dr. Kavita Menon. Please arrive 10 minutes early.","Dr. Kavita Menon will call you on video. We'll send the link."]},
+    need:"Laser hair removal", source:"Instagram ad: Laser LHR", stage3:"Consult booked", visit:"consultation",
+    deal:"₹42,000", dealShort:"₹42k", close:"Sneha buys the 6-session package", closeShort:"Bought the 6-session package",
+    leads:{
+      0:[["Rhea Das","97654 2","Acne treatment","40m"],["Prachi Shetty","98230 1","Skin consult","2h"],["Ankita Roy","99600 2","Laser hair removal","4h"]],
+      1:[["Aditi Menon","99231 0","Hydrafacial","2d"],["Kavya Rao","98500 7","Chemical peel","1d"],["Mansi Jain","90490 1","Hair PRP","1d"],["Megha Pawar","97670 8","Skin brightening","2d"]],
+      2:[["Tara Pillai","98810 5","Laser hair removal","2d"],["Simran Kaur","97300 4","Pigmentation","3d"]],
+      3:[["Nisha Gupta","99700 3","Laser, 6 sessions","₹38,000"],["Zoya Khan","98902 6","Hydrafacial pack","₹18,000"]]
+    },
+    fu:{name:"Aditi Menon", ph:"99231 0", what:"Hydrafacial", msg:"Hi Aditi, did you get a chance to look at our treatment guide? Dr. Kavita has a free consultation slot this Saturday."},
+    appts:[["11:00 AM","Tara Pillai","Laser session 3 of 6"],["5:00 PM","Simran Kaur","Pigmentation review"]],
+    report:{leads:58, delta:"+33%", booked:27, won:16, rev:"₹5.6 L", weeks:[11,14,15,18], src:[["Instagram ads",55],["Website",25],["QR code",20]]}
+  }
+};
+const DAYS = [
+  {d:"Fri",n:"30",m:"Oct",full:true},
+  {d:"Sat",n:"31",m:"Oct",label:"Sat, 31 Oct",prev:"Fri, 30 Oct",prevLong:"Friday, 30 October"},
+  {d:"Sun",n:"1",m:"Nov",label:"Sun, 1 Nov",prev:"Sat, 31 Oct",prevLong:"Saturday, 31 October"},
+  {d:"Mon",n:"2",m:"Nov",label:"Mon, 2 Nov",prev:"Sun, 1 Nov",prevLong:"Sunday, 1 November"}
+];
+const TIMES = [
+  {t:"10:00 AM",sb:"10:00",after:"12:00 PM",asb:"12:00"},
+  {t:"11:00 AM",sb:"11:00",after:"1:00 PM",asb:"1:00"},
+  {t:"12:30 PM",sb:"12:30",after:"2:30 PM",asb:"2:30"},
+  {t:"4:00 PM",sb:"4:00",after:"6:00 PM",asb:"6:00",full:true},
+  {t:"5:30 PM",sb:"5:30",after:"7:30 PM",asb:"7:30"},
+  {t:"7:00 PM",sb:"7:00",after:"9:00 PM",asb:"9:00"}
+];
+const STAGE_DOT = ["var(--blue)","var(--violet)","var(--amber)","var(--green)"];
+
+let pk = "interior", step = 0, dir = 1;
+const S = {day:1, time:1, mode:0, f1:null, f2:null, f3:null, pipe:2, sent:false};
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const I = (id, cls="") => `<svg class="i ${cls}"><use href="#i-${id}"/></svg>`;
+const first = n => n.replace("Dr. ","").split(" ")[0];
+const ini = n => n.replace("Dr. ","").split(" ").map(w => w[0]).join("").slice(0,2);
+const TICKS = '<svg class="ticks" viewBox="0 0 16 11" fill="none" stroke="#53BDEB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3 3 6-7.5"/><path d="M6.5 8.5 7 9l6-7.5"/></svg>';
+const VBADGE = '<svg class="vbadge" viewBox="0 0 24 24"><path fill="#25D366" d="M12 1.5l2.6 1.9 3.2-.1 1 3 2.6 1.9-1 3 1 3-2.6 1.9-1 3-3.2-.1L12 22.5l-2.6-1.9-3.2.1-1-3-2.6-1.9 1-3-1-3 2.6-1.9 1-3 3.2.1z"/><path d="M8 12.2l2.6 2.6L16.2 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const WIFI = '<svg class="wifi" viewBox="0 0 16 12" fill="currentColor"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.5 6.9a6.4 6.4 0 0 1 9 0l-1.4 1.4a4.4 4.4 0 0 0-6.2 0z"/><path d="M1.3 4.7a9.5 9.5 0 0 1 13.4 0L13.3 6a7.5 7.5 0 0 0-10.6 0z"/></svg>';
+const sbLock = `<div class="sb"><span></span><span class="ic"><span class="bars"><i></i><i></i><i></i><i></i></span>${'<svg class="wifi" viewBox="0 0 16 12" fill="currentColor"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.5 6.9a6.4 6.4 0 0 1 9 0l-1.4 1.4a4.4 4.4 0 0 0-6.2 0z"/><path d="M1.3 4.7a9.5 9.5 0 0 1 13.4 0L13.3 6a7.5 7.5 0 0 0-10.6 0z"/></svg>'}<span class="bat"></span></span></div>`;
+const sb = t => `<div class="sb"><span>${t}</span><span class="ic"><span class="bars"><i></i><i></i><i></i><i></i></span>${WIFI}<span class="bat"></span></span></div>`;
+const day = () => DAYS[S.day], tm = () => TIMES[S.time];
+const sel = (k, def) => S[k] === null ? def : S[k];
+
+/* ---------- client artwork (no images needed) ---------- */
+let uid = 0;
+function art(kind, v = 0){
+  const id = "g" + (++uid);
+  if(kind === "interior"){
+    const sofa = ["#1F4D3A","#8A4B2F","#33476B"][v % 3], wall = ["#E9DCC6","#EFE6D8","#E4E1D6"][v % 3];
+    return `<svg class="art" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice"><rect width="300" height="300" fill="${wall}"/>
+      <rect y="214" width="300" height="86" fill="#CDB89A"/><path d="M34 214V112a42 42 0 0 1 84 0v102z" fill="#F7F1E7"/>
+      <path d="M76 70v144M34 150h84" stroke="#DCCBB0" stroke-width="3"/><path d="M226 0v74" stroke="#3A2E22" stroke-width="2"/>
+      <path d="M204 96a22 22 0 0 1 44 0z" fill="#C8A15A"/><ellipse cx="200" cy="250" rx="92" ry="14" fill="#B9A182"/>
+      <rect x="146" y="142" width="118" height="44" rx="16" fill="${sofa}" opacity=".85"/><rect x="134" y="170" width="142" height="48" rx="16" fill="${sofa}"/>
+      <rect x="18" y="186" width="24" height="28" rx="4" fill="#B5734A"/><ellipse cx="30" cy="168" rx="15" ry="24" fill="#4C7A5A"/>
+      <rect x="186" y="122" width="40" height="30" rx="3" fill="#fff" opacity=".7"/></svg>`;
+  }
+  if(kind === "detailing"){
+    const body = ["#FF6A1A","#D7DCE3","#2F6FED"][v % 3];
+    return `<svg class="art" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice"><defs>
+      <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${body}"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient>
+      <radialGradient id="${id}r" cx=".5" cy=".3" r=".7"><stop offset="0" stop-color="#3A3F4A"/><stop offset="1" stop-color="#121418"/></radialGradient></defs>
+      <rect width="300" height="300" fill="url(#${id}r)"/><path d="M0 0h300L170 120z" fill="#fff" opacity=".05"/>
+      <ellipse cx="150" cy="236" rx="132" ry="11" fill="#000" opacity=".55"/>
+      <path d="M36 206V164q0-12 12-12h46l16-38h96q10 0 13 10l10 28h24q11 0 11 12v42z" fill="${body}"/>
+      <path d="M36 206V164q0-12 12-12h46l16-38h96q10 0 13 10l10 28h24q11 0 11 12v42z" fill="url(#${id})"/>
+      <path d="M117 122h44v28h-56zM168 122h36l10 28h-46z" fill="#20242C"/>
+      <path d="M50 168l200-8" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="86" cy="208" r="25" fill="#0B0C0F"/><circle cx="86" cy="208" r="11" fill="#5A606B"/>
+      <circle cx="214" cy="208" r="25" fill="#0B0C0F"/><circle cx="214" cy="208" r="11" fill="#5A606B"/>
+      <g fill="#fff" opacity=".55"><circle cx="130" cy="180" r="2"/><circle cx="150" cy="186" r="1.5"/><circle cx="176" cy="178" r="2.2"/><circle cx="200" cy="188" r="1.4"/><circle cx="110" cy="190" r="1.6"/></g></svg>`;
+  }
+  const bg = ["#F6E3EA","#EFE7F3","#F3E9E1"][v % 3], petal = ["#7A2E4F","#6B4A8C","#A2584A"][v % 3];
+  const petals = [0,60,120,180,240,300].map((r,i) => `<ellipse cx="150" cy="122" rx="20" ry="46" fill="${petal}" opacity="${.55 + (i%2)*.3}" transform="rotate(${r} 150 168)"/>`).join("");
+  return `<svg class="art" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice"><rect width="300" height="300" fill="${bg}"/>
+    <circle cx="214" cy="92" r="70" fill="#fff" opacity=".55"/>${petals}<circle cx="150" cy="168" r="18" fill="#F2B8A0"/>
+    <path d="M150 214c0 40-10 70-30 86M150 240c18-14 40-14 56-4" stroke="#5C7C5A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M58 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4zM246 220l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fff"/></svg>`;
+}
+
+/* =========================================================
+   SCREENS
+   ========================================================= */
+function scrInstagram(p){
+  const st = ["Your story","priya.k","foodie.diaries","arjun","travelwithme"].map((n,i) =>
+    `<div class="ig-st"><div class="ig-ring"${i===0?' style="background:#DBDBDB"':''}><i style="background:${["#C7D2FE","#FBCFE8","#FDE68A","#BBF7D0","#BAE6FD"][i]}"></i></div>${n}</div>`).join("");
+  return `${sb("11:24")}
+  <div class="ig-top"><span class="ig-logo">Instagram</span>${I("heart")}${I("send")}</div>
+  <div class="ig-stories">${st}</div>
+  <div class="scroll">
+    <div class="ig-ph"><span class="ig-av" style="background:${p.b}">${p.ini}</span><div><b>${p.handle}</b><small>Sponsored</small></div><span class="dots">${I("dots")}</span></div>
+    <div class="ig-img">${art(p.art,0)}<div class="ig-ovl">${p.ad.h}</div></div>
+    <button class="ig-cta" style="background:${p.b}" data-go>Get quote${I("right")}</button>
+    <div class="ig-acts">${I("heart")}${I("comment")}${I("send")}<span class="bm">${I("bookmark")}</span></div>
+    <p class="ig-likes">${p.ad.likes} likes</p>
+    <p class="ig-cap"><b>${p.handle}</b> ${p.ad.cap}</p>
+  </div>
+  <nav class="ig-tab">${I("home")}${I("search")}${I("reels")}${I("bag")}${I("user")}</nav>`;
+}
+const brTop = p => `<div class="br-top">${I("x")}<div><b>${p.brand}</b><small>${I("lock")}${p.domain}</small></div>${I("dots")}</div>`;
+
+function scrLanding(p){
+  return `${sb("11:25")}${brTop(p)}
+  <div class="scroll">
+    <header class="lp-hero">
+      <div class="lp-logo"><i>${p.ini}</i>${p.brand}</div>
+      <h1>${p.lp.h}</h1><p>${p.lp.sub}</p>
+      <div class="lp-rate"><span class="stars">★★★★★</span>${p.lp.rate} from ${p.lp.reviews} Google reviews</div>
+      <div class="lp-art">${art(p.art,1)}</div>
+    </header>
+    <section class="lp-proof">${p.lp.proof.map(t => `<div><i>${I("check")}</i>${t}</div>`).join("")}</section>
+    <section class="lp-work"><h2>${p.lp.workTitle}</h2><div class="lp-row">${p.lp.work.map((t,i) => `<div class="th"><div>${art(p.art,i)}</div><p>${t}</p></div>`).join("")}</div></section>
+  </div>
+  <div class="lp-sticky"><button class="lp-btn" data-go>Get my free quote</button></div>`;
+}
+
+function scrForm(p){
+  const f = p.form, grp = (q, o, k, d) => `<div class="fld"><span class="lb">${q}</span><div class="opts">${o.map((t,i) =>
+    `<button class="opt ${i === sel(k,d) ? "on" : ""}" data-opt="${k}" data-i="${i}">${t}</button>`).join("")}</div></div>`;
+  return `${sb("11:29")}${brTop(p)}
+  <div class="scroll form">
+    <h1>Get your free quote</h1><p>Takes 30 seconds. We reply on WhatsApp.</p>
+    <div class="fld"><label>Your name</label><div class="inp">${p.cust}</div></div>
+    <div class="fld"><label>WhatsApp number</label><div class="inp"><span class="cc">+91</span>98765 43210</div></div>
+    ${f.extra ? `<div class="fld"><label>${f.extra[0]}</label><div class="inp">${f.extra[1]}</div></div>` : ""}
+    ${grp(f.q1, f.o1, "f1", f.s1)}${grp(f.q2, f.o2, "f2", f.s2)}${grp(f.q3, f.o3, "f3", f.s3)}
+    <div class="chk"><i>${I("check")}</i>Send my quote on WhatsApp</div>
+  </div>
+  <div class="lp-sticky"><button class="lp-btn" data-go>Get my free quote</button></div>`;
+}
+
+function scrThanks(p){
+  return `${sb("11:30")}${brTop(p)}
+  <div class="scroll ty">
+    <div class="ty-check">${I("check")}</div>
+    <h1>Done, ${first(p.cust)}. Check WhatsApp.</h1>
+    <p>Your ${p.guide} is on its way to +91 98765 43210.</p>
+    <div class="ty-next"><h2>What happens next</h2>
+      <div><b>1</b>Get the guide on WhatsApp, right now</div>
+      <div><b>2</b>Pick a time for your ${p.book.what}</div>
+      <div><b>3</b>Meet ${p.ownerFull}, our ${p.ownerRole}</div>
+    </div>
+  </div>
+  <button class="nb drop" data-go><span class="app-ic wa">${I("wa")}</span><span class="tx"><span class="row"><b>${p.brand}</b><small>now</small></span><p>${p.reply}</p></span></button>`;
+}
+
+const waHead = p => `<div class="wa-head">${I("left")}<span class="wa-av" style="background:${p.b}">${p.ini}</span>
+  <div class="wa-name"><b>${p.brand}${VBADGE}</b><small>Business account</small></div><span class="acts">${I("video")}${I("phone")}</span></div>`;
+const waInput = `<div class="wa-input">${I("plus")}<div></div>${I("camera")}${I("mic")}</div>`;
+const replyBubbles = (p, used) => `
+  <div class="bub in">${p.reply}<div class="meta">11:30 PM</div></div>
+  <div class="bub in"><div class="doc"><span class="pdf">PDF</span><div><b>${p.pdf}</b><small>${p.pages}</small></div></div><div class="meta">11:30 PM</div></div>
+  <div class="wa-btns">${used
+     ? `<div class="used">${I("cal")}${p.btns[0]}</div><div class="used">${I("phone")}${p.btns[1]}</div>`
+     : `<button data-go>${I("cal")}${p.btns[0]}</button><div>${I("phone")}${p.btns[1]}</div>`}</div>`;
+
+function scrChat(p){
+  return `${sb("11:30")}${waHead(p)}
+  <div class="scroll wa-body"><div class="wa-day">Today</div>
+    <div class="wa-note">Messages and calls are end-to-end encrypted.</div>
+    ${replyBubbles(p,false)}</div>${waInput}`;
+}
+
+function scrBook(p){
+  return `${sb("11:31")}${waHead(p)}
+  <div class="scroll wa-body"><div class="wa-day">Today</div>${replyBubbles(p,true)}</div>${waInput}
+  <div class="dim"></div>
+  <div class="sheet" role="dialog" aria-label="${p.book.title}">
+    <div class="sheet-h">${I("x")}<b>${p.book.title}</b><span></span></div>
+    <div class="sheet-body">
+      <p class="lbl">Where</p>${p.book.modes.map((m,i) => `<button class="radio ${i===S.mode?"on":""}" data-mode="${i}"><i></i>${m}</button>`).join("")}
+      <p class="lbl">Day</p><div class="days">${DAYS.map((d,i) => `<button class="day ${i===S.day?"on":""}" data-day="${i}" ${d.full?"disabled":""}><small>${d.d}</small><b>${d.n}</b><small>${d.full?"Full":d.m}</small></button>`).join("")}</div>
+      <p class="lbl">Time</p><div class="times">${TIMES.map((t,i) => `<button class="tm ${i===S.time?"on":""}" data-time="${i}" ${t.full?"disabled":""}>${t.t}</button>`).join("")}</div>
+    </div>
+    <div class="sheet-f"><small>Only open slots from the ${p.brand} calendar are shown</small><button class="sheet-btn" data-go>Confirm booking</button></div>
+  </div>`;
+}
+
+function scrBooked(p){
+  return `${sb("11:31")}${waHead(p)}
+  <div class="scroll wa-body" data-bottom><div class="wa-day">Today</div>${replyBubbles(p,true)}
+    <div class="bub out"><div class="flow-r">${I("flow")}Booking form sent</div><b>${day().label}, ${tm().t}</b><br>${p.book.modes[S.mode]}<div class="meta">11:31 PM ${TICKS}</div></div>
+    <div class="bub in">You're booked, ${first(p.cust)}. Your ${p.book.what} is on <b>${day().label} at ${tm().t}</b>. ${p.book.meet[S.mode]} We'll send you a reminder the day before.<div class="meta">11:31 PM</div></div>
+    <div class="wa-btns"><div>${I("cal")}Add to calendar</div></div>
+  </div>${waInput}`;
+}
+
+function scrReminder(p){
+  return `<div class="scr-in ls" style="flex:1;display:flex;flex-direction:column;background:linear-gradient(165deg,#5B7FA6 0%,#2B4766 45%,#111C2B 100%)">
+    ${sbLock}
+    <p class="ls-date">${day().prevLong}</p><p class="ls-time">${tm().sb}</p>
+    <div class="ls-notifs">
+      <button class="nb" data-go><span class="app-ic wa">${I("wa")}</span><span class="tx"><span class="row"><b>${p.brand}</b><small>now</small></span>
+        <p>Reminder: your ${p.book.what} is tomorrow at ${tm().t}. Reply 1 to confirm or 2 to reschedule.</p></span></button>
+    </div>
+    <div class="ls-bottom"><span>${I("flash")}</span><span>${I("camera")}</span></div></div>`;
+}
+
+function scrOwnerLock(p){
+  return `<div class="ls" style="flex:1;display:flex;flex-direction:column;background:linear-gradient(170deg,#F4B58A 0%,#B86E7E 42%,#3A2B4E 78%,#1C1630 100%)">
+    ${sbLock}
+    <p class="ls-date">Friday, 30 October</p><p class="ls-time">7:45</p>
+    <span class="ls-focus">${I("moon")}Sleep ended at 7:30 AM</span>
+    <div class="ls-notifs">
+      <p class="ls-group">While you were asleep</p>
+      <button class="nb" data-go><span class="app-ic crm">${I("kanban")}</span><span class="tx"><span class="row"><b>New lead: ${p.cust}</b><small>11:30 PM</small></span>
+        <p>${p.need}, ${S.f2===null?p.form.o2[p.form.s2]:p.form.o2[S.f2]}. Auto-reply sent in 4 sec.</p></span></button>
+      <div class="nb"><span class="app-ic crm">${I("kanban")}</span><span class="tx"><span class="row"><b>${p.stage3.replace(" booked","")} booked</b><small>11:31 PM</small></span>
+        <p>${p.cust}, ${day().label} at ${tm().t}.</p></span></div>
+    </div>
+    <div class="ls-bottom"><span>${I("flash")}</span><span>${I("camera")}</span></div></div>`;
+}
+
+const crmTab = (on, hot) => `<nav class="crm-tab">${[["today","Today"],["kanban","Pipeline"],["users","Leads"],["chart","Reports"]].map(([ic,l]) =>
+  `<button class="${l===on?"on":""}" ${l===hot?"data-go":""}>${I(ic)}${l}</button>`).join("")}</nav>`;
+
+function leadDetail(p, won){
+  const budget = p.form.o2[sel("f2", p.form.s2)], start = p.form.o3[sel("f3", p.form.s3)];
+  return `<div class="scroll crm">
+    <div class="ld"><div class="ld-av">${ini(p.cust)}</div><h1>${p.cust}</h1>
+      <span class="pill ${won?"won":""}"><i></i>${won ? "Deal closed" : p.stage3}</span>
+      <div class="ld-acts"><button>${I("phone")}Call</button><button>${I("wa")}WhatsApp</button><button>${I("note")}Note</button></div></div>
+    <div class="card"><h2>Details</h2>
+      <div class="kv"><span>Phone</span><b>+91 98765 43210</b></div>
+      <div class="kv"><span>Needs</span><b>${p.need}</b></div>
+      <div class="kv"><span>Budget</span><b>${budget}</b></div>
+      <div class="kv"><span>Start</span><b>${start}</b></div>
+      <div class="kv"><span>Source</span><b>${p.source}</b></div>
+      <div class="kv"><span>Booked</span><b>${day().label}, ${tm().t}</b></div></div>
+    <div class="card"><h2>Activity</h2><ol class="tl">
+      <li><time>11:30:02 PM</time><i class="dot"></i><span>Filled the quote form on ${p.domain}</span></li>
+      <li><time>11:30:06 PM</time><i class="dot"></i><span>WhatsApp reply sent <em class="auto">Auto</em></span></li>
+      <li><time>11:30:07 PM</time><i class="dot"></i><span>${p.pdf.replace(".pdf","")} sent <em class="auto">Auto</em></span></li>
+      <li><time>11:31 PM</time><i class="dot"></i><span>Booked ${p.book.what}</span></li>
+      <li><time>11:31 PM</time><i class="dot"></i><span>Moved to ${p.stage3} <em class="auto">Auto</em></span></li>
+      <li><time>Scheduled</time><i class="dot"></i><span>Reminder on ${day().prev}, ${tm().t} <em class="auto">Auto</em></span></li>
+    </ol></div></div>`;
+}
+
+function scrLead(p){
+  return `${sb("7:46")}<div class="crm-bar"><span>${I("left")}Leads</span>${I("dots")}</div>${leadDetail(p,false)}${crmTab("Leads","Pipeline")}`;
+}
+
+function scrPipeline(p){
+  const names = ["New inquiry","Catalog sent",p.stage3,"Deal closed"];
+  const lists = [p.leads[0], p.leads[1], [[p.cust,"98765 4",p.need,"now",true], ...p.leads[2]], p.leads[3]];
+  const card = (l, s) => `<div class="lc ${l[4]?"hl":""}"><div class="t"><b>${l[0]}</b>${s===3?`<span class="v">${l[3]}</span>`:`<time>${l[3]}</time>`}</div>
+    <div class="ph">+91 ${l[1]}••••</div><span class="tag">${l[2]}</span>
+    ${l[4] ? `<div class="moved">${I("zap")}Moved here on its own at 11:31 PM</div>` : ""}</div>`;
+  return `${sb("7:47")}
+  <div class="pg-h"><h1>Pipeline</h1><p>${lists.flat().length} leads this week</p></div>
+  <div class="tabs">${names.map((n,s) => `<button aria-pressed="${s===S.pipe}" data-pipe="${s}"><i style="background:${STAGE_DOT[s]}"></i>${n} ${lists[s].length}</button>`).join("")}</div>
+  <div class="scroll crm"><div class="list">${lists[S.pipe].map(l => card(l, S.pipe)).join("")}</div></div>
+  ${crmTab("Pipeline","Today")}`;
+}
+
+function scrToday(p){
+  return `${sb("9:00")}
+  <div class="td-h"><p>Friday, 30 October</p><h1>Good morning, ${p.owner}</h1></div>
+  <div class="scroll crm">
+    <div class="night"><p>Overnight</p><h2>3 new leads came in. All got a reply in 4 seconds.</h2>
+      <div class="st"><div><b>3</b><small>New leads</small></div><div><b>4 sec</b><small>Avg reply</small></div><div><b>1</b><small>Booked</small></div></div></div>
+    <div class="card"><h2>Today's appointments</h2>${p.appts.map(a => `<div class="ap"><time>${a[0]}</time><div>${a[1]}<small>${a[2]}</small></div></div>`).join("")}</div>
+    <div class="card"><h2>Follow-ups due</h2>
+      <div class="fu"><div class="t"><b>${p.fu.name}</b><span class="warn">No reply for 2 days</span></div>
+        <div class="ph">${p.fu.what}, catalog sent Wednesday</div>
+        <blockquote>${p.fu.msg}</blockquote>
+        <button class="fu-btn ${S.sent?"sent":""}" data-act="followup">${S.sent ? I("check")+"Follow-up sent" : I("send")+"Send follow-up"}</button></div></div>
+    <div style="height:16px"></div>
+  </div>
+  ${crmTab("Today")}${S.justSent ? `<div class="toast">${I("check")}Sent to ${first(p.fu.name)} on WhatsApp</div>` : ""}`;
+}
+
+function scrMove(p){
+  const names = ["New inquiry","Catalog sent",p.stage3,"Deal closed"];
+  return `${sb(tm().asb)}<div class="crm-bar"><span>${I("left")}Leads</span>${I("dots")}</div>${leadDetail(p,false)}${crmTab("Leads")}
+  <div class="dim"></div>
+  <div class="sheet" role="dialog" aria-label="Move lead">
+    <div class="sheet-h">${I("x")}<b>Move ${first(p.cust)} to</b><span></span></div>
+    <div class="sheet-body">
+      ${names.map((n,s) => `<div class="stg ${s===3?"on":""}"><i class="d" style="background:${STAGE_DOT[s]}"></i>${n}${s===2?" <small>Current</small>":""}<span class="r"></span></div>`).join("")}
+      <p class="lbl">Deal value</p><div class="val">${p.deal}</div>
+      <p class="note">Counts toward your monthly growth report.</p>
+    </div>
+    <div class="sheet-f"><button class="sheet-btn crm" data-go>Mark as won</button></div>
+  </div>`;
+}
+
+function scrWon(p){
+  return `${sb(tm().asb)}
+  <div class="scroll won-s">
+    <div class="won-top"><div class="ok">${I("check")}</div><p>Deal won</p><h1>${p.deal}</h1><small>${p.cust}, ${p.need}</small></div>
+    <div class="path"><h2>How ${first(p.cust)} found you</h2><ol class="tl">
+      <li><time>Thu 11:24 PM</time><i class="dot"></i><span>Saw your Instagram ad</span></li>
+      <li><time>Thu 11:30 PM</time><i class="dot"></i><span>Got your ${p.guide} in 4 sec</span></li>
+      <li><time>Thu 11:31 PM</time><i class="dot"></i><span>Booked a ${p.visit}</span></li>
+      <li><time>${day().d} ${tm().t}</time><i class="dot"></i><span>Came for the ${p.visit}</span></li>
+      <li><time>${day().d} ${tm().after}</time><i class="dot"></i><span>${p.closeShort}</span></li>
+    </ol></div>
+    <button class="restart" data-go style="background:var(--blue);color:#fff;border-color:var(--blue)">See this month's report${I("right")}</button>
+  </div>`;
+}
+
+function scrReport(p){
+  const r = p.report, max = Math.max(...r.weeks);
+  return `${sb("10:00")}
+  <div class="rp-h"><p>Sent Sun, 1 Nov</p><h1>October growth report</h1></div>
+  <div class="scroll crm">
+    <div class="kpis">
+      <div class="kpi"><span>Leads</span><b>${r.leads}</b><small>${r.delta} vs September</small></div>
+      <div class="kpi"><span>First reply</span><b>4 sec</b><small>Average, day and night</small></div>
+      <div class="kpi"><span>${p.stage3.replace(" booked","")}s booked</span><b>${r.booked}</b><small>${Math.round(r.booked/r.leads*100)}% of leads</small></div>
+      <div class="kpi"><span>Deals won</span><b>${r.won}</b><small>${Math.round(r.won/r.booked*100)}% of bookings</small></div>
+    </div>
+    <div class="rev"><span>Revenue won</span><b>${r.rev}</b><small>Including ${first(p.cust)}, ${p.dealShort}</small></div>
+    <div class="card"><h2>Leads per week</h2><div class="chart">${r.weeks.map((w,i) => `<div><span>${w}</span><i style="height:${w/max*64}px"></i>Week ${i+1}</div>`).join("")}</div><div style="height:12px"></div></div>
+    <div class="card"><h2>Where leads came from</h2><div class="src">${r.src.map(s => `<span>${s[0]}</span><b>${s[1]}%</b><div class="bar"><i style="width:${s[1]}%"></i></div>`).join("")}</div></div>
+    <div class="zero">${I("check")}0 leads waited more than 1 minute for a reply</div>
+    <button class="restart" data-act="restart">${I("replay")}Start the journey again</button>
+  </div>
+  ${crmTab("Reports")}`;
+}
+
+/* =========================================================
+   STEPS
+   ========================================================= */
+const STEPS = [
+  {who:"c", when:"Thu, 11:24 PM", title:"Sees your ad on Instagram", scr:scrInstagram,
+   desc:p=>`${first(p.cust)} is scrolling late at night and stops at your ad. One tap on Get quote.`,
+   bts:p=>["Your ad runs on Instagram and Facebook","The tap opens your landing page, not your profile grid"]},
+  {who:"c", when:"Thu, 11:25 PM", title:"Lands on your page", scr:scrLanding,
+   desc:p=>`A page built for one job: getting the quote request. Your reviews and promises up front, one button at the bottom.`,
+   bts:p=>["Custom landing page on your own domain","Google rating shown to build trust","Loads fast on mobile data"]},
+  {who:"c", when:"Thu, 11:29 PM", title:"Asks for a quote", scr:scrForm,
+   desc:p=>`Name, number and three taps. The form only asks what you need to price the job. Try tapping the options.`,
+   bts:p=>["Requirement, budget and start date saved","Number checked so the WhatsApp reply can't fail"]},
+  {who:"c", when:"Thu, 11:30:02 PM", title:"Is told what happens next", scr:scrThanks,
+   desc:p=>`The thank-you screen sets the expectation: check WhatsApp. The message is already landing.`,
+   bts:p=>["Lead created in your CRM as New inquiry","WhatsApp reply triggered"]},
+  {who:"c", when:"Thu, 11:30:06 PM", title:"Gets a reply in 4 seconds", scr:scrChat,
+   desc:p=>`Your ${p.guide}, from your verified business number. Nobody on your team lifted a finger.`,
+   bts:p=>["Reply sent 4 seconds after the form","PDF attached automatically","Lead moved to Catalog sent"]},
+  {who:"c", when:"Thu, 11:31 PM", title:"Books inside WhatsApp", scr:scrBook,
+   desc:p=>`${first(p.cust)} picks a day and time without leaving the chat. Booked slots are hidden. Try picking a different slot.`,
+   bts:p=>["Linked to your calendar","Full slots can't be picked"]},
+  {who:"c", when:"Thu, 11:31 PM", title:"Gets a confirmation", scr:scrBooked, tapAll:true,
+   desc:p=>`From first tap to a booked ${p.visit} in about 7 minutes, at 11:31 at night.`,
+   bts:p=>[`Lead moved to ${p.stage3}`,"Reminder scheduled for the day before",`${p.owner} notified`]},
+  {who:"c", when:p=>`${day().prev}, ${tm().t}`, title:"Gets a reminder the day before", scr:scrReminder, dark:true,
+   desc:p=>`Fewer no-shows. One reply confirms or reschedules.`,
+   bts:p=>["Sent automatically 24 hours before","Reply 2 offers new slots"]},
+  {who:"o", when:"Fri, 7:45 AM", title:"Wakes up to a handled lead", scr:scrOwnerLock, dark:true,
+   desc:p=>`${p.owner} was asleep at 11:30 PM. The lead got a reply, the catalog and a booking anyway.`,
+   bts:p=>["A notification for every new lead","Night-time leads grouped for the morning"]},
+  {who:"o", when:"Fri, 7:46 AM", title:"Opens the lead", scr:scrLead,
+   desc:p=>`What ${first(p.cust)} wants, the budget, which ad they came from, and every message sent so far. All in one place.`,
+   bts:p=>["Every message logged automatically","Source tracked to the exact ad"]},
+  {who:"o", when:"Fri, 7:47 AM", title:"Checks the pipeline", scr:scrPipeline,
+   desc:p=>`Every lead sits in a stage. Leads move on their own when customers act. Tap the stages to look around.`,
+   bts:p=>["The booking moved the lead automatically","The whole team sees the same board"]},
+  {who:"o", when:"Fri, 9:00 AM", title:"Follows up in one tap", scr:scrToday,
+   desc:p=>`The system flags leads that went quiet. One tap sends a ready-written follow-up from your number.`,
+   bts:p=>["Follow-up flagged after 2 days of silence","Message pre-written, sent on WhatsApp"]},
+  {who:"o", when:p=>`${day().label}, ${tm().after}`, title:"Marks the deal won", scr:scrMove,
+   desc:p=>`After the ${p.visit}, ${p.close}. ${p.owner} moves the lead to Deal closed and adds the value.`,
+   bts:p=>["Deal value saved for the monthly report"]},
+  {who:"o", when:p=>`${day().label}, ${tm().after}`, title:"Sees where the deal came from", scr:scrWon,
+   desc:p=>`From an Instagram ad at 11:24 PM to ${p.dealShort} of business, without a single missed message.`,
+   bts:p=>["Revenue linked to the ad that brought it"]},
+  {who:"o", when:"Sun, 1 Nov", title:"Gets the monthly growth report", scr:scrReport,
+   desc:p=>`What came in, how fast you replied, what closed and which source paid off. Sent on the 1st of every month.`,
+   bts:p=>["Shared on WhatsApp and email","Compared with last month"]}
+];
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+let hintT, autoT;
+function render(){
+  const p = P[pk], s = STEPS[step];
+  clearTimeout(hintT); clearTimeout(autoT);
+
+  // screen
+  const scr = document.createElement("div");
+  scr.className = `scr ${s.dark ? "dark" : ""} ${dir > 0 ? "fwd" : dir < 0 ? "back" : ""} ${s.tapAll ? "tapall" : ""}`;
+  scr.style.setProperty("--b", p.b);
+  scr.innerHTML = s.scr(p);
+  if(s.tapAll) scr.addEventListener("click", () => next());
+  const box = $("screen");
+  const keep = dir === 0 ? [...box.querySelectorAll(".scroll,.sheet-body")].map(e => e.scrollTop) : [];
+  if(dir === 0) scr.classList.add("still");
+  box.innerHTML = ""; box.appendChild(scr);
+  scr.querySelectorAll(".scroll,.sheet-body").forEach((e,i) => { if(keep[i] != null) e.scrollTop = keep[i]; });
+  const bottom = scr.querySelector("[data-bottom]"); if(bottom) bottom.scrollTop = bottom.scrollHeight;
+  const tabOn = scr.querySelector('.tabs [aria-pressed="true"]'); if(tabOn) tabOn.parentNode.scrollLeft = tabOn.offsetLeft - 16;
+
+  // wire up taps inside the phone
+  scr.querySelectorAll("[data-go]").forEach(el => el.addEventListener("click", e => { e.stopPropagation(); next(); }));
+  scr.querySelectorAll("[data-opt]").forEach(b => b.onclick = e => { e.stopPropagation(); S[b.dataset.opt] = +b.dataset.i; refresh(); });
+  scr.querySelectorAll("[data-mode]").forEach(b => b.onclick = e => { e.stopPropagation(); S.mode = +b.dataset.mode; refresh(); });
+  scr.querySelectorAll("[data-day]").forEach(b => b.onclick = e => { e.stopPropagation(); S.day = +b.dataset.day; refresh(); });
+  scr.querySelectorAll("[data-time]").forEach(b => b.onclick = e => { e.stopPropagation(); S.time = +b.dataset.time; refresh(); });
+  scr.querySelectorAll("[data-pipe]").forEach(b => b.onclick = e => { e.stopPropagation(); S.pipe = +b.dataset.pipe; refresh(); });
+  const fu = scr.querySelector('[data-act="followup"]');
+  if(fu) fu.onclick = e => { e.stopPropagation(); if(S.sent){ next(); return; } S.sent = true; S.justSent = true; refresh(); autoT = setTimeout(next, 1400); };
+  const rs = scr.querySelector('[data-act="restart"]');
+  if(rs) rs.onclick = e => { e.stopPropagation(); Object.assign(S,{day:1,time:1,mode:0,f1:null,f2:null,f3:null,pipe:2,sent:false}); go(0); };
+
+  // hint ring on the next tap target
+  const target = s.tapAll ? null : (scr.querySelector('[data-act="followup"]:not(.sent)') || scr.querySelector("[data-go]") || scr.querySelector('[data-act="restart"]'));
+  hintT = setTimeout(() => target && target.classList.add("hint"), 1500);
+
+  // panel
+  const when = typeof s.when === "function" ? s.when(p) : s.when;
+  const isC = s.who === "c";
+  $("who").className = "who" + (isC ? "" : " owner");
+  $("who").innerHTML = I(isC ? "user" : "kanban") + (isC ? `On ${first(p.cust)}'s phone` : `On ${p.owner}'s phone`);
+  $("when").textContent = when;
+  $("ptitle").textContent = s.title;
+  $("pdesc").textContent = s.desc(p);
+  $("pbts").innerHTML = s.bts(p).map(t => `<li><i>${I("check")}</i>${t}</li>`).join("");
+  $("prev").disabled = step === 0; $("mprev").disabled = step === 0;
+  $("next").innerHTML = step === STEPS.length - 1 ? `Start again${I("replay")}` : `Next${I("right")}`;
+  $("mlbl").innerHTML = `<small>${isC ? "Customer" : "Owner"}, step ${step+1} of ${STEPS.length}</small><span>${s.title}</span>`;
+  document.querySelector(".tip").textContent = s.tapAll ? "Tap anywhere on the phone to continue, or use the arrow keys." : "Tap the highlighted spot on the phone, or use the arrow keys.";
+
+  renderRail();
+  try{ history.replaceState(null, "", `#${pk}-${step+1}`); }catch(e){}
+}
+function refresh(){ dir = 0; render(); }
+function renderRail(){
+  const p = P[pk];
+  const item = (s,i) => `<li><button class="${i<step?"done":""} ${i===step?"now":""}" data-step="${i}" ${i===step?'aria-current="step"':""}>
+    <span class="n">${i<step ? I("check") : i+1}</span>${s.title}</button></li>`;
+  $("rail").innerHTML =
+    `<h2>${I("user")}${first(p.cust)}, the customer</h2><ol>${STEPS.map((s,i) => s.who==="c" ? item(s,i) : "").join("")}</ol>
+     <h2>${I("kanban")}${p.owner}, the owner</h2><ol>${STEPS.map((s,i) => s.who==="o" ? item(s,i) : "").join("")}</ol>`;
+  $("rail").querySelectorAll("[data-step]").forEach(b => b.onclick = () => go(+b.dataset.step));
+}
+function go(i){ i = Math.max(0, Math.min(STEPS.length-1, i)); dir = i >= step ? 1 : -1; step = i; S.justSent = false; render(); }
+function next(){ if(step === STEPS.length - 1){ Object.assign(S,{sent:false}); go(0); } else go(step+1); }
+function prev(){ go(step-1); }
+
+$("next").onclick = next; $("prev").onclick = prev;
+$("mnext").onclick = next; $("mprev").onclick = prev;
+document.addEventListener("keydown", e => {
+  if(e.key === "ArrowRight"){ e.preventDefault(); next(); }
+  if(e.key === "ArrowLeft"){ e.preventDefault(); prev(); }
+});
+document.querySelectorAll("#seg button").forEach(b => b.onclick = () => {
+  pk = b.dataset.p; S.f1 = S.f2 = S.f3 = null; S.sent = false;
+  document.querySelectorAll("#seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  dir = 0; render();
+});
+
+/* scale the phone to fit shorter screens */
+function fit(){
+  if(innerWidth < 720){ document.documentElement.style.setProperty("--k", 1); return; }
+  const top = document.querySelector(".top").offsetHeight;
+  let k = Math.min(1, (innerHeight - top - 48) / 836);
+  if(innerWidth < 1180) k = Math.min(k, (innerWidth - 40 - 32 - 280) / 399);
+  k = Math.max(.62, k);
+  document.documentElement.style.setProperty("--k", k.toFixed(3));
+}
+addEventListener("resize", fit);
+
+/* deep links: #interior-5, #detailing-12, #clinic-1 */
+(function init(){
+  const m = location.hash.match(/^#(interior|detailing|clinic)-(\d+)$/);
+  if(m){ pk = m[1]; step = Math.max(0, Math.min(STEPS.length-1, +m[2]-1)); }
+  document.querySelectorAll("#seg button").forEach(x => x.setAttribute("aria-pressed", x.dataset.p === pk));
+  fit(); dir = 0; render();
+})();
+</script>
+</body>
+</html>
